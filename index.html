@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletic Club | Premium Gear</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Modern CSS Reset & Smooth Scrolling */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        
+        /* Upgraded Font */
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; }
+        
+        /* Navigation */
+        header { background-color: #111; color: #fff; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header h1 { text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; font-weight: 900;}
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: #d90429; }
+        
+        .cart-btn { background: #d90429; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1rem; text-transform: uppercase; transition: background 0.3s; font-family: 'Montserrat', sans-serif;}
+        .cart-btn:hover { background: #bf0424; }
+
+        /* Hero Section */
+        .hero { background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; padding: 10rem 2rem; border-bottom: 5px solid #d90429; }
+        .hero h2 { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; font-weight: 400;}
+
+        /* Shop Section - Dark Background */
+        #shop { background-color: #1a1a1a; padding: 5rem 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #fff; font-weight: 900; letter-spacing: 2px;}
+        
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
+        
+        /* Product Cards */
+        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-8px); }
+        .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
+        
+        /* Fix for the Dynamic Images so they don't cut off */
+        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img { object-fit: contain; padding: 10px; background-color: #111;}
+
+        .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
+        .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        .price { font-size: 1.6rem; font-weight: 900; color: #d90429; margin-bottom: 15px; }
+        
+        /* Controls (Colors, Sizes, Qty) */
+        .controls-container { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;}
+        .color-selector p { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; color: #555;}
+        .swatches { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;}
+        .swatch { width: 30px; height: 30px; border-radius: 50%; border: 3px solid #ddd; cursor: pointer; transition: 0.2s; }
+        .swatch:hover, .swatch.active { border-color: #d90429; transform: scale(1.1); }
+
+        .flex-options { display: flex; justify-content: space-between; align-items: center; gap: 10px;}
+        .size-select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; flex-grow: 1;}
+        .qty-input { width: 60px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; text-align: center;}
+
+        .add-to-cart-btn { margin-top: auto; background: #111; color: #fff; border: none; padding: 15px 20px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; font-family: 'Montserrat'; letter-spacing: 1px;}
+        .add-to-cart-btn:hover { background: #d90429; }
+
+        /* Contact Section */
+        #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
+        #contact h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: #111;}
+        #contact p { color: #666; margin-bottom: 2rem; font-size: 1.1rem;}
+        .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
+        .social-btn { display: flex; align-items: center; gap: 10px; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.1rem; color: white; transition: transform 0.3s;}
+        .social-btn:hover { transform: translateY(-3px); }
+        .whatsapp-btn { background-color: #25D366; }
+        .instagram-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+        /* Cart & Checkout Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; justify-content: center; align-items: center; }
+        .modal { background: #fff; width: 90%; max-width: 500px; border-radius: 8px; padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #666; }
+        .modal h2 { margin-bottom: 1.5rem; text-transform: uppercase; text-align: center; font-weight: 900;}
+        
+        #cart-items { list-style: none; margin-bottom: 1.5rem; }
+        #cart-items li { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; font-weight: bold;}
+        .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 2rem; color: #d90429; }
+        
+        /* Checkout Form */
+        .checkout-form { display: none; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;}
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat';}
+        .payment-options { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid #ddd;}
+        .payment-options label { display: block; margin-bottom: 10px; cursor: pointer; font-weight: bold;}
+        
+        .checkout-btn { width: 100%; background: #28a745; color: white; padding: 15px; border: none; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Montserrat';}
+        .checkout-btn:hover { background: #218838; }
+
+        footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Athletic Club</h1>
+        <div class="nav-links">
+            <a href="#shop">Shop</a>
+            <a href="#contact">Contact</a>
+            <button class="cart-btn" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Athletic Club</h2>
+        <p>Premium compression wear and gym essentials. Built for performance, priced for you.</p>
+    </section>
+
+    <section id="shop">
+        <h3 class="section-title">Latest Drops</h3>
+        <div class="products">
+            
+            <div class="card">
+                <img src="https://i.postimg.cc/FYjTZzBP/spider-black.jpg" alt="Two Piece Set" id="dynamic-set-img">
+                <div class="card-content">
+                    <div class="product-title">Spider Graphic Two-Piece Set</div>
+                    <div class="product-desc">Compression performance tee paired with lightweight training joggers.</div>
+                    
+                    <div class="price" id="set-price-display">$25.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111;" id="swatch-black" onclick="changeColor('Black', 'https://i.postimg.cc/FYjTZzBP/spider-black.jpg')"></div>
+                                <div class="swatch" style="background-color: #5c1822;" id="swatch-maroon" onclick="changeColor('Maroon', 'https://i.postimg.cc/cvQFmCzq/spider-maroon.jpg')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="set-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="set-qty" class="qty-input" value="1" min="1" onchange="updateSetPrice()">
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-btn" onclick="addSetToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/DSqxg0MD/spider-blue.jpg" alt="Spider Compression Shirt" id="dynamic-shirt-img">
+                <div class="card-content">
+                    <div class="product-title">Spider Compression Top</div>
+                    <div class="product-desc">Lightweight, quick-drying stretch fabric for maximum performance.</div>
+                    
+                    <div class="price" id="shirt-price-display">$15.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-shirt-color-text" style="color: #0f4c81;">Royal Blue</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #0f4c81;" id="swatch-shirt-blue" onclick="changeShirtColor('Royal Blue', 'https://i.postimg.cc/DSqxg0MD/spider-blue.jpg')"></div>
+                                <div class="swatch" style="background-color: #111;" id="swatch-shirt-black" onclick="changeShirtColor('Black', 'https://i.postimg.cc/rDSfJsPP/spider-black-shirt.jpg')"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shirt-white" onclick="changeShirtColor('White', 'https://i.postimg.cc/rDSfJsPP/spider-black-shirt.jpg')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="shirt-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                            </select>
+                            
+                            <input type="number" id="shirt-qty" class="qty-input" value="1" min="1" onchange="updateShirtPrice()">
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-btn" onclick="addShirtToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/dh85B3xr/shorts-black.jpg" alt="2-in-1 Training Shorts" id="dynamic-shorts-img">
+                <div class="card-content">
+                    <div class="product-title">2-in-1 Training Shorts</div>
+                    <div class="product-desc">Built-in compression liner with hidden pockets and lightweight outer shell.</div>
+                    
+                    <div class="price" id="shorts-price-display">$13.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-shorts-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111;" id="swatch-shorts-black" onclick="changeShortsColor('Black', 'https://i.postimg.cc/dh85B3xr/shorts-black.jpg')"></div>
+                                <div class="swatch" style="background-color: #808080;" id="swatch-shorts-grey" onclick="changeShortsColor('Grey', 'https://i.postimg.cc/K1n0NjHJ/shorts-grey.jpg')"></div>
+                                <div class="swatch" style="background-color: #219ebc;" id="swatch-shorts-blue" onclick="changeShortsColor('Blue', 'https://i.postimg.cc/RWcgRhDR/shorts-blue.jpg')"></div>
+                                <div class="swatch" style="background-color: #264653;" id="swatch-shorts-navy" onclick="changeShortsColor('Navy Blue', 'https://i.postimg.cc/yDFLPxbn/shorts-navy.jpg')"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shorts-white" onclick="changeShortsColor('White', 'https://i.postimg.cc/tshB5JMk/shorts-white.jpg')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="shorts-size">
+                                <option value="XXS">Size: XXS</option>
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="shorts-qty" class="qty-input" value="1" min="1" onchange="updateShortsPrice()">
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-btn" onclick="addShortsToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80" alt="Red Hoodie">
+                <div class="card-content">
+                    <div class="product-title">Crimson Pump Cover</div>
+                    <div class="product-desc">Oversized heavy-cotton hoodie for warmups.</div>
+                    <div class="price">$35.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Crimson Pump Cover', 35.00)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=600&q=80" alt="Grey Joggers">
+                <div class="card-content">
+                    <div class="product-title">Urban Tapered Joggers</div>
+                    <div class="product-desc">Fleece-lined interior with a tapered ankle fit.</div>
+                    <div class="price">$30.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Urban Tapered Joggers', 30.00)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1512469446215-99884e9d5622?w=600&q=80" alt="Windbreaker">
+                <div class="card-content">
+                    <div class="product-title">Blackout Windbreaker</div>
+                    <div class="product-desc">Water-resistant shell for outdoor training sessions.</div>
+                    <div class="price">$40.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Blackout Windbreaker', 40.00)">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h3>Connect With Us</h3>
+        <p>Got questions or ready to order directly? Hit us up on our socials.</p>
+        <div class="social-links">
+            <a href="https://wa.me/96181885580" target="_blank" class="social-btn whatsapp-btn">
+                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Message on WhatsApp
+            </a>
+            <a href="https://instagram.com/kayansiefeldeen" target="_blank" class="social-btn instagram-btn">
+                <i class="fab fa-instagram" style="font-size: 1.5rem;"></i> @kayansiefeldeen
+            </a>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal">
+            <span class="close-btn" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <div class="cart-total" id="cart-total-display">Total: $0.00</div>
+            <div id="empty-cart-msg" style="text-align: center; margin-bottom: 20px; display: none;">Your cart is empty!</div>
+
+            <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address (Lebanon)</label>
+                    <input type="text" required placeholder="City, Street, Building">
+                </div>
+                
+                <label style="font-weight: bold; margin-bottom: 5px; display: block;">Payment Method</label>
+                <div class="payment-options">
+                    <label><input type="radio" name="payment" value="Cash on Delivery (COD)" required> Cash on Delivery (COD)</label>
+                    <label><input type="radio" name="payment" value="Whish Money Transfer" required> Whish Money Transfer</label>
+                </div>
+
+                <button type="submit" class="checkout-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Athletic Club. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        // --- FIRST LISTING LOGIC (Two-Piece Set) ---
+        let currentSetColor = 'Black'; 
+        const baseSetPrice = 25.00;
+
+        function changeColor(colorName, imagePath) {
+            document.getElementById('dynamic-set-img').src = imagePath;
+            
+            const colorText = document.getElementById('selected-color-text');
+            colorText.innerText = colorName;
+            colorText.style.color = colorName === 'Maroon' ? '#d90429' : '#111';
+
+            currentSetColor = colorName;
+
+            document.getElementById('swatch-maroon').classList.remove('active');
+            document.getElementById('swatch-black').classList.remove('active');
+            
+            if(colorName === 'Maroon') {
+                document.getElementById('swatch-maroon').classList.add('active');
+            } else {
+                document.getElementById('swatch-black').classList.add('active');
+            }
+        }
+
+        function updateSetPrice() {
+            let qty = parseInt(document.getElementById('set-qty').value);
+            if(qty < 1 || isNaN(qty)) {
+                qty = 1;
+                document.getElementById('set-qty').value = 1;
+            }
+            let newTotal = baseSetPrice * qty;
+            document.getElementById('set-price-display').innerText = "$" + newTotal.toFixed(2);
+        }
+
+        function addSetToCart() {
+            let size = document.getElementById('set-size').value;
+            let qty = parseInt(document.getElementById('set-qty').value);
+            let totalPrice = baseSetPrice * qty;
+            let itemName = qty + "x Spider Graphic Set (" + currentSetColor + " - " + size + ")";
+            addToCart(itemName, totalPrice);
+        }
+
+        // --- SECOND LISTING LOGIC (Compression Top) ---
+        let currentShirtColor = 'Royal Blue'; 
+        const baseShirtPrice = 15.00;
+
+        function changeShirtColor(colorName, imagePath) {
+            document.getElementById('dynamic-shirt-img').src = imagePath;
+            
+            const colorText = document.getElementById('selected-shirt-color-text');
+            colorText.innerText = colorName;
+            
+            if(colorName === 'Royal Blue') colorText.style.color = '#0f4c81';
+            else if (colorName === 'White') colorText.style.color = '#888';
+            else colorText.style.color = '#111';
+
+            currentShirtColor = colorName;
+
+            document.getElementById('swatch-shirt-blue').classList.remove('active');
+            document.getElementById('swatch-shirt-black').classList.remove('active');
+            document.getElementById('swatch-shirt-white').classList.remove('active');
+            
+            if(colorName === 'Royal Blue') {
+                document.getElementById('swatch-shirt-blue').classList.add('active');
+            } else if (colorName === 'Black') {
+                document.getElementById('swatch-shirt-black').classList.add('active');
+            } else {
+                document.getElementById('swatch-shirt-white').classList.add('active');
+            }
+        }
+
+        function updateShirtPrice() {
+            let qty = parseInt(document.getElementById('shirt-qty').value);
+            if(qty < 1 || isNaN(qty)) {
+                qty = 1;
+                document.getElementById('shirt-qty').value = 1;
+            }
+            let newTotal = baseShirtPrice * qty;
+            document.getElementById('shirt-price-display').innerText = "$" + newTotal.toFixed(2);
+        }
+
+        function addShirtToCart() {
+            let size = document.getElementById('shirt-size').value;
+            let qty = parseInt(document.getElementById('shirt-qty').value);
+            let totalPrice = baseShirtPrice * qty;
+            let itemName = qty + "x Spider Shirt (" + currentShirtColor + " - " + size + ")";
+            addToCart(itemName, totalPrice);
+        }
+
+        // --- THIRD LISTING LOGIC (2-in-1 Shorts) ---
+        let currentShortsColor = 'Black'; 
+        const baseShortsPrice = 13.00;
+
+        function changeShortsColor(colorName, imagePath) {
+            document.getElementById('dynamic-shorts-img').src = imagePath;
+            
+            const colorText = document.getElementById('selected-shorts-color-text');
+            colorText.innerText = colorName;
+            colorText.style.color = '#111'; // Keep text dark for readability
+
+            currentShortsColor = colorName;
+
+            // Remove active class from all short swatches
+            document.getElementById('swatch-shorts-black').classList.remove('active');
+            document.getElementById('swatch-shorts-grey').classList.remove('active');
+            document.getElementById('swatch-shorts-blue').classList.remove('active');
+            document.getElementById('swatch-shorts-navy').classList.remove('active');
+            document.getElementById('swatch-shorts-white').classList.remove('active');
+            
+            // Add active class back to the clicked one
+            if(colorName === 'Black') document.getElementById('swatch-shorts-black').classList.add('active');
+            else if(colorName === 'Grey') document.getElementById('swatch-shorts-grey').classList.add('active');
+            else if(colorName === 'Blue') document.getElementById('swatch-shorts-blue').classList.add('active');
+            else if(colorName === 'Navy Blue') document.getElementById('swatch-shorts-navy').classList.add('active');
+            else if(colorName === 'White') document.getElementById('swatch-shorts-white').classList.add('active');
+        }
+
+        function updateShortsPrice() {
+            let qty = parseInt(document.getElementById('shorts-qty').value);
+            if(qty < 1 || isNaN(qty)) {
+                qty = 1;
+                document.getElementById('shorts-qty').value = 1;
+            }
+            let newTotal = baseShortsPrice * qty;
+            document.getElementById('shorts-price-display').innerText = "$" + newTotal.toFixed(2);
+        }
+
+        function addShortsToCart() {
+            let size = document.getElementById('shorts-size').value;
+            let qty = parseInt(document.getElementById('shorts-qty').value);
+            let totalPrice = baseShortsPrice * qty;
+            let itemName = qty + "x 2-in-1 Shorts (" + currentShortsColor + " - " + size + ")";
+            addToCart(itemName, totalPrice);
+        }
+
+        // --- GENERAL CART LOGIC ---
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            total += itemPrice;
+            document.getElementById('cart-count').innerText = cart.length;
+            alert(itemName + " added to your cart!");
+        }
+
+        function openCart() {
+            const modal = document.getElementById('cart-modal');
+            const cartList = document.getElementById('cart-items');
+            const checkoutForm = document.getElementById('checkout-form');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const totalDisplay = document.getElementById('cart-total-display');
+
+            cartList.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                checkoutForm.style.display = 'none';
+                totalDisplay.style.display = 'none';
+            } else {
+                emptyMsg.style.display = 'none';
+                checkoutForm.style.display = 'block';
+                totalDisplay.style.display = 'block';
+
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${item.name}</span> <span>$${item.price.toFixed(2)}</span>`;
+                    cartList.appendChild(li);
+                });
+            }
+
+            totalDisplay.innerText = `Total: $${total.toFixed(2)}`;
+            modal.style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            alert(`Order Confirmed! \nTotal: $${total.toFixed(2)}\nPaid via: ${paymentMethod}\nThank you for shopping at Athletic Club!`);
+            
+            cart = [];
+            total = 0;
+            document.getElementById('cart-count').innerText = "0";
+            document.getElementById('checkout-form').reset();
+            
+            // Reset all dynamic quantities back to 1
+            document.getElementById('set-qty').value = 1;
+            updateSetPrice();
+            
+            document.getElementById('shirt-qty').value = 1;
+            updateShirtPrice();
+            
+            document.getElementById('shorts-qty').value = 1;
+            updateShortsPrice();
+            
+            closeCart();
+        }
+    </script>
+</body>
+</html>
