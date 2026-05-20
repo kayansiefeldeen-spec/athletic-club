@@ -96,6 +96,47 @@
         .checkout-btn:hover { background: #218838; }
 
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
+
+        /* --- MOBILE RESPONSIVENESS FIXES --- */
+        @media (max-width: 768px) {
+            /* Stack the header menu cleanly */
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem;
+                text-align: center;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 15px;
+            }
+            header h1 {
+                font-size: 1.3rem; 
+            }
+            
+            /* Shrink the giant hero text so it doesn't break the screen */
+            .hero {
+                padding: 6rem 1rem; 
+            }
+            .hero h2 {
+                font-size: 2.5rem; /* Down from 4.5rem */
+                letter-spacing: 2px;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            /* Adjust section titles */
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* Ensure swatches wrap nicely on small screens */
+            .swatches {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 <body>
@@ -119,7 +160,7 @@
         <div class="products">
             
             <div class="card">
-                <img src="https://i.postimg.cc/FYjTZzBP/spider-black.jpg" alt="Two Piece Set" id="dynamic-set-img">
+                <img src="spider-black.jpeg" alt="Two Piece Set" id="dynamic-set-img">
                 <div class="card-content">
                     <div class="product-title">Spider Graphic Two-Piece Set</div>
                     <div class="product-desc">Compression performance tee paired with lightweight training joggers.</div>
@@ -130,8 +171,8 @@
                         <div class="color-selector">
                             <p>Color: <span id="selected-color-text" style="color: #111;">Black</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #111;" id="swatch-black" onclick="changeColor('Black', 'https://i.postimg.cc/FYjTZzBP/spider-black.jpg')"></div>
-                                <div class="swatch" style="background-color: #5c1822;" id="swatch-maroon" onclick="changeColor('Maroon', 'https://i.postimg.cc/cvQFmCzq/spider-maroon.jpg')"></div>
+                                <div class="swatch active" style="background-color: #111;" id="swatch-black" onclick="changeColor('Black', 'spider-black.jpeg')"></div>
+                                <div class="swatch" style="background-color: #5c1822;" id="swatch-maroon" onclick="changeColor('Maroon', 'spider-maroon.jpeg')"></div>
                             </div>
                         </div>
                         
@@ -154,7 +195,7 @@
             </div>
 
             <div class="card">
-                <img src="https://i.postimg.cc/DSqxg0MD/spider-blue.jpg" alt="Spider Compression Shirt" id="dynamic-shirt-img">
+                <img src="spider-blue.jpeg" alt="Spider Compression Shirt" id="dynamic-shirt-img">
                 <div class="card-content">
                     <div class="product-title">Spider Compression Top</div>
                     <div class="product-desc">Lightweight, quick-drying stretch fabric for maximum performance.</div>
@@ -165,9 +206,9 @@
                         <div class="color-selector">
                             <p>Color: <span id="selected-shirt-color-text" style="color: #0f4c81;">Royal Blue</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #0f4c81;" id="swatch-shirt-blue" onclick="changeShirtColor('Royal Blue', 'https://i.postimg.cc/DSqxg0MD/spider-blue.jpg')"></div>
-                                <div class="swatch" style="background-color: #111;" id="swatch-shirt-black" onclick="changeShirtColor('Black', 'https://i.postimg.cc/rDSfJsPP/spider-black-shirt.jpg')"></div>
-                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shirt-white" onclick="changeShirtColor('White', 'https://i.postimg.cc/rDSfJsPP/spider-black-shirt.jpg')"></div>
+                                <div class="swatch active" style="background-color: #0f4c81;" id="swatch-shirt-blue" onclick="changeShirtColor('Royal Blue', 'spider-blue.jpeg')"></div>
+                                <div class="swatch" style="background-color: #111;" id="swatch-shirt-black" onclick="changeShirtColor('Black', 'spider-black-shirt.jpeg')"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shirt-white" onclick="changeShirtColor('White', 'spider-black-shirt.jpeg')"></div>
                             </div>
                         </div>
                         
@@ -189,7 +230,7 @@
             </div>
 
             <div class="card">
-                <img src="https://i.postimg.cc/dh85B3xr/shorts-black.jpg" alt="2-in-1 Training Shorts" id="dynamic-shorts-img">
+                <img src="shorts-black.jpeg" alt="2-in-1 Training Shorts" id="dynamic-shorts-img">
                 <div class="card-content">
                     <div class="product-title">2-in-1 Training Shorts</div>
                     <div class="product-desc">Built-in compression liner with hidden pockets and lightweight outer shell.</div>
@@ -200,11 +241,11 @@
                         <div class="color-selector">
                             <p>Color: <span id="selected-shorts-color-text" style="color: #111;">Black</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #111;" id="swatch-shorts-black" onclick="changeShortsColor('Black', 'https://i.postimg.cc/dh85B3xr/shorts-black.jpg')"></div>
-                                <div class="swatch" style="background-color: #808080;" id="swatch-shorts-grey" onclick="changeShortsColor('Grey', 'https://i.postimg.cc/K1n0NjHJ/shorts-grey.jpg')"></div>
-                                <div class="swatch" style="background-color: #219ebc;" id="swatch-shorts-blue" onclick="changeShortsColor('Blue', 'https://i.postimg.cc/RWcgRhDR/shorts-blue.jpg')"></div>
-                                <div class="swatch" style="background-color: #264653;" id="swatch-shorts-navy" onclick="changeShortsColor('Navy Blue', 'https://i.postimg.cc/yDFLPxbn/shorts-navy.jpg')"></div>
-                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shorts-white" onclick="changeShortsColor('White', 'https://i.postimg.cc/tshB5JMk/shorts-white.jpg')"></div>
+                                <div class="swatch active" style="background-color: #111;" id="swatch-shorts-black" onclick="changeShortsColor('Black', 'shorts-black.jpeg')"></div>
+                                <div class="swatch" style="background-color: #808080;" id="swatch-shorts-grey" onclick="changeShortsColor('Grey', 'shorts-grey.jpeg')"></div>
+                                <div class="swatch" style="background-color: #219ebc;" id="swatch-shorts-blue" onclick="changeShortsColor('Blue', 'shorts-blue.jpeg')"></div>
+                                <div class="swatch" style="background-color: #264653;" id="swatch-shorts-navy" onclick="changeShortsColor('Navy Blue', 'shorts-navy.jpeg')"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shorts-white" onclick="changeShortsColor('White', 'shorts-white(2).jpeg')"></div>
                             </div>
                         </div>
                         
@@ -407,7 +448,7 @@
             
             const colorText = document.getElementById('selected-shorts-color-text');
             colorText.innerText = colorName;
-            colorText.style.color = '#111'; // Keep text dark for readability
+            colorText.style.color = '#111'; 
 
             currentShortsColor = colorName;
 
