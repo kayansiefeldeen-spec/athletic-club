@@ -100,6 +100,8 @@
         
         .checkout-btn.email-btn { background: #d90429; }
         .checkout-btn.email-btn:hover { background: #bf0424; }
+        
+        .checkout-btn:disabled { background: #888; cursor: not-allowed; }
 
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
 
@@ -297,12 +299,8 @@
             <div class="cart-total" id="cart-total-display">Total: $0.00</div>
             <div id="empty-cart-msg" style="text-align: center; margin-bottom: 20px; display: none;">Your cart is empty!</div>
 
-            <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)" action="https://formsubmit.co/YOUR_EMAIL@GMAIL.COM" method="POST">
+            <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
                 
-                <input type="hidden" name="_subject" value="New Order! Athletic Club">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="Order_Details" id="hidden-order-details">
-
                 <label style="font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1rem;">Payment Method</label>
                 <div class="payment-options">
                     <label><input type="radio" name="Payment_Method" value="Whish Money Transfer" onchange="toggleForm()" checked> Whish Money Transfer</label>
@@ -315,43 +313,43 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>First Name *</label>
-                            <input type="text" name="First_Name" id="f-name" class="req-field">
+                            <input type="text" id="f-name" class="req-field">
                         </div>
                         <div class="form-group">
                             <label>Last Name *</label>
-                            <input type="text" name="Last_Name" id="l-name" class="req-field">
+                            <input type="text" id="l-name" class="req-field">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" name="Email" id="email" class="req-field">
+                            <input type="email" id="email" class="req-field">
                         </div>
                         <div class="form-group">
                             <label>Phone Number *</label>
-                            <input type="text" name="Phone" id="phone" class="req-field">
+                            <input type="text" id="phone" class="req-field">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Address *</label>
-                        <input type="text" name="Address" id="address" class="req-field">
+                        <input type="text" id="address" class="req-field">
                     </div>
                     
                     <div class="form-group">
                         <label>Apartment/Suite/Building (Optional)</label>
-                        <input type="text" name="Apartment" id="apt">
+                        <input type="text" id="apt">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>City *</label>
-                            <input type="text" name="City" id="city" class="req-field">
+                            <input type="text" id="city" class="req-field">
                         </div>
                         <div class="form-group">
                             <label>State/Province (Optional)</label>
-                            <select name="State" id="state">
+                            <select id="state">
                                 <option value="">Select a state</option>
                                 <option value="Beirut">Beirut</option>
                                 <option value="Mount Lebanon">Mount Lebanon</option>
@@ -536,32 +534,82 @@
             }
         }
 
-        // --- CHECKOUT ROUTER ---
+        // --- INVISIBLE BACKGROUND SUBMIT (AJAX) ---
         function processPayment(event) {
-            const method = document.querySelector('input[name="Payment_Method"]:checked').value;
+            event.preventDefault(); // This stops the page from reloading or redirecting!
             
-            // Build the Cart Summary text so it goes in the email/whatsapp
+            const method = document.querySelector('input[name="Payment_Method"]:checked').value;
+            const submitBtn = document.getElementById('submit-btn');
+            
             let orderSummary = "";
             cart.forEach(item => { orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`; });
             orderSummary += `\nTOTAL: $${total.toFixed(2)}`;
             
             if (method === 'Whish Money Transfer') {
-                // If Whish -> Stop the form from sending an email, and open WhatsApp instead
-                event.preventDefault();
                 let message = `Hello Athletic Club! I would like to place an order via Whish Transfer.\n\n*ORDER DETAILS:*\n${orderSummary}`;
                 const encodedMessage = encodeURIComponent(message);
                 window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
                 
-                // Clear cart
                 cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
                 document.getElementById('checkout-form').reset();
-                closeCart();
+                toggleForm(); closeCart();
             } else {
-                // If COD -> Put the cart text into the hidden form field so it gets emailed
-                document.getElementById('hidden-order-details').value = orderSummary;
-                
-                // We let the form submit naturally! It will take the user to a "Thank You" page provided by FormSubmit
-                alert("Thank you! Your order is being processed.");
+                // Change button to show it's working
+                submitBtn.innerHTML = "Processing Order...";
+                submitBtn.disabled = true;
+
+                const fname = document.getElementById('f-name').value;
+                const lname = document.getElementById('l-name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const apt = document.getElementById('apt').value;
+                const city = document.getElementById('city').value;
+                const state = document.getElementById('state').value;
+
+                // Package the data for the email
+                const formData = {
+                    _subject: "New COD Order - Athletic Club",
+                    _captcha: "false",
+                    Order_Details: orderSummary,
+                    Customer_Name: fname + " " + lname,
+                    Customer_Email: email,
+                    Customer_Phone: phone,
+                    Shipping_Address: `${address}, ${apt ? apt + ', ' : ''}${city}, ${state}`,
+                    Payment_Method: "Cash on Delivery"
+                };
+
+                // Send the email invisibly in the background
+                fetch("https://formsubmit.co/ajax/kayanseifeldeen@gmail.com", {
+                    method: "POST",
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Order Confirmed! Thank you for shopping with us.");
+                    
+                    // Reset the cart after successful order
+                    cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
+                    document.getElementById('checkout-form').reset();
+                    
+                    document.getElementById('set-qty').value = 1; updateSetPrice();
+                    document.getElementById('shirt-qty').value = 1; updateShirtPrice();
+                    document.getElementById('shorts-qty').value = 1; updateShortsPrice();
+
+                    toggleForm();
+                    closeCart();
+                })
+                .catch(error => {
+                    alert("Something went wrong. Please try again or checkout via WhatsApp.");
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = 'Place Order (COD)';
+                    submitBtn.disabled = false;
+                });
             }
         }
     </script>
