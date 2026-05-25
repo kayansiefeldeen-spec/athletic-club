@@ -371,11 +371,6 @@
         </div>
     </div>
 
-    <form action="https://formsubmit.co/kayanseifeldeen@gmail.com" method="POST" style="padding: 50px; background: #fff; text-align: center;">
-        <h3>TEMPORARY ACTIVATION FORM</h3>
-        <input type="email" name="email" value="test@test.com" required>
-        <button type="submit" style="padding: 10px; background: red; color: white; font-weight: bold; cursor: pointer;">CLICK HERE TO ACTIVATE FORMSUBMIT</button>
-    </form>
     <footer>
         <p>&copy; 2026 Athletic Club. All rights reserved.</p>
     </footer>
@@ -539,9 +534,9 @@
             }
         }
 
-        // --- INVISIBLE BACKGROUND SUBMIT (AJAX) ---
+        // --- FIXED BACKGROUND SUBMIT LOGIC (WEB3FORMS) ---
         function processPayment(event) {
-            event.preventDefault(); // This stops the page from reloading or redirecting!
+            event.preventDefault(); 
             
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
             const submitBtn = document.getElementById('submit-btn');
@@ -559,7 +554,6 @@
                 document.getElementById('checkout-form').reset();
                 toggleForm(); closeCart();
             } else {
-                // Change button to show it's working
                 submitBtn.innerHTML = "Processing Order...";
                 submitBtn.disabled = true;
 
@@ -572,10 +566,11 @@
                 const city = document.getElementById('city').value;
                 const state = document.getElementById('state').value;
 
-                // Package the data for the email
+                // Package the data for Web3Forms using your verified public key
                 const formData = {
-                    _subject: "New COD Order - Athletic Club",
-                    _captcha: "false",
+                    access_key: "4c51ca66-face-4bcc-a197-c9d5cafc10ce",
+                    subject: "New COD Order - Athletic Club",
+                    from_name: "Athletic Club Store",
                     Order_Details: orderSummary,
                     Customer_Name: fname + " " + lname,
                     Customer_Email: email,
@@ -585,7 +580,7 @@
                 };
 
                 // Send the email invisibly in the background
-                fetch("https://formsubmit.co/ajax/kayanseifeldeen@gmail.com", {
+                fetch("https://api.web3forms.com/submit", {
                     method: "POST",
                     headers: { 
                         'Content-Type': 'application/json',
@@ -595,18 +590,22 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert("Order Confirmed! Thank you for shopping with us.");
-                    
-                    // Reset the cart after successful order
-                    cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
-                    document.getElementById('checkout-form').reset();
-                    
-                    document.getElementById('set-qty').value = 1; updateSetPrice();
-                    document.getElementById('shirt-qty').value = 1; updateShirtPrice();
-                    document.getElementById('shorts-qty').value = 1; updateShortsPrice();
+                    if(data.success) {
+                        alert("Order Confirmed! Thank you for shopping with us.");
+                        
+                        // Reset the cart after successful order parsing
+                        cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
+                        document.getElementById('checkout-form').reset();
+                        
+                        document.getElementById('set-qty').value = 1; updateSetPrice();
+                        document.getElementById('shirt-qty').value = 1; updateShirtPrice();
+                        document.getElementById('shorts-qty').value = 1; updateShortsPrice();
 
-                    toggleForm();
-                    closeCart();
+                        toggleForm();
+                        closeCart();
+                    } else {
+                        alert("Something went wrong. Please try again or checkout via WhatsApp.");
+                    }
                 })
                 .catch(error => {
                     alert("Something went wrong. Please try again or checkout via WhatsApp.");
