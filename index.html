@@ -7,6 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         /* Modern CSS Reset & Smooth Scrolling */
@@ -31,38 +33,53 @@
         .hero h2 { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; font-weight: 400;}
 
-        /* Shop Section - Dark Background */
+        /* Shop Section */
         #shop { background-color: #1a1a1a; padding: 5rem 5%; }
         .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #fff; font-weight: 900; letter-spacing: 2px;}
-        
         .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
         
         /* Product Cards */
         .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
         .card:hover { transform: translateY(-8px); }
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
-        
-        /* Fix for the Dynamic Images so they don't cut off */
-        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-hero-img { object-fit: contain; padding: 10px; background-color: #111;}
+        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-custom-shirt-img, #dynamic-hero-img, #dynamic-winged-img { object-fit: contain; padding: 10px; background-color: #111;}
 
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
         .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
         .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
         .price { font-size: 1.6rem; font-weight: 900; color: #d90429; margin-bottom: 15px; }
         
-        /* Controls (Colors, Sizes, Qty) */
+        /* Controls */
         .controls-container { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;}
         .color-selector p { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; color: #555;}
         .swatches { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;}
         .swatch { width: 30px; height: 30px; border-radius: 50%; border: 3px solid #ddd; cursor: pointer; transition: 0.2s; }
         .swatch:hover, .swatch.active { border-color: #d90429; transform: scale(1.1); }
-
         .flex-options { display: flex; justify-content: space-between; align-items: center; gap: 10px;}
         .size-select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; flex-grow: 1;}
         .qty-input { width: 60px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; text-align: center;}
-
         .add-to-cart-btn { margin-top: auto; background: #111; color: #fff; border: none; padding: 15px 20px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; font-family: 'Montserrat'; letter-spacing: 1px;}
         .add-to-cart-btn:hover { background: #d90429; }
+
+        /* Custom Design Studio Styles */
+        .design-studio { background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: left; border: 2px solid #ccc;}
+        .design-studio h4 { font-size: 1rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; text-align: center;}
+        .studio-input-group { margin-bottom: 10px; }
+        .studio-input-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; text-transform: uppercase;}
+        .studio-select, .studio-text { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold;}
+        .studio-add-btn { background: #d90429; color: white; border: none; padding: 10px; width: 100%; font-weight: bold; text-transform: uppercase; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 5px;}
+        .studio-add-btn:hover { background: #111; }
+        .customization-list { list-style: none; margin-top: 10px; font-size: 0.85rem; padding: 0; }
+        .customization-list li { background: #fff; padding: 8px; border-radius: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #111; font-weight: bold;}
+        .remove-cust-btn { color: #d90429; cursor: pointer; font-weight: 900; }
+
+        /* Live Preview Overlays */
+        .preview-zone { position: absolute; pointer-events: none; display: flex; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.3); }
+        .preview-zone img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        #preview-Front-Center-Trunk { top: 35%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; font-size: 1.2rem; }
+        #preview-Left-Breast { top: 25%; right: 28%; width: 50px; height: 50px; font-size: 0.7rem; }
+        #preview-Right-Sleeve { top: 35%; left: 15%; width: 40px; height: 40px; font-size: 0.6rem; transform: rotate(-15deg); }
+        #preview-Left-Sleeve { top: 35%; right: 15%; width: 40px; height: 40px; font-size: 0.6rem; transform: rotate(15deg); }
 
         /* Contact Section */
         #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
@@ -81,7 +98,9 @@
         .modal h2 { margin-bottom: 1.5rem; text-transform: uppercase; text-align: center; font-weight: 900;}
         
         #cart-items { list-style: none; margin-bottom: 1.5rem; }
-        #cart-items li { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; font-weight: bold;}
+        #cart-items li { display: flex; flex-direction: column; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .cart-item-header { display: flex; justify-content: space-between; font-weight: bold; }
+        .cart-item-details { color: #666; font-size: 0.85rem; margin-top: 5px; }
         .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 2rem; color: #d90429; }
         
         /* Dynamic Checkout Form Styles */
@@ -101,20 +120,19 @@
         .checkout-btn.email-btn { background: #d90429; }
         .checkout-btn.email-btn:hover { background: #bf0424; }
         
+        .checkout-btn.pdf-btn { background: #111; margin-bottom: 15px;}
+        .checkout-btn.pdf-btn:hover { background: #333; }
+        
         .checkout-btn:disabled { background: #888; cursor: not-allowed; }
 
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
 
-        /* --- MOBILE RESPONSIVENESS FIXES --- */
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; padding: 1rem; text-align: center; }
             .nav-links { width: 100%; justify-content: center; gap: 15px; }
             header h1 { font-size: 1.3rem; }
             .hero { padding: 6rem 1rem; }
             .hero h2 { font-size: 2.5rem; letter-spacing: 2px; }
-            .hero p { font-size: 1rem; }
-            .section-title { font-size: 2rem; }
-            .swatches { flex-wrap: wrap; }
             .form-row { flex-direction: column; gap: 1rem; }
         }
     </style>
@@ -138,15 +156,123 @@
     <section id="shop">
         <h3 class="section-title">Latest Drops</h3>
         <div class="products">
-            
+
+            <div class="card">
+                <img src="winged-set.jpeg" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img">
+                <div class="card-content">
+                    <div class="product-title">Winged Graphic Two-Piece Set</div>
+                    <div class="product-desc">Performance compression top and activewear pants set with red wing accents.</div>
+                    
+                    <div class="price" id="winged-price-display">$25.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-winged-color-text" style="color: #111;">Black & Red</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-winged-black"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="winged-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="winged-qty" class="qty-input" value="1" min="1" onchange="updateWingedPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addWingedToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="position: relative; background: #111; overflow: hidden; height: 350px;">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80" alt="Blank T-Shirt" id="dynamic-custom-shirt-img" style="width: 100%; height: 100%; object-fit: contain; padding: 10px; transition: 0.3s;">
+                    
+                    <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #111;"></div>
+                    <div id="preview-Left-Breast" class="preview-zone" style="color: #111;"></div>
+                    <div id="preview-Right-Sleeve" class="preview-zone" style="color: #111;"></div>
+                    <div id="preview-Left-Sleeve" class="preview-zone" style="color: #111;"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="product-title">Custom Blank Tee</div>
+                    <div class="product-desc">Fully customize your gear. Add text, flags, or logos exactly where you want them.</div>
+                    
+                    <div class="price" id="custom-shirt-price-display">$15.00</div>
+                    
+                    <div class="design-studio">
+                        <h4><i class="fas fa-paint-roller"></i> Design Studio</h4>
+                        
+                        <div class="studio-input-group">
+                            <label>1. Select Placement</label>
+                            <select id="studio-placement" class="studio-select">
+                                <option value="Front Center (Trunk)">Front Center (Trunk)</option>
+                                <option value="Left Breast">Left Breast</option>
+                                <option value="Right Sleeve">Right Sleeve</option>
+                                <option value="Left Sleeve">Left Sleeve</option>
+                                <option value="Upper Back (Right)">Upper Back (Right) *No front preview</option>
+                                <option value="Upper Back (Center)">Upper Back (Center) *No front preview</option>
+                            </select>
+                        </div>
+
+                        <div class="studio-input-group">
+                            <label>2. Content Type</label>
+                            <select id="studio-type" class="studio-select" onchange="toggleStudioInput()">
+                                <option value="text">Custom Text (e.g., Team Name, Slogan, Initials)</option>
+                                <option value="image">Upload Image/Logo (e.g., Team Crest, Flag)</option>
+                            </select>
+                        </div>
+
+                        <div class="studio-input-group" id="studio-text-wrapper">
+                            <input type="text" id="studio-text-input" class="studio-text" placeholder="Type team name or slogan..." maxlength="30">
+                        </div>
+
+                        <div class="studio-input-group" id="studio-image-wrapper" style="display: none;">
+                            <input type="file" id="studio-image-input" class="studio-text" accept="image/*">
+                            <small style="display:block; margin-top:3px; color:#666;">Choose your logo or flag file.</small>
+                        </div>
+
+                        <button class="studio-add-btn" onclick="addCustomizationItem()"><i class="fas fa-plus"></i> Add to Shirt Design</button>
+                        
+                        <ul id="active-customizations" class="customization-list"></ul>
+                    </div>
+
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-custom-shirt-color-text" style="color: #111;">White</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-custom-white" onclick="changeCustomShirtColor('White', 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80')"></div>
+                                <div class="swatch" style="background-color: #111;" id="swatch-custom-black" onclick="changeCustomShirtColor('Black', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80')"></div>
+                                <div class="swatch" style="background-color: #0f4c81;" id="swatch-custom-navy" onclick="changeCustomShirtColor('Navy Blue', 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&q=80')"></div>
+                                <div class="swatch" style="background-color: #c1121f;" id="swatch-custom-red" onclick="changeCustomShirtColor('Red', 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80')"></div>
+                                <div class="swatch" style="background-color: #6c757d;" id="swatch-custom-grey" onclick="changeCustomShirtColor('Grey', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&q=80')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="custom-shirt-size">
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                            </select>
+                            <input type="number" id="custom-shirt-qty" class="qty-input" value="1" min="1" onchange="updateCustomShirtPrice()">
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-btn" onclick="addCustomShirtToCart()">Add Custom Shirt to Cart</button>
+                </div>
+            </div>
+
             <div class="card">
                 <img src="hero-green.jpeg" alt="Hero Compression Top" id="dynamic-hero-img">
                 <div class="card-content">
                     <div class="product-title">Hero Compression Top</div>
                     <div class="product-desc">Ultra-stretch performance compression armor featuring high-definition hero concepts.</div>
-                    
                     <div class="price" id="hero-price-display">$15.00</div>
-                    
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Style: <span id="selected-hero-color-text" style="color: #2a9d8f;">Green Spider</span></p>
@@ -157,7 +283,6 @@
                                 <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.jpeg')"></div>
                             </div>
                         </div>
-                        
                         <div class="flex-options">
                             <select class="size-select" id="hero-size">
                                 <option value="XS">Size: XS</option>
@@ -166,22 +291,19 @@
                                 <option value="XL">Size: XL</option>
                                 <option value="XXL">Size: XXL</option>
                             </select>
-                            
                             <input type="number" id="hero-qty" class="qty-input" value="1" min="1" onchange="updateHeroPrice()">
                         </div>
                     </div>
                     <button class="add-to-cart-btn" onclick="addHeroToCart()">Add to Cart</button>
                 </div>
             </div>
-
+            
             <div class="card">
                 <img src="spider-black.jpeg" alt="Two Piece Set" id="dynamic-set-img">
                 <div class="card-content">
                     <div class="product-title">Spider Graphic Two-Piece Set</div>
                     <div class="product-desc">Compression performance tee paired with lightweight training joggers.</div>
-                    
                     <div class="price" id="set-price-display">$25.00</div>
-                    
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-color-text" style="color: #111;">Black</span></p>
@@ -190,7 +312,6 @@
                                 <div class="swatch" style="background-color: #5c1822;" id="swatch-maroon" onclick="changeColor('Maroon', 'spider-maroon.jpeg')"></div>
                             </div>
                         </div>
-                        
                         <div class="flex-options">
                             <select class="size-select" id="set-size">
                                 <option value="XS">Size: XS</option>
@@ -200,7 +321,6 @@
                                 <option value="XL">Size: XL</option>
                                 <option value="XXL">Size: XXL</option>
                             </select>
-                            
                             <input type="number" id="set-qty" class="qty-input" value="1" min="1" onchange="updateSetPrice()">
                         </div>
                     </div>
@@ -213,9 +333,7 @@
                 <div class="card-content">
                     <div class="product-title">Spider Compression Top</div>
                     <div class="product-desc">Lightweight, quick-drying stretch fabric for maximum performance.</div>
-                    
                     <div class="price" id="shirt-price-display">$15.00</div>
-                    
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-shirt-color-text" style="color: #0f4c81;">Royal Blue</span></p>
@@ -225,7 +343,6 @@
                                 <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shirt-white" onclick="changeShirtColor('White', 'spider-black-shirt.jpeg')"></div>
                             </div>
                         </div>
-                        
                         <div class="flex-options">
                             <select class="size-select" id="shirt-size">
                                 <option value="XS">Size: XS</option>
@@ -234,7 +351,6 @@
                                 <option value="L">Size: L</option>
                                 <option value="XL">Size: XL</option>
                             </select>
-                            
                             <input type="number" id="shirt-qty" class="qty-input" value="1" min="1" onchange="updateShirtPrice()">
                         </div>
                     </div>
@@ -247,9 +363,7 @@
                 <div class="card-content">
                     <div class="product-title">2-in-1 Training Shorts</div>
                     <div class="product-desc">Built-in compression liner with hidden pockets and lightweight outer shell.</div>
-                    
                     <div class="price" id="shorts-price-display">$13.00</div>
-                    
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-shorts-color-text" style="color: #111;">Black</span></p>
@@ -261,7 +375,6 @@
                                 <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shorts-white" onclick="changeShortsColor('White', 'shorts-white.jpeg')"></div>
                             </div>
                         </div>
-                        
                         <div class="flex-options">
                             <select class="size-select" id="shorts-size">
                                 <option value="XXS">Size: XXS</option>
@@ -272,7 +385,6 @@
                                 <option value="XL">Size: XL</option>
                                 <option value="XXL">Size: XXL</option>
                             </select>
-                            
                             <input type="number" id="shorts-qty" class="qty-input" value="1" min="1" onchange="updateShortsPrice()">
                         </div>
                     </div>
@@ -280,49 +392,6 @@
                 </div>
             </div>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80" alt="Red Hoodie">
-                <div class="card-content">
-                    <div class="product-title">Crimson Pump Cover</div>
-                    <div class="product-desc">Oversized heavy-cotton hoodie for warmups.</div>
-                    <div class="price">$35.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Crimson Pump Cover', 35.00)">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=600&q=80" alt="Grey Joggers">
-                <div class="card-content">
-                    <div class="product-title">Urban Tapered Joggers</div>
-                    <div class="product-desc">Fleece-lined interior with a tapered ankle fit.</div>
-                    <div class="price">$30.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Urban Tapered Joggers', 30.00)">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1512469446215-99884e9d5622?w=600&q=80" alt="Windbreaker">
-                <div class="card-content">
-                    <div class="product-title">Blackout Windbreaker</div>
-                    <div class="product-desc">Water-resistant shell for outdoor training sessions.</div>
-                    <div class="price">$40.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Blackout Windbreaker', 40.00)">Add to Cart</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="contact">
-        <h3>Connect With Us</h3>
-        <p>Got questions or ready to order directly? Hit us up on our socials.</p>
-        <div class="social-links">
-            <a href="https://wa.me/96181885580" target="_blank" class="social-btn whatsapp-btn">
-                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Message on WhatsApp
-            </a>
-            <a href="https://instagram.com/kayansiefeldeen" target="_blank" class="social-btn instagram-btn">
-                <i class="fab fa-instagram" style="font-size: 1.5rem;"></i> @kayansiefeldeen
-            </a>
         </div>
     </section>
 
@@ -336,6 +405,10 @@
 
             <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
                 
+                <button type="button" class="checkout-btn pdf-btn" onclick="downloadOrderPDF()">
+                    <i class="fas fa-file-pdf"></i> Download Order Spec as PDF
+                </button>
+
                 <label style="font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1rem;">Payment Method</label>
                 <div class="payment-options">
                     <label><input type="radio" name="Payment_Method" value="Whish Money Transfer" onchange="toggleForm()" checked> Whish Money Transfer</label>
@@ -344,7 +417,6 @@
 
                 <div id="cod-shipping-details" style="display: none; border-top: 1px solid #eee; padding-top: 1rem; margin-top: 1rem;">
                     <h3 style="margin-bottom: 15px; font-size: 1.1rem;">Shipping Details</h3>
-                    
                     <div class="form-row">
                         <div class="form-group">
                             <label>First Name *</label>
@@ -355,7 +427,6 @@
                             <input type="text" id="l-name" class="req-field">
                         </div>
                     </div>
-                    
                     <div class="form-row">
                         <div class="form-group">
                             <label>Email *</label>
@@ -366,17 +437,10 @@
                             <input type="text" id="phone" class="req-field">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Address *</label>
                         <input type="text" id="address" class="req-field">
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Apartment/Suite/Building (Optional)</label>
-                        <input type="text" id="apt">
-                    </div>
-
                     <div class="form-row">
                         <div class="form-group">
                             <label>City *</label>
@@ -415,7 +479,150 @@
         let total = 0;
         const myWhatsAppNumber = "96181885580";
 
-        // --- NEW HERO COLLECTION LISTING LOGIC ---
+        // --- NEW WINGED SET LISTING LOGIC ---
+        let currentWingedColor = 'Black & Red'; 
+        const baseWingedPrice = 25.00;
+
+        function updateWingedPrice() {
+            let qty = parseInt(document.getElementById('winged-qty').value);
+            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('winged-qty').value = 1; }
+            document.getElementById('winged-price-display').innerText = "$" + (baseWingedPrice * qty).toFixed(2);
+        }
+
+        function addWingedToCart() {
+            let size = document.getElementById('winged-size').value;
+            let qty = parseInt(document.getElementById('winged-qty').value);
+            addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []);
+        }
+
+        // --- CUSTOM SHIRT DESIGN STUDIO LOGIC ---
+        let currentCustomShirtColor = 'White'; 
+        const baseCustomShirtPrice = 15.00;
+        let shirtDesignList = []; 
+
+        function toggleStudioInput() {
+            const type = document.getElementById('studio-type').value;
+            document.getElementById('studio-text-wrapper').style.display = type === 'text' ? 'block' : 'none';
+            document.getElementById('studio-image-wrapper').style.display = type === 'image' ? 'block' : 'none';
+        }
+
+        function addCustomizationItem() {
+            const placement = document.getElementById('studio-placement').value;
+            const type = document.getElementById('studio-type').value;
+
+            if (type === 'text') {
+                const contentValue = document.getElementById('studio-text-input').value.trim();
+                if (!contentValue) return alert("Please type some text for the design.");
+                shirtDesignList.push({ placement: placement, type: type, content: contentValue });
+                finalizeAdd();
+            } else {
+                const fileInput = document.getElementById('studio-image-input');
+                if (fileInput.files.length === 0) return alert("Please select an image file to upload.");
+                const file = fileInput.files[0];
+                
+                // Read image file so we can display it on the shirt overlay
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    shirtDesignList.push({ 
+                        placement: placement, 
+                        type: type, 
+                        content: file.name, 
+                        dataUrl: e.target.result // Store the actual image data for preview
+                    });
+                    finalizeAdd();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function finalizeAdd() {
+            document.getElementById('studio-text-input').value = "";
+            document.getElementById('studio-image-input').value = "";
+            renderDesignList();
+            updateLivePreview();
+        }
+
+        function removeDesignItem(index) {
+            shirtDesignList.splice(index, 1);
+            renderDesignList();
+            updateLivePreview();
+        }
+
+        function renderDesignList() {
+            const listEl = document.getElementById('active-customizations');
+            listEl.innerHTML = "";
+            shirtDesignList.forEach((item, index) => {
+                const li = document.createElement('li');
+                const icon = item.type === 'text' ? '<i class="fas fa-font"></i>' : '<i class="fas fa-image"></i>';
+                li.innerHTML = `<span>${icon} <strong>${item.placement}:</strong> ${item.content}</span> <span class="remove-cust-btn" onclick="removeDesignItem(${index})">&times;</span>`;
+                listEl.appendChild(li);
+            });
+        }
+
+        function updateLivePreview() {
+            // Clear all current visual previews
+            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
+            zones.forEach(zone => {
+                const el = document.getElementById(`preview-${zone}`);
+                if(el) el.innerHTML = "";
+            });
+
+            // Re-render based on current list array
+            shirtDesignList.forEach(item => {
+                // Match the drop-down placement to the HTML ID structure
+                let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
+                let element = document.getElementById(elementId);
+                
+                // If it's a back placement, we just skip drawing it on the front image view
+                if (!element) return; 
+
+                if(item.type === 'text') {
+                    element.innerHTML = `<span>${item.content}</span>`;
+                } else if (item.type === 'image') {
+                    element.innerHTML = `<img src="${item.dataUrl}">`;
+                }
+            });
+        }
+
+        function changeCustomShirtColor(colorName, imagePath) {
+            document.getElementById('dynamic-custom-shirt-img').src = imagePath;
+            document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
+            
+            // Re-color swatches logic
+            const colors = ['white', 'black', 'navy', 'red', 'grey'];
+            colors.forEach(c => document.getElementById(`swatch-custom-${c}`).classList.remove('active'));
+            
+            let idSuffix = colorName.toLowerCase().split(' ')[0]; // Gets 'white', 'navy', etc.
+            document.getElementById(`swatch-custom-${idSuffix}`).classList.add('active');
+
+            // Toggle preview text color so it remains visible against dark/light shirts
+            let textColor = (colorName === 'White' || colorName === 'Grey') ? '#111' : '#fff';
+            document.querySelectorAll('.preview-zone').forEach(el => el.style.color = textColor);
+            currentCustomShirtColor = colorName;
+        }
+
+        function updateCustomShirtPrice() {
+            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
+            document.getElementById('custom-shirt-price-display').innerText = "$" + (baseCustomShirtPrice * qty).toFixed(2);
+        }
+
+        function addCustomShirtToCart() {
+            let size = document.getElementById('custom-shirt-size').value;
+            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
+            let totalPrice = baseCustomShirtPrice * qty;
+            
+            let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
+            let customDetails = [];
+            if (shirtDesignList.length > 0) {
+                shirtDesignList.forEach(design => {
+                    customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`);
+                });
+            }
+            addToCartWithDetails(itemName, totalPrice, customDetails);
+        }
+
+
+        // --- HERO COMPRESSION COLLECTION LISTING LOGIC ---
         let currentHeroColor = 'Green Spider'; 
         const baseHeroPrice = 15.00;
 
@@ -451,182 +658,161 @@
         function addHeroToCart() {
             let size = document.getElementById('hero-size').value;
             let qty = parseInt(document.getElementById('hero-qty').value);
-            addToCart(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty);
+            addToCartWithDetails(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty, []);
         }
 
         // --- FIRST LISTING LOGIC ---
         let currentSetColor = 'Black'; 
         const baseSetPrice = 25.00;
-
         function changeColor(colorName, imagePath) {
             document.getElementById('dynamic-set-img').src = imagePath;
-            const colorText = document.getElementById('selected-color-text');
-            colorText.innerText = colorName;
-            colorText.style.color = colorName === 'Maroon' ? '#d90429' : '#111';
+            document.getElementById('selected-color-text').innerText = colorName;
             currentSetColor = colorName;
-            document.getElementById('swatch-maroon').classList.remove('active');
-            document.getElementById('swatch-black').classList.remove('active');
-            if(colorName === 'Maroon') document.getElementById('swatch-maroon').classList.add('active');
-            else document.getElementById('swatch-black').classList.add('active');
         }
-
         function updateSetPrice() {
             let qty = parseInt(document.getElementById('set-qty').value);
             if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('set-qty').value = 1; }
             document.getElementById('set-price-display').innerText = "$" + (baseSetPrice * qty).toFixed(2);
         }
-
         function addSetToCart() {
             let size = document.getElementById('set-size').value;
             let qty = parseInt(document.getElementById('set-qty').value);
-            addToCart(`${qty}x Spider Graphic Set (${currentSetColor} - ${size})`, baseSetPrice * qty);
+            addToCartWithDetails(`${qty}x Spider Graphic Set (${currentSetColor} - ${size})`, baseSetPrice * qty, []);
         }
 
-        // --- SECOND LISTING LOGIC ---
-        let currentShirtColor = 'Royal Blue'; 
-        const baseShirtPrice = 15.00;
+        // --- SECOND & THIRD LISTING LOGIC ---
+        let currentShirtColor = 'Royal Blue'; const baseShirtPrice = 15.00;
+        function changeShirtColor(colorName, imagePath) { document.getElementById('dynamic-shirt-img').src = imagePath; currentShirtColor = colorName; }
+        function updateShirtPrice() { let qty = parseInt(document.getElementById('shirt-qty').value) || 1; document.getElementById('shirt-price-display').innerText = "$" + (baseShirtPrice * qty).toFixed(2); }
+        function addShirtToCart() { let size = document.getElementById('shirt-size').value; let qty = parseInt(document.getElementById('shirt-qty').value) || 1; addToCartWithDetails(`${qty}x Spider Shirt (${currentShirtColor} - ${size})`, baseShirtPrice * qty, []); }
 
-        function changeShirtColor(colorName, imagePath) {
-            document.getElementById('dynamic-shirt-img').src = imagePath;
-            const colorText = document.getElementById('selected-shirt-color-text');
-            colorText.innerText = colorName;
-            if(colorName === 'Royal Blue') colorText.style.color = '#0f4c81';
-            else if (colorName === 'White') colorText.style.color = '#888';
-            else colorText.style.color = '#111';
-            currentShirtColor = colorName;
-            document.getElementById('swatch-shirt-blue').classList.remove('active');
-            document.getElementById('swatch-shirt-black').classList.remove('active');
-            document.getElementById('swatch-shirt-white').classList.remove('active');
-            if(colorName === 'Royal Blue') document.getElementById('swatch-shirt-blue').classList.add('active');
-            else if (colorName === 'Black') document.getElementById('swatch-shirt-black').classList.add('active');
-            else document.getElementById('swatch-shirt-white').classList.add('active');
-        }
+        let currentShortsColor = 'Black'; const baseShortsPrice = 13.00;
+        function changeShortsColor(colorName, imagePath) { document.getElementById('dynamic-shorts-img').src = imagePath; currentShortsColor = colorName; }
+        function updateShortsPrice() { let qty = parseInt(document.getElementById('shorts-qty').value) || 1; document.getElementById('shorts-price-display').innerText = "$" + (baseShortsPrice * qty).toFixed(2); }
+        function addShortsToCart() { let size = document.getElementById('shorts-size').value; let qty = parseInt(document.getElementById('shorts-qty').value) || 1; addToCartWithDetails(`${qty}x 2-in-1 Shorts (${currentShortsColor} - ${size})`, baseShortsPrice * qty, []); }
 
-        function updateShirtPrice() {
-            let qty = parseInt(document.getElementById('shirt-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('shirt-qty').value = 1; }
-            document.getElementById('shirt-price-display').innerText = "$" + (baseShirtPrice * qty).toFixed(2);
-        }
 
-        function addShirtToCart() {
-            let size = document.getElementById('shirt-size').value;
-            let qty = parseInt(document.getElementById('shirt-qty').value);
-            addToCart(`${qty}x Spider Shirt (${currentShirtColor} - ${size})`, baseShirtPrice * qty);
-        }
-
-        // --- THIRD LISTING LOGIC ---
-        let currentShortsColor = 'Black'; 
-        const baseShortsPrice = 13.00;
-
-        function changeShortsColor(colorName, imagePath) {
-            document.getElementById('dynamic-shorts-img').src = imagePath;
-            const colorText = document.getElementById('selected-shorts-color-text');
-            colorText.innerText = colorName;
-            colorText.style.color = '#111'; 
-            currentShortsColor = colorName;
-            
-            document.getElementById('swatch-shorts-black').classList.remove('active');
-            document.getElementById('swatch-shorts-grey').classList.remove('active');
-            document.getElementById('swatch-shorts-blue').classList.remove('active');
-            document.getElementById('swatch-shorts-navy').classList.remove('active');
-            document.getElementById('swatch-shorts-white').classList.remove('active');
-            
-            if(colorName === 'Black') document.getElementById('swatch-shorts-black').classList.add('active');
-            else if(colorName === 'Grey') document.getElementById('swatch-shorts-grey').classList.add('active');
-            else if(colorName === 'Blue') document.getElementById('swatch-shorts-blue').classList.add('active');
-            else if(colorName === 'Navy Blue') document.getElementById('swatch-shorts-navy').classList.add('active');
-            else if(colorName === 'White') document.getElementById('swatch-shorts-white').classList.add('active');
-        }
-
-        function updateShortsPrice() {
-            let qty = parseInt(document.getElementById('shorts-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('shorts-qty').value = 1; }
-            document.getElementById('shorts-price-display').innerText = "$" + (baseShortsPrice * qty).toFixed(2);
-        }
-
-        function addShortsToCart() {
-            let size = document.getElementById('shorts-size').value;
-            let qty = parseInt(document.getElementById('shorts-qty').value);
-            addToCart(`${qty}x 2-in-1 Shorts (${currentShortsColor} - ${size})`, baseShortsPrice * qty);
-        }
-
-        // --- CART & CHECKOUT LOGIC ---
-        function addToCart(itemName, itemPrice) {
-            cart.push({ name: itemName, price: itemPrice });
+        // --- CART LOGIC ---
+        function addToCart(itemName, itemPrice) { addToCartWithDetails(itemName, itemPrice, []); }
+        
+        function addToCartWithDetails(itemName, itemPrice, detailsArray) {
+            cart.push({ name: itemName, price: itemPrice, details: detailsArray });
             total += itemPrice;
             document.getElementById('cart-count').innerText = cart.length;
-            alert(itemName + " added to your cart!");
+            alert("Added to cart!");
         }
 
         function openCart() {
-            const modal = document.getElementById('cart-modal');
             const cartList = document.getElementById('cart-items');
-            const checkoutForm = document.getElementById('checkout-form');
-            const emptyMsg = document.getElementById('empty-cart-msg');
-            const totalDisplay = document.getElementById('cart-total-display');
-
             cartList.innerHTML = '';
+            
             if (cart.length === 0) {
-                emptyMsg.style.display = 'block';
-                checkoutForm.style.display = 'none';
-                totalDisplay.style.display = 'none';
+                document.getElementById('empty-cart-msg').style.display = 'block';
+                document.getElementById('checkout-form').style.display = 'none';
+                document.getElementById('cart-total-display').style.display = 'none';
             } else {
-                emptyMsg.style.display = 'none';
-                checkoutForm.style.display = 'block';
-                totalDisplay.style.display = 'block';
+                document.getElementById('empty-cart-msg').style.display = 'none';
+                document.getElementById('checkout-form').style.display = 'block';
+                document.getElementById('cart-total-display').style.display = 'block';
+                
                 cart.forEach(item => {
                     const li = document.createElement('li');
-                    li.innerHTML = `<span>${item.name}</span> <span>$${item.price.toFixed(2)}</span>`;
+                    let detailsHTML = '';
+                    if (item.details && item.details.length > 0) {
+                        detailsHTML = `<div class="cart-item-details">${item.details.join('<br>')}</div>`;
+                    }
+                    li.innerHTML = `<div class="cart-item-header"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>${detailsHTML}`;
                     cartList.appendChild(li);
                 });
             }
-            totalDisplay.innerText = `Total: $${total.toFixed(2)}`;
-            modal.style.display = 'flex';
+            document.getElementById('cart-total-display').innerText = `Total: $${total.toFixed(2)}`;
+            document.getElementById('cart-modal').style.display = 'flex';
         }
 
-        function closeCart() {
-            document.getElementById('cart-modal').style.display = 'none';
-        }
+        function closeCart() { document.getElementById('cart-modal').style.display = 'none'; }
 
-        // --- DYNAMIC FORM TOGGLE ---
         function toggleForm() {
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
             const shippingFields = document.getElementById('cod-shipping-details');
             const submitBtn = document.getElementById('submit-btn');
-            const requiredInputs = document.querySelectorAll('.req-field');
-
+            
             if (method === 'Cash on Delivery (COD)') {
                 shippingFields.style.display = 'block';
                 submitBtn.innerHTML = 'Place Order (COD)';
                 submitBtn.classList.add('email-btn');
-                requiredInputs.forEach(input => input.required = true);
             } else {
                 shippingFields.style.display = 'none';
                 submitBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp';
                 submitBtn.classList.remove('email-btn');
-                requiredInputs.forEach(input => input.required = false);
             }
         }
 
-        // --- FIXED BACKGROUND SUBMIT LOGIC (WEB3FORMS) ---
+        // --- PDF GENERATOR FUNCTION ---
+        function downloadOrderPDF() {
+            if (cart.length === 0) return alert("Your cart is empty!");
+            
+            let htmlContent = `
+                <div style="font-family: Arial, sans-serif; padding: 40px; color: #111;">
+                    <h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1>
+                    <h2>Design Spec & Order Invoice</h2>
+                    <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr style="background-color: #111; color: white; text-align: left;">
+                            <th style="padding: 10px;">Item Details</th>
+                            <th style="padding: 10px; text-align: right;">Price</th>
+                        </tr>
+            `;
+
+            cart.forEach(item => {
+                htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
+                if (item.details && item.details.length > 0) {
+                    htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`;
+                    item.details.forEach(detail => {
+                        htmlContent += `<li>${detail}</li>`;
+                    });
+                    htmlContent += `</ul>`;
+                }
+                htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
+            });
+
+            htmlContent += `
+                    </table>
+                    <h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2>
+                </div>
+            `;
+
+            let opt = {
+              margin:       1,
+              filename:     'AthleticClub_Order_Spec.pdf',
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { scale: 2 },
+              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+            html2pdf().set(opt).from(tempDiv).save();
+        }
+
+        // --- CHECKOUT LOGIC (WEB3FORMS) ---
         function processPayment(event) {
             event.preventDefault(); 
-            
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
             const submitBtn = document.getElementById('submit-btn');
             
             let orderSummary = "";
-            cart.forEach(item => { orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`; });
+            cart.forEach(item => {
+                orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`;
+                if (item.details && item.details.length > 0) {
+                    item.details.forEach(detail => { orderSummary += `  > ${detail}\n`; });
+                }
+            });
             orderSummary += `\nTOTAL: $${total.toFixed(2)}`;
             
             if (method === 'Whish Money Transfer') {
                 let message = `Hello Athletic Club! I would like to place an order via Whish Transfer.\n\n*ORDER DETAILS:*\n${orderSummary}`;
-                const encodedMessage = encodeURIComponent(message);
-                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
-                
-                cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
-                document.getElementById('checkout-form').reset();
-                toggleForm(); closeCart();
+                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                resetCart();
             } else {
                 submitBtn.innerHTML = "Processing Order...";
                 submitBtn.disabled = true;
@@ -636,11 +822,9 @@
                 const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
                 const address = document.getElementById('address').value;
-                const apt = document.getElementById('apt').value;
                 const city = document.getElementById('city').value;
                 const state = document.getElementById('state').value;
 
-                // Package the data for Web3Forms using your verified public key
                 const formData = {
                     access_key: "4c51ca66-face-4bcc-a197-c9d5cafc10ce",
                     subject: "New COD Order - Athletic Club",
@@ -649,47 +833,42 @@
                     Customer_Name: fname + " " + lname,
                     Customer_Email: email,
                     Customer_Phone: phone,
-                    Shipping_Address: `${address}, ${apt ? apt + ', ' : ''}${city}, ${state}`,
+                    Shipping_Address: `${address}, ${city}, ${state}`,
                     Payment_Method: "Cash on Delivery"
                 };
 
-                // Send the email invisibly in the background
                 fetch("https://api.web3forms.com/submit", {
                     method: "POST",
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(formData)
                 })
                 .then(response => response.json())
                 .then(data => {
                     if(data.success) {
                         alert("Order Confirmed! Thank you for shopping with us.");
-                        
-                        // Reset the cart after successful order parsing
-                        cart = []; total = 0; document.getElementById('cart-count').innerText = "0";
-                        document.getElementById('checkout-form').reset();
-                        
-                        document.getElementById('set-qty').value = 1; updateSetPrice();
-                        document.getElementById('shirt-qty').value = 1; updateShirtPrice();
-                        document.getElementById('shorts-qty').value = 1; updateShortsPrice();
-                        document.getElementById('hero-qty').value = 1; updateHeroPrice();
-
-                        toggleForm();
-                        closeCart();
-                    } else {
-                        alert("Something went wrong. Please try again or checkout via WhatsApp.");
-                    }
+                        resetCart();
+                    } else alert("Something went wrong. Please try again.");
                 })
-                .catch(error => {
-                    alert("Something went wrong. Please try again or checkout via WhatsApp.");
-                })
-                .finally(() => {
-                    submitBtn.innerHTML = 'Place Order (COD)';
-                    submitBtn.disabled = false;
-                });
+                .catch(() => alert("Something went wrong. Please try again."))
+                .finally(() => { submitBtn.innerHTML = 'Place Order (COD)'; submitBtn.disabled = false; });
             }
+        }
+
+        function resetCart() {
+            cart = []; total = 0; shirtDesignList = [];
+            document.getElementById('cart-count').innerText = "0";
+            document.getElementById('checkout-form').reset();
+            
+            // Reset quantities to baseline
+            if(document.getElementById('winged-qty')) { document.getElementById('winged-qty').value = 1; updateWingedPrice(); }
+            if(document.getElementById('hero-qty')) { document.getElementById('hero-qty').value = 1; updateHeroPrice(); }
+            if(document.getElementById('set-qty')) { document.getElementById('set-qty').value = 1; updateSetPrice(); }
+            if(document.getElementById('shirt-qty')) { document.getElementById('shirt-qty').value = 1; updateShirtPrice(); }
+            if(document.getElementById('shorts-qty')) { document.getElementById('shorts-qty').value = 1; updateShortsPrice(); }
+            if(document.getElementById('custom-shirt-qty')) { document.getElementById('custom-shirt-qty').value = 1; updateCustomShirtPrice(); }
+            
+            renderDesignList(); updateLivePreview();
+            toggleForm(); closeCart();
         }
     </script>
 </body>
