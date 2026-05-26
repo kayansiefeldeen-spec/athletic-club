@@ -43,7 +43,7 @@
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
         
         /* Fix for the Dynamic Images so they don't cut off */
-        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img { object-fit: contain; padding: 10px; background-color: #111;}
+        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-hero-img { object-fit: contain; padding: 10px; background-color: #111;}
 
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
         .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
@@ -139,6 +139,41 @@
         <h3 class="section-title">Latest Drops</h3>
         <div class="products">
             
+            <div class="card">
+                <img src="hero-green.jpeg" alt="Hero Compression Top" id="dynamic-hero-img">
+                <div class="card-content">
+                    <div class="product-title">Hero Compression Top</div>
+                    <div class="product-desc">Ultra-stretch performance compression armor featuring high-definition hero concepts.</div>
+                    
+                    <div class="price" id="hero-price-display">$15.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Style: <span id="selected-hero-color-text" style="color: #2a9d8f;">Green Spider</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.jpeg')"></div>
+                                <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.jpeg')"></div>
+                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.jpeg')"></div>
+                                <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.jpeg')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="hero-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="hero-qty" class="qty-input" value="1" min="1" onchange="updateHeroPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addHeroToCart()">Add to Cart</button>
+                </div>
+            </div>
+
             <div class="card">
                 <img src="spider-black.jpeg" alt="Two Piece Set" id="dynamic-set-img">
                 <div class="card-content">
@@ -380,6 +415,45 @@
         let total = 0;
         const myWhatsAppNumber = "96181885580";
 
+        // --- NEW HERO COLLECTION LISTING LOGIC ---
+        let currentHeroColor = 'Green Spider'; 
+        const baseHeroPrice = 15.00;
+
+        function changeHeroColor(colorName, imagePath) {
+            document.getElementById('dynamic-hero-img').src = imagePath;
+            const colorText = document.getElementById('selected-hero-color-text');
+            colorText.innerText = colorName;
+            
+            if(colorName === 'Green Spider') colorText.style.color = '#2a9d8f';
+            else if (colorName === 'Black & Blue Symbol') colorText.style.color = '#00b4d8';
+            else if (colorName === 'Dark Knight') colorText.style.color = '#555';
+            else colorText.style.color = '#9b2226';
+            
+            currentHeroColor = colorName;
+            
+            document.getElementById('swatch-hero-green').classList.remove('active');
+            document.getElementById('swatch-hero-blue').classList.remove('active');
+            document.getElementById('swatch-hero-dark').classList.remove('active');
+            document.getElementById('swatch-hero-red').classList.remove('active');
+            
+            if(colorName === 'Green Spider') document.getElementById('swatch-hero-green').classList.add('active');
+            else if (colorName === 'Black & Blue Symbol') document.getElementById('swatch-hero-blue').classList.add('active');
+            else if (colorName === 'Dark Knight') document.getElementById('swatch-hero-dark').classList.add('active');
+            else document.getElementById('swatch-hero-red').classList.add('active');
+        }
+
+        function updateHeroPrice() {
+            let qty = parseInt(document.getElementById('hero-qty').value);
+            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('hero-qty').value = 1; }
+            document.getElementById('hero-price-display').innerText = "$" + (baseHeroPrice * qty).toFixed(2);
+        }
+
+        function addHeroToCart() {
+            let size = document.getElementById('hero-size').value;
+            let qty = parseInt(document.getElementById('hero-qty').value);
+            addToCart(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty);
+        }
+
         // --- FIRST LISTING LOGIC ---
         let currentSetColor = 'Black'; 
         const baseSetPrice = 25.00;
@@ -600,6 +674,7 @@
                         document.getElementById('set-qty').value = 1; updateSetPrice();
                         document.getElementById('shirt-qty').value = 1; updateShirtPrice();
                         document.getElementById('shorts-qty').value = 1; updateShortsPrice();
+                        document.getElementById('hero-qty').value = 1; updateHeroPrice();
 
                         toggleForm();
                         closeCart();
