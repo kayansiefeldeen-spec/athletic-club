@@ -7,18 +7,13 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        /* Modern CSS Reset & Smooth Scrolling */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        
-        /* Upgraded Font */
         body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; }
         
-        /* Navigation */
         header { background-color: #111; color: #fff; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         header h1 { text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; font-weight: 900;}
         .nav-links { display: flex; align-items: center; gap: 20px; }
@@ -28,28 +23,24 @@
         .cart-btn { background: #d90429; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1rem; text-transform: uppercase; transition: background 0.3s; font-family: 'Montserrat', sans-serif;}
         .cart-btn:hover { background: #bf0424; }
 
-        /* Hero Section */
         .hero { background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; padding: 10rem 2rem; border-bottom: 5px solid #d90429; }
         .hero h2 { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; font-weight: 400;}
 
-        /* Shop Section */
         #shop { background-color: #1a1a1a; padding: 5rem 5%; }
         .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #fff; font-weight: 900; letter-spacing: 2px;}
         .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
         
-        /* Product Cards */
         .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
         .card:hover { transform: translateY(-8px); }
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
-        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-custom-shirt-img, #dynamic-hero-img, #dynamic-winged-img, #dynamic-tribal-img, #dynamic-essential-img, #dynamic-hoodie-img { object-fit: contain; padding: 10px; background-color: #111;}
+        .card img.dynamic-img { object-fit: contain; padding: 10px; background-color: #111;}
 
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
         .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
         .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
         .price { font-size: 1.6rem; font-weight: 900; color: #d90429; margin-bottom: 15px; }
         
-        /* Controls */
         .controls-container { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;}
         .color-selector p { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; color: #555;}
         .swatches { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;}
@@ -61,35 +52,12 @@
         .add-to-cart-btn { margin-top: auto; background: #111; color: #fff; border: none; padding: 15px 20px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; font-family: 'Montserrat'; letter-spacing: 1px;}
         .add-to-cart-btn:hover { background: #d90429; }
 
-        /* FEATURED CUSTOM SHIRT STUDIO (Big Layout) */
-        .card.featured-card {
-            grid-column: 1 / -1; 
-            flex-direction: row; 
-            background: #fff;
-        }
-        .featured-card .img-container {
-            flex: 1; 
-            position: relative; 
-            background: #fff; 
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-right: 2px solid #eee;
-        }
-        .featured-card .img-container img {
-            width: 100%; height: 100%; object-fit: contain; background: transparent; padding: 20px;
-        }
-        .featured-card .card-content {
-            flex: 1; text-align: left; padding: 2.5rem; justify-content: flex-start;
-        }
-        @media (max-width: 900px) {
-            .card.featured-card { flex-direction: column; }
-            .featured-card .img-container { min-height: 350px; border-right: none; border-bottom: 2px solid #eee;}
-            .featured-card .card-content { padding: 1.5rem; }
-        }
-
-        /* Custom Design Studio Inputs */
+        /* FEATURED CUSTOM SHIRT STUDIO */
+        .card.featured-card { grid-column: 1 / -1; flex-direction: row; background: #fff; }
+        .featured-card .img-container { flex: 1; position: relative; background: #fff; min-height: 500px; display: flex; align-items: center; justify-content: center; border-right: 2px solid #eee; }
+        .featured-card .img-container img { width: 100%; height: 100%; object-fit: contain; background: transparent; padding: 20px; }
+        .featured-card .card-content { flex: 1; text-align: left; padding: 2.5rem; justify-content: flex-start; }
+        
         .design-studio { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #ccc;}
         .design-studio h4 { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; color: #111; text-align: center;}
         .studio-input-group { margin-bottom: 15px; }
@@ -101,7 +69,6 @@
         .customization-list li { background: #fff; padding: 10px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #111; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
         .remove-cust-btn { color: #d90429; cursor: pointer; font-weight: 900; font-size: 1.2rem;}
 
-        /* Live Preview Overlays */
         .preview-zone { position: absolute; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); overflow: visible;}
         .preview-zone img { max-width: 100%; max-height: 100%; object-fit: contain; drop-shadow: 0px 2px 4px rgba(0,0,0,0.5); }
         #preview-Front-Center-Trunk { top: 40%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; font-size: 1.5rem; }
@@ -109,55 +76,38 @@
         #preview-Right-Sleeve { top: 40%; left: 15%; width: 50px; height: 50px; font-size: 0.7rem; transform: rotate(-15deg); }
         #preview-Left-Sleeve { top: 40%; right: 15%; width: 50px; height: 50px; font-size: 0.7rem; transform: rotate(15deg); }
 
-        /* Contact Section */
-        #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
-        #contact h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: #111;}
-        #contact p { color: #666; margin-bottom: 2rem; font-size: 1.1rem;}
-        .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
-        .social-btn { display: flex; align-items: center; gap: 10px; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.1rem; color: white; transition: transform 0.3s;}
-        .social-btn:hover { transform: translateY(-3px); }
-        .whatsapp-btn { background-color: #25D366; }
-        .instagram-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-
-        /* Cart & Checkout Modal */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; justify-content: center; align-items: center; }
         .modal { background: #fff; width: 95%; max-width: 600px; border-radius: 8px; padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #666; }
         .modal h2 { margin-bottom: 1.5rem; text-transform: uppercase; text-align: center; font-weight: 900;}
-        
         #cart-items { list-style: none; margin-bottom: 1.5rem; }
         #cart-items li { display: flex; flex-direction: column; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .cart-item-header { display: flex; justify-content: space-between; font-weight: bold; }
         .cart-item-details { color: #666; font-size: 0.85rem; margin-top: 5px; }
         .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 2rem; color: #d90429; }
-        
-        /* Dynamic Checkout Form Styles */
         .checkout-form { display: none; text-align: left; }
         .form-row { display: flex; gap: 15px; margin-bottom: 1rem; }
         .form-row .form-group { flex: 1; margin-bottom: 0; }
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.85rem; color: #555;}
         .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-size: 0.9rem;}
-        
         .payment-options { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid #ddd;}
-        .payment-options label { display: block; margin-bottom: 10px; cursor: pointer; font-weight: bold;}
-        
         .checkout-btn { width: 100%; background: #25D366; color: white; padding: 15px; border: none; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Montserrat'; display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .checkout-btn:hover { background: #1ebe57; }
         .checkout-btn.email-btn { background: #d90429; }
-        .checkout-btn.email-btn:hover { background: #bf0424; }
         .checkout-btn.pdf-btn { background: #111; margin-bottom: 15px;}
-        .checkout-btn.pdf-btn:hover { background: #333; }
         .checkout-btn:disabled { background: #888; cursor: not-allowed; }
-
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
 
+        @media (max-width: 900px) {
+            .card.featured-card { flex-direction: column; }
+            .featured-card .img-container { min-height: 350px; border-right: none; border-bottom: 2px solid #eee;}
+            .featured-card .card-content { padding: 1.5rem; }
+        }
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; padding: 1rem; text-align: center; }
             .nav-links { width: 100%; justify-content: center; gap: 15px; }
-            header h1 { font-size: 1.3rem; }
             .hero { padding: 6rem 1rem; }
-            .hero h2 { font-size: 2.5rem; letter-spacing: 2px; }
+            .hero h2 { font-size: 2.5rem; }
             .form-row { flex-direction: column; gap: 1rem; }
         }
     </style>
@@ -168,7 +118,6 @@
         <h1>Athletic Club</h1>
         <div class="nav-links">
             <a href="#shop">Shop</a>
-            <a href="#contact">Contact</a>
             <button class="cart-btn" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
         </div>
     </header>
@@ -184,8 +133,7 @@
 
             <div class="card featured-card">
                 <div class="img-container">
-                    <img src="blank-black.jpg" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
-                    
+                    <img src="blank-black.png" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
                     <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #fff;"></div>
                     <div id="preview-Left-Breast" class="preview-zone" style="color: #fff;"></div>
                     <div id="preview-Right-Sleeve" class="preview-zone" style="color: #fff;"></div>
@@ -195,12 +143,10 @@
                 <div class="card-content">
                     <div class="product-title" style="font-size: 2rem;">Custom Blank Tee</div>
                     <div class="product-desc" style="font-size: 1.1rem;">Build your own gear. Upload a logo or add your team name and see it live on the shirt before you buy.</div>
-                    
                     <div class="price" id="custom-shirt-price-display" style="font-size: 2rem;">$20.00</div>
                     
                     <div class="design-studio">
                         <h4><i class="fas fa-paint-roller"></i> Design Studio</h4>
-                        
                         <div class="studio-input-group">
                             <label>1. Select Placement</label>
                             <select id="studio-placement" class="studio-select" onchange="renderPreviews()">
@@ -212,26 +158,20 @@
                                 <option value="Upper Back (Center)">Upper Back (Center) *No front preview</option>
                             </select>
                         </div>
-
                         <div class="studio-input-group">
                             <label>2. Content Type</label>
                             <select id="studio-type" class="studio-select" onchange="toggleStudioInput(); renderPreviews();">
-                                <option value="text">Custom Text (e.g., Team Name, Slogan, Initials)</option>
-                                <option value="image">Upload Image/Logo (e.g., Team Crest, Flag)</option>
+                                <option value="text">Custom Text (e.g., Team Name, Slogan)</option>
+                                <option value="image">Upload Image/Logo</option>
                             </select>
                         </div>
-
                         <div class="studio-input-group" id="studio-text-wrapper">
                             <input type="text" id="studio-text-input" class="studio-text" placeholder="Type here to see it live..." maxlength="30" oninput="renderPreviews()">
                         </div>
-
                         <div class="studio-input-group" id="studio-image-wrapper" style="display: none;">
                             <input type="file" id="studio-image-input" class="studio-text" accept="image/*" onchange="handleImageUpload(event)">
-                            <small style="display:block; margin-top:5px; color:#666; font-weight:bold;">Select an image to instantly preview it on the shirt.</small>
                         </div>
-
                         <button class="studio-add-btn" onclick="addCustomizationItem()"><i class="fas fa-plus"></i> Lock in Design</button>
-                        
                         <ul id="active-customizations" class="customization-list"></ul>
                     </div>
 
@@ -239,19 +179,18 @@
                         <div class="color-selector">
                             <p>Base Color: <span id="selected-custom-shirt-color-text" style="color: #111;">Black</span></p>
                             <div class="swatches" style="justify-content: flex-start;">
-                                <div class="swatch active" style="background-color: #111;" onclick="changeCustomShirtColor('Black', 'blank-black.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" onclick="changeCustomShirtColor('White', 'blank-white.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #a3e635;" onclick="changeCustomShirtColor('Lime Green', 'blank-lime.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #f97316;" onclick="changeCustomShirtColor('Orange', 'blank-orange.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #f472b6;" onclick="changeCustomShirtColor('Pink', 'blank-pink.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #facc15;" onclick="changeCustomShirtColor('Yellow', 'blank-yellow.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #166534;" onclick="changeCustomShirtColor('Dark Green', 'blank-darkgreen.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #1e3a8a;" onclick="changeCustomShirtColor('Navy', 'blank-navy.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #ef4444;" onclick="changeCustomShirtColor('Red', 'blank-red.jpg', this)"></div>
-                                <div class="swatch" style="background-color: #2563eb;" onclick="changeCustomShirtColor('Royal Blue', 'blank-blue.jpg', this)"></div>
+                                <div class="swatch active" style="background-color: #111;" onclick="changeCustomShirtColor('Black', 'blank-black.png', this)"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" onclick="changeCustomShirtColor('White', 'blank-white.png', this)"></div>
+                                <div class="swatch" style="background-color: #a3e635;" onclick="changeCustomShirtColor('Lime Green', 'blank-lime.png', this)"></div>
+                                <div class="swatch" style="background-color: #f97316;" onclick="changeCustomShirtColor('Orange', 'blank-orange.png', this)"></div>
+                                <div class="swatch" style="background-color: #f472b6;" onclick="changeCustomShirtColor('Pink', 'blank-pink.png', this)"></div>
+                                <div class="swatch" style="background-color: #facc15;" onclick="changeCustomShirtColor('Yellow', 'blank-yellow.png', this)"></div>
+                                <div class="swatch" style="background-color: #166534;" onclick="changeCustomShirtColor('Dark Green', 'blank-darkgreen.png', this)"></div>
+                                <div class="swatch" style="background-color: #1e3a8a;" onclick="changeCustomShirtColor('Navy', 'blank-navy.png', this)"></div>
+                                <div class="swatch" style="background-color: #ef4444;" onclick="changeCustomShirtColor('Red', 'blank-red.png', this)"></div>
+                                <div class="swatch" style="background-color: #2563eb;" onclick="changeCustomShirtColor('Royal Blue', 'blank-blue.png', this)"></div>
                             </div>
                         </div>
-                        
                         <div class="flex-options">
                             <select class="size-select" id="custom-shirt-size">
                                 <option value="S">Size: S</option>
@@ -264,26 +203,25 @@
                             <input type="number" id="custom-shirt-qty" class="qty-input" value="1" min="1" onchange="updateCustomShirtPrice()">
                         </div>
                     </div>
-
                     <button class="add-to-cart-btn" style="font-size:1.2rem; padding: 20px;" onclick="addCustomShirtToCart()">Add Custom Tee to Cart</button>
                 </div>
             </div>
 
             <div class="card">
-                <img src="hoodie-black-red.jpg" alt="Gothic Graphic Zip-Up Hoodie" id="dynamic-hoodie-img">
+                <img src="hoodie-black-red.png" alt="Gothic Graphic Zip-Up Hoodie" id="dynamic-hoodie-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Gothic Graphic Zip-Up Hoodie</div>
-                    <div class="product-desc">Heavyweight thermal zip-up featuring intricate tribal and gothic graphic prints along the chest and sleeves.</div>
+                    <div class="product-desc">Heavyweight thermal zip-up featuring intricate tribal and gothic graphic prints.</div>
                     <div class="price" id="hoodie-price-display">$26.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Style: <span id="selected-hoodie-color-text" style="color: #d90429;">Black & Red Tribal</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-hoodie-black-red" onclick="changeHoodieColor('Black & Red Tribal', 'hoodie-black-red.jpg', 'swatch-hoodie-black-red', '#d90429')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #ff66b2;" id="swatch-hoodie-black-pink" onclick="changeHoodieColor('Black & Pink Tribal', 'hoodie-black-pink.jpg', 'swatch-hoodie-black-pink', '#ff66b2')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #ddd;" id="swatch-hoodie-black-white" onclick="changeHoodieColor('Black & White Angel', 'hoodie-black-white.jpg', 'swatch-hoodie-black-white', '#555')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #9b5de5;" id="swatch-hoodie-black-purple" onclick="changeHoodieColor('Black & Purple Angel', 'hoodie-black-purple.jpg', 'swatch-hoodie-black-purple', '#9b5de5')"></div>
-                                <div class="swatch" style="background-color: #900c3f; border-color: #ddd;" id="swatch-hoodie-red-white" onclick="changeHoodieColor('Red & White Tribal', 'hoodie-red-white.jpg', 'swatch-hoodie-red-white', '#900c3f')"></div>
+                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-hoodie-black-red" onclick="changeHoodieColor('Black & Red Tribal', 'hoodie-black-red.png', 'swatch-hoodie-black-red', '#d90429')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ff66b2;" id="swatch-hoodie-black-pink" onclick="changeHoodieColor('Black & Pink Tribal', 'hoodie-black-pink.png', 'swatch-hoodie-black-pink', '#ff66b2')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ddd;" id="swatch-hoodie-black-white" onclick="changeHoodieColor('Black & White Angel', 'hoodie-black-white.png', 'swatch-hoodie-black-white', '#555')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #9b5de5;" id="swatch-hoodie-black-purple" onclick="changeHoodieColor('Black & Purple Angel', 'hoodie-black-purple.png', 'swatch-hoodie-black-purple', '#9b5de5')"></div>
+                                <div class="swatch" style="background-color: #900c3f; border-color: #ddd;" id="swatch-hoodie-red-white" onclick="changeHoodieColor('Red & White Tribal', 'hoodie-red-white.png', 'swatch-hoodie-red-white', '#900c3f')"></div>
                             </div>
                         </div>
                         <div class="flex-options">
@@ -303,7 +241,7 @@
             </div>
 
             <div class="card">
-                <img src="tribal-set-new.jpg" alt="Tribal Graphic Two-Piece Set" id="dynamic-tribal-img">
+                <img src="tribal-set-new.png" alt="Tribal Graphic Two-Piece Set" id="dynamic-tribal-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Tribal Graphic Two-Piece Set</div>
                     <div class="product-desc">Matching compression top and lightweight activewear pants featuring striking tribal graphics.</div>
@@ -331,10 +269,10 @@
             </div>
 
             <div class="card">
-                <img src="essential-shirt.jpg" alt="Essential Compression Top" id="dynamic-essential-img">
+                <img src="essential-shirt.png" alt="Essential Compression Top" id="dynamic-essential-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Essential Compression Top</div>
-                    <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams for ultimate durability.</div>
+                    <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams.</div>
                     <div class="price" id="essential-price-display">$16.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
@@ -360,7 +298,7 @@
             </div>
 
             <div class="card">
-                <img src="winged-set.jpg" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img">
+                <img src="winged-set.png" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Winged Graphic Two-Piece Set</div>
                     <div class="product-desc">Performance compression top and activewear pants set with red wing accents.</div>
@@ -386,7 +324,7 @@
             </div>
 
             <div class="card">
-                <img src="hero-green.jpg" alt="Hero Compression Top" id="dynamic-hero-img">
+                <img src="hero-green.png" alt="Hero Compression Top" id="dynamic-hero-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Hero Compression Top</div>
                     <div class="product-desc">Ultra-stretch performance compression armor featuring high-definition hero concepts.</div>
@@ -395,10 +333,10 @@
                         <div class="color-selector">
                             <p>Style: <span id="selected-hero-color-text" style="color: #2a9d8f;">Green Spider</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.jpg')"></div>
-                                <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.jpg')"></div>
-                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.jpg')"></div>
-                                <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.jpg')"></div>
+                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.png')"></div>
+                                <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.png')"></div>
+                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.png')"></div>
+                                <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.png')"></div>
                             </div>
                         </div>
                         <div class="flex-options">
@@ -428,7 +366,6 @@
             <div id="empty-cart-msg" style="text-align: center; margin-bottom: 20px; display: none;">Your cart is empty!</div>
 
             <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
-                
                 <div style="background: #fdf0f0; border-left: 4px solid #d90429; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
                     <p style="margin: 0; font-size: 0.9rem; font-weight: bold; color: #d90429;"><i class="fas fa-truck"></i> Note: Delivery takes approximately 20 days.</p>
                 </div>
@@ -507,7 +444,7 @@
         let total = 0;
         const myWhatsAppNumber = "96181885580";
 
-        // --- CUSTOM SHIRT DESIGN STUDIO LOGIC (With real-time live preview) ---
+        // --- CUSTOM SHIRT DESIGN STUDIO LOGIC ---
         let currentCustomShirtColor = 'Black'; 
         const baseCustomShirtPrice = 20.00;
         let shirtDesignList = []; 
@@ -521,40 +458,24 @@
 
         function handleImageUpload(event) {
             const file = event.target.files[0];
-            if(!file) { 
-                draftDataUrl = null; 
-                renderPreviews(); 
-                return; 
-            }
+            if(!file) { draftDataUrl = null; renderPreviews(); return; }
             const reader = new FileReader();
-            reader.onload = function(e) {
-                draftDataUrl = e.target.result;
-                renderPreviews();
-            };
+            reader.onload = function(e) { draftDataUrl = e.target.result; renderPreviews(); };
             reader.readAsDataURL(file);
         }
 
         function renderPreviews() {
             const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
-            zones.forEach(zone => {
-                const el = document.getElementById(`preview-${zone}`);
-                if(el) el.innerHTML = "";
-            });
+            zones.forEach(zone => { const el = document.getElementById(`preview-${zone}`); if(el) el.innerHTML = ""; });
 
-            // 1. Draw permanently saved design elements
             shirtDesignList.forEach(item => {
                 let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
                 let element = document.getElementById(elementId);
                 if (!element) return; 
-
-                if(item.type === 'text') {
-                    element.innerHTML += `<div>${item.content}</div>`;
-                } else if (item.type === 'image') {
-                    element.innerHTML += `<img src="${item.dataUrl}">`;
-                }
+                if(item.type === 'text') element.innerHTML += `<div>${item.content}</div>`;
+                else if (item.type === 'image') element.innerHTML += `<img src="${item.dataUrl}">`;
             });
 
-            // 2. Draw live temporary preview while user types/selects
             const placement = document.getElementById('studio-placement').value;
             const type = document.getElementById('studio-type').value;
             let targetZoneId = `preview-${placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
@@ -582,13 +503,7 @@
             } else {
                 const fileInput = document.getElementById('studio-image-input');
                 if (fileInput.files.length === 0 || !draftDataUrl) return alert("Please select an image file to upload.");
-                const file = fileInput.files[0];
-                shirtDesignList.push({ 
-                    placement: placement, 
-                    type: type, 
-                    content: file.name, 
-                    dataUrl: draftDataUrl 
-                });
+                shirtDesignList.push({ placement: placement, type: type, content: fileInput.files[0].name, dataUrl: draftDataUrl });
                 finalizeAdd();
             }
         }
@@ -598,7 +513,6 @@
             document.getElementById('studio-image-input').value = "";
             draftDataUrl = null; 
             
-            // Render text list
             const listEl = document.getElementById('active-customizations');
             listEl.innerHTML = "";
             shirtDesignList.forEach((item, index) => {
@@ -607,27 +521,19 @@
                 li.innerHTML = `<span>${icon} <strong>${item.placement}:</strong> ${item.content}</span> <span class="remove-cust-btn" onclick="removeDesignItem(${index})">&times;</span>`;
                 listEl.appendChild(li);
             });
-
             renderPreviews();
         }
 
-        function removeDesignItem(index) {
-            shirtDesignList.splice(index, 1);
-            finalizeAdd(); 
-        }
+        function removeDesignItem(index) { shirtDesignList.splice(index, 1); finalizeAdd(); }
 
         function changeCustomShirtColor(colorName, imagePath, swatchEl) {
             document.getElementById('dynamic-custom-shirt-img').src = imagePath;
             document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
             
-            // Re-color swatches logic dynamically based on clicked element
             const swatches = swatchEl.parentElement.children;
-            for(let i=0; i<swatches.length; i++) {
-                swatches[i].classList.remove('active');
-            }
+            for(let i=0; i<swatches.length; i++) swatches[i].classList.remove('active');
             swatchEl.classList.add('active');
 
-            // Set overlay text color based on light/dark shirt
             const lightColors = ['White', 'Yellow', 'Lime Green', 'Pink'];
             let textColor = lightColors.includes(colorName) ? '#111' : '#fff';
             document.querySelectorAll('.preview-zone').forEach(el => el.style.color = textColor);
@@ -647,137 +553,50 @@
             let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
             let customDetails = [];
             if (shirtDesignList.length > 0) {
-                shirtDesignList.forEach(design => {
-                    customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`);
-                });
+                shirtDesignList.forEach(design => customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`));
             }
             addToCartWithDetails(itemName, totalPrice, customDetails);
         }
 
-
-        // --- GOTHIC HOODIE LISTING LOGIC ---
-        let currentHoodieColor = 'Black & Red Tribal'; 
-        const baseHoodiePrice = 26.00;
-
+        // --- LISTINGS LOGIC (Gothic, Tribal, Essential, Winged, Hero) ---
+        let currentHoodieColor = 'Black & Red Tribal'; const baseHoodiePrice = 26.00;
         function changeHoodieColor(colorName, imagePath, swatchId, textColor) {
             document.getElementById('dynamic-hoodie-img').src = imagePath;
-            const colorText = document.getElementById('selected-hoodie-color-text');
-            colorText.innerText = colorName;
-            colorText.style.color = textColor === '#fff' ? '#555' : textColor; 
+            document.getElementById('selected-hoodie-color-text').innerText = colorName;
+            document.getElementById('selected-hoodie-color-text').style.color = textColor === '#fff' ? '#555' : textColor; 
             currentHoodieColor = colorName;
-            
-            document.getElementById('swatch-hoodie-black-red').classList.remove('active');
-            document.getElementById('swatch-hoodie-black-pink').classList.remove('active');
-            document.getElementById('swatch-hoodie-black-white').classList.remove('active');
-            document.getElementById('swatch-hoodie-black-purple').classList.remove('active');
-            document.getElementById('swatch-hoodie-red-white').classList.remove('active');
-            
+            ['swatch-hoodie-black-red','swatch-hoodie-black-pink','swatch-hoodie-black-white','swatch-hoodie-black-purple','swatch-hoodie-red-white'].forEach(id => document.getElementById(id).classList.remove('active'));
             document.getElementById(swatchId).classList.add('active');
         }
+        function updateHoodiePrice() { let qty = parseInt(document.getElementById('hoodie-qty').value) || 1; document.getElementById('hoodie-price-display').innerText = "$" + (baseHoodiePrice * qty).toFixed(2); }
+        function addHoodieToCart() { let size = document.getElementById('hoodie-size').value; let qty = parseInt(document.getElementById('hoodie-qty').value) || 1; addToCartWithDetails(`${qty}x Gothic Hoodie (${currentHoodieColor} - ${size})`, baseHoodiePrice * qty, []); }
 
-        function updateHoodiePrice() {
-            let qty = parseInt(document.getElementById('hoodie-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('hoodie-qty').value = 1; }
-            document.getElementById('hoodie-price-display').innerText = "$" + (baseHoodiePrice * qty).toFixed(2);
-        }
+        let currentTribalColor = 'Black'; const baseTribalPrice = 30.00;
+        function updateTribalPrice() { let qty = parseInt(document.getElementById('tribal-qty').value) || 1; document.getElementById('tribal-price-display').innerText = "$" + (baseTribalPrice * qty).toFixed(2); }
+        function addTribalToCart() { let size = document.getElementById('tribal-size').value; let qty = parseInt(document.getElementById('tribal-qty').value) || 1; addToCartWithDetails(`${qty}x Tribal Two-Piece Set (${currentTribalColor} - ${size})`, baseTribalPrice * qty, []); }
 
-        function addHoodieToCart() {
-            let size = document.getElementById('hoodie-size').value;
-            let qty = parseInt(document.getElementById('hoodie-qty').value);
-            addToCartWithDetails(`${qty}x Gothic Zip-Up Hoodie (${currentHoodieColor} - ${size})`, baseHoodiePrice * qty, []);
-        }
+        let currentEssentialColor = 'Black'; const baseEssentialPrice = 16.00;
+        function updateEssentialPrice() { let qty = parseInt(document.getElementById('essential-qty').value) || 1; document.getElementById('essential-price-display').innerText = "$" + (baseEssentialPrice * qty).toFixed(2); }
+        function addEssentialToCart() { let size = document.getElementById('essential-size').value; let qty = parseInt(document.getElementById('essential-qty').value) || 1; addToCartWithDetails(`${qty}x Essential Compression Top (${currentEssentialColor} - ${size})`, baseEssentialPrice * qty, []); }
 
-        // --- TRIBAL SET LISTING LOGIC ---
-        let currentTribalColor = 'Black'; 
-        const baseTribalPrice = 30.00;
+        let currentWingedColor = 'Black & Red'; const baseWingedPrice = 25.00;
+        function updateWingedPrice() { let qty = parseInt(document.getElementById('winged-qty').value) || 1; document.getElementById('winged-price-display').innerText = "$" + (baseWingedPrice * qty).toFixed(2); }
+        function addWingedToCart() { let size = document.getElementById('winged-size').value; let qty = parseInt(document.getElementById('winged-qty').value) || 1; addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []); }
 
-        function updateTribalPrice() {
-            let qty = parseInt(document.getElementById('tribal-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('tribal-qty').value = 1; }
-            document.getElementById('tribal-price-display').innerText = "$" + (baseTribalPrice * qty).toFixed(2);
-        }
-
-        function addTribalToCart() {
-            let size = document.getElementById('tribal-size').value;
-            let qty = parseInt(document.getElementById('tribal-qty').value);
-            addToCartWithDetails(`${qty}x Tribal Graphic Two-Piece Set (${currentTribalColor} - ${size})`, baseTribalPrice * qty, []);
-        }
-
-        // --- ESSENTIAL COMPRESSION TOP LISTING LOGIC ---
-        let currentEssentialColor = 'Black'; 
-        const baseEssentialPrice = 16.00;
-
-        function updateEssentialPrice() {
-            let qty = parseInt(document.getElementById('essential-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('essential-qty').value = 1; }
-            document.getElementById('essential-price-display').innerText = "$" + (baseEssentialPrice * qty).toFixed(2);
-        }
-
-        function addEssentialToCart() {
-            let size = document.getElementById('essential-size').value;
-            let qty = parseInt(document.getElementById('essential-qty').value);
-            addToCartWithDetails(`${qty}x Essential Compression Top (${currentEssentialColor} - ${size})`, baseEssentialPrice * qty, []);
-        }
-
-        // --- WINGED SET LISTING LOGIC ---
-        let currentWingedColor = 'Black & Red'; 
-        const baseWingedPrice = 25.00;
-
-        function updateWingedPrice() {
-            let qty = parseInt(document.getElementById('winged-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('winged-qty').value = 1; }
-            document.getElementById('winged-price-display').innerText = "$" + (baseWingedPrice * qty).toFixed(2);
-        }
-
-        function addWingedToCart() {
-            let size = document.getElementById('winged-size').value;
-            let qty = parseInt(document.getElementById('winged-qty').value);
-            addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []);
-        }
-
-        // --- HERO COMPRESSION COLLECTION LISTING LOGIC ---
-        let currentHeroColor = 'Green Spider'; 
-        const baseHeroPrice = 15.00;
-
+        let currentHeroColor = 'Green Spider'; const baseHeroPrice = 15.00;
         function changeHeroColor(colorName, imagePath) {
             document.getElementById('dynamic-hero-img').src = imagePath;
-            const colorText = document.getElementById('selected-hero-color-text');
-            colorText.innerText = colorName;
-            
-            if(colorName === 'Green Spider') colorText.style.color = '#2a9d8f';
-            else if (colorName === 'Black & Blue Symbol') colorText.style.color = '#00b4d8';
-            else if (colorName === 'Dark Knight') colorText.style.color = '#555';
-            else colorText.style.color = '#9b2226';
-            
+            let ct = document.getElementById('selected-hero-color-text'); ct.innerText = colorName;
+            if(colorName === 'Green Spider') ct.style.color = '#2a9d8f'; else if (colorName === 'Black & Blue Symbol') ct.style.color = '#00b4d8'; else if (colorName === 'Dark Knight') ct.style.color = '#555'; else ct.style.color = '#9b2226';
             currentHeroColor = colorName;
-            
-            document.getElementById('swatch-hero-green').classList.remove('active');
-            document.getElementById('swatch-hero-blue').classList.remove('active');
-            document.getElementById('swatch-hero-dark').classList.remove('active');
-            document.getElementById('swatch-hero-red').classList.remove('active');
-            
-            if(colorName === 'Green Spider') document.getElementById('swatch-hero-green').classList.add('active');
-            else if (colorName === 'Black & Blue Symbol') document.getElementById('swatch-hero-blue').classList.add('active');
-            else if (colorName === 'Dark Knight') document.getElementById('swatch-hero-dark').classList.add('active');
-            else document.getElementById('swatch-hero-red').classList.add('active');
+            ['swatch-hero-green','swatch-hero-blue','swatch-hero-dark','swatch-hero-red'].forEach(id => document.getElementById(id).classList.remove('active'));
+            let activeId = 'swatch-hero-' + (colorName === 'Green Spider' ? 'green' : (colorName === 'Black & Blue Symbol' ? 'blue' : (colorName === 'Dark Knight' ? 'dark' : 'red')));
+            document.getElementById(activeId).classList.add('active');
         }
-
-        function updateHeroPrice() {
-            let qty = parseInt(document.getElementById('hero-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('hero-qty').value = 1; }
-            document.getElementById('hero-price-display').innerText = "$" + (baseHeroPrice * qty).toFixed(2);
-        }
-
-        function addHeroToCart() {
-            let size = document.getElementById('hero-size').value;
-            let qty = parseInt(document.getElementById('hero-qty').value);
-            addToCartWithDetails(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty, []);
-        }
-
+        function updateHeroPrice() { let qty = parseInt(document.getElementById('hero-qty').value) || 1; document.getElementById('hero-price-display').innerText = "$" + (baseHeroPrice * qty).toFixed(2); }
+        function addHeroToCart() { let size = document.getElementById('hero-size').value; let qty = parseInt(document.getElementById('hero-qty').value) || 1; addToCartWithDetails(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty, []); }
 
         // --- CART LOGIC ---
-        function addToCart(itemName, itemPrice) { addToCartWithDetails(itemName, itemPrice, []); }
-        
         function addToCartWithDetails(itemName, itemPrice, detailsArray) {
             cart.push({ name: itemName, price: itemPrice, details: detailsArray });
             total += itemPrice;
@@ -800,10 +619,7 @@
                 
                 cart.forEach(item => {
                     const li = document.createElement('li');
-                    let detailsHTML = '';
-                    if (item.details && item.details.length > 0) {
-                        detailsHTML = `<div class="cart-item-details">${item.details.join('<br>')}</div>`;
-                    }
+                    let detailsHTML = item.details && item.details.length > 0 ? `<div class="cart-item-details">${item.details.join('<br>')}</div>` : '';
                     li.innerHTML = `<div class="cart-item-header"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>${detailsHTML}`;
                     cartList.appendChild(li);
                 });
@@ -816,68 +632,29 @@
 
         function toggleForm() {
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
-            const shippingFields = document.getElementById('cod-shipping-details');
-            const submitBtn = document.getElementById('submit-btn');
-            
+            const sf = document.getElementById('cod-shipping-details');
+            const sb = document.getElementById('submit-btn');
             if (method === 'Cash on Delivery (COD)') {
-                shippingFields.style.display = 'block';
-                submitBtn.innerHTML = 'Place Order (COD)';
-                submitBtn.classList.add('email-btn');
+                sf.style.display = 'block'; sb.innerHTML = 'Place Order (COD)'; sb.classList.add('email-btn');
             } else {
-                shippingFields.style.display = 'none';
-                submitBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp';
-                submitBtn.classList.remove('email-btn');
+                sf.style.display = 'none'; sb.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp'; sb.classList.remove('email-btn');
             }
         }
 
-        // --- PDF GENERATOR FUNCTION ---
+        // --- PDF GENERATOR ---
         function downloadOrderPDF() {
             if (cart.length === 0) return alert("Your cart is empty!");
-            
-            let htmlContent = `
-                <div style="font-family: Arial, sans-serif; padding: 40px; color: #111;">
-                    <h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1>
-                    <h2>Design Spec & Order Invoice</h2>
-                    <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                        <tr style="background-color: #111; color: white; text-align: left;">
-                            <th style="padding: 10px;">Item Details</th>
-                            <th style="padding: 10px; text-align: right;">Price</th>
-                        </tr>
-            `;
-
+            let htmlContent = `<div style="font-family: Arial, sans-serif; padding: 40px; color: #111;"><h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1><h2>Design Spec & Order Invoice</h2><p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p><table style="width: 100%; border-collapse: collapse; margin-top: 20px;"><tr style="background-color: #111; color: white; text-align: left;"><th style="padding: 10px;">Item Details</th><th style="padding: 10px; text-align: right;">Price</th></tr>`;
             cart.forEach(item => {
                 htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
-                if (item.details && item.details.length > 0) {
-                    htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`;
-                    item.details.forEach(detail => {
-                        htmlContent += `<li>${detail}</li>`;
-                    });
-                    htmlContent += `</ul>`;
-                }
+                if (item.details && item.details.length > 0) { htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; item.details.forEach(detail => htmlContent += `<li>${detail}</li>`); htmlContent += `</ul>`; }
                 htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
             });
-
-            htmlContent += `
-                    </table>
-                    <h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2>
-                </div>
-            `;
-
-            let opt = {
-              margin:       1,
-              filename:     'AthleticClub_Order_Spec.pdf',
-              image:        { type: 'jpeg', quality: 0.98 },
-              html2canvas:  { scale: 2 },
-              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-
-            let tempDiv = document.createElement('div');
-            tempDiv.innerHTML = htmlContent;
-            html2pdf().set(opt).from(tempDiv).save();
+            htmlContent += `</table><h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2></div>`;
+            html2pdf().set({ margin: 1, filename: 'AthleticClub_Order_Spec.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(document.createElement('div').insertAdjacentHTML('afterbegin', htmlContent) || htmlContent).save();
         }
 
-        // --- CHECKOUT LOGIC (WEB3FORMS) ---
+        // --- CHECKOUT LOGIC ---
         function processPayment(event) {
             event.preventDefault(); 
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
@@ -886,72 +663,34 @@
             let orderSummary = "";
             cart.forEach(item => {
                 orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`;
-                if (item.details && item.details.length > 0) {
-                    item.details.forEach(detail => { orderSummary += `  > ${detail}\n`; });
-                }
+                if (item.details && item.details.length > 0) item.details.forEach(detail => orderSummary += `  > ${detail}\n`);
             });
             orderSummary += `\nTOTAL: $${total.toFixed(2)}`;
             
             if (method === 'Whish Money Transfer') {
-                let message = `Hello Athletic Club! I would like to place an order via Whish Transfer.\n\n*ORDER DETAILS:*\n${orderSummary}`;
-                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(`Hello Athletic Club! I would like to place an order via Whish Transfer.\n\n*ORDER DETAILS:*\n${orderSummary}`)}`, '_blank');
                 resetCart();
             } else {
-                submitBtn.innerHTML = "Processing Order...";
-                submitBtn.disabled = true;
-
-                const fname = document.getElementById('f-name').value;
-                const lname = document.getElementById('l-name').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const address = document.getElementById('address').value;
-                const city = document.getElementById('city').value;
-                const state = document.getElementById('state').value;
-
-                const formData = {
-                    access_key: "4c51ca66-face-4bcc-a197-c9d5cafc10ce",
-                    subject: "New COD Order - Athletic Club",
-                    from_name: "Athletic Club Store",
-                    Order_Details: orderSummary,
-                    Customer_Name: fname + " " + lname,
-                    Customer_Email: email,
-                    Customer_Phone: phone,
-                    Shipping_Address: `${address}, ${city}, ${state}`,
-                    Payment_Method: "Cash on Delivery"
+                submitBtn.innerHTML = "Processing Order..."; submitBtn.disabled = true;
+                const fd = {
+                    access_key: "4c51ca66-face-4bcc-a197-c9d5cafc10ce", subject: "New COD Order - Athletic Club", from_name: "Athletic Club Store",
+                    Order_Details: orderSummary, Payment_Method: "Cash on Delivery",
+                    Customer_Name: document.getElementById('f-name').value + " " + document.getElementById('l-name').value,
+                    Customer_Email: document.getElementById('email').value, Customer_Phone: document.getElementById('phone').value,
+                    Shipping_Address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}`
                 };
-
-                fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        alert("Order Confirmed! Thank you for shopping with us.");
-                        resetCart();
-                    } else alert("Something went wrong. Please try again.");
-                })
-                .catch(() => alert("Something went wrong. Please try again."))
-                .finally(() => { submitBtn.innerHTML = 'Place Order (COD)'; submitBtn.disabled = false; });
+                fetch("https://api.web3forms.com/submit", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(fd) })
+                .then(r => r.json()).then(data => { if(data.success) { alert("Order Confirmed! Thank you."); resetCart(); } else alert("Error. Please try again."); })
+                .catch(() => alert("Error. Please try again.")).finally(() => { submitBtn.innerHTML = 'Place Order (COD)'; submitBtn.disabled = false; });
             }
         }
 
         function resetCart() {
             cart = []; total = 0; shirtDesignList = []; draftDataUrl = null;
-            document.getElementById('cart-count').innerText = "0";
-            document.getElementById('checkout-form').reset();
-            
-            // Reset quantities to baseline
-            if(document.getElementById('hoodie-qty')) { document.getElementById('hoodie-qty').value = 1; updateHoodiePrice(); }
-            if(document.getElementById('tribal-qty')) { document.getElementById('tribal-qty').value = 1; updateTribalPrice(); }
-            if(document.getElementById('essential-qty')) { document.getElementById('essential-qty').value = 1; updateEssentialPrice(); }
-            if(document.getElementById('winged-qty')) { document.getElementById('winged-qty').value = 1; updateWingedPrice(); }
-            if(document.getElementById('hero-qty')) { document.getElementById('hero-qty').value = 1; updateHeroPrice(); }
-            if(document.getElementById('custom-shirt-qty')) { document.getElementById('custom-shirt-qty').value = 1; updateCustomShirtPrice(); }
-            
-            renderDesignList(); updateLivePreview();
-            toggleForm(); closeCart();
+            document.getElementById('cart-count').innerText = "0"; document.getElementById('checkout-form').reset();
+            ['hoodie-qty','tribal-qty','essential-qty','winged-qty','hero-qty','custom-shirt-qty'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = 1; });
+            updateHoodiePrice(); updateTribalPrice(); updateEssentialPrice(); updateWingedPrice(); updateHeroPrice(); updateCustomShirtPrice();
+            renderDesignList(); updateLivePreview(); toggleForm(); closeCart();
         }
     </script>
 </body>
