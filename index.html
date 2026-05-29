@@ -42,7 +42,7 @@
         .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
         .card:hover { transform: translateY(-8px); }
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
-        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-custom-shirt-img, #dynamic-hero-img, #dynamic-winged-img { object-fit: contain; padding: 10px; background-color: #111;}
+        #dynamic-set-img, #dynamic-shirt-img, #dynamic-shorts-img, #dynamic-custom-shirt-img, #dynamic-hero-img, #dynamic-winged-img, #dynamic-tribal-img, #dynamic-essential-img, #dynamic-hoodie-img { object-fit: contain; padding: 10px; background-color: #111;}
 
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
         .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
@@ -156,6 +156,108 @@
     <section id="shop">
         <h3 class="section-title">Latest Drops</h3>
         <div class="products">
+
+            <div class="card">
+                <img src="hoodie-black-red.jpeg" alt="Gothic Graphic Zip-Up Hoodie" id="dynamic-hoodie-img">
+                <div class="card-content">
+                    <div class="product-title">Gothic Graphic Zip-Up Hoodie</div>
+                    <div class="product-desc">Heavyweight thermal zip-up featuring intricate tribal and gothic graphic prints along the chest and sleeves.</div>
+                    
+                    <div class="price" id="hoodie-price-display">$26.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Style: <span id="selected-hoodie-color-text" style="color: #d90429;">Black & Red Tribal</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-hoodie-black-red" onclick="changeHoodieColor('Black & Red Tribal', 'hoodie-black-red.jpeg', 'swatch-hoodie-black-red', '#d90429')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ff66b2;" id="swatch-hoodie-black-pink" onclick="changeHoodieColor('Black & Pink Tribal', 'hoodie-black-pink.jpeg', 'swatch-hoodie-black-pink', '#ff66b2')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ddd;" id="swatch-hoodie-black-white" onclick="changeHoodieColor('Black & White Angel', 'hoodie-black-white.jpeg', 'swatch-hoodie-black-white', '#555')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #9b5de5;" id="swatch-hoodie-black-purple" onclick="changeHoodieColor('Black & Purple Angel', 'hoodie-black-purple.jpeg', 'swatch-hoodie-black-purple', '#9b5de5')"></div>
+                                <div class="swatch" style="background-color: #900c3f; border-color: #ddd;" id="swatch-hoodie-red-white" onclick="changeHoodieColor('Red & White Tribal', 'hoodie-red-white.jpeg', 'swatch-hoodie-red-white', '#900c3f')"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="hoodie-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="hoodie-qty" class="qty-input" value="1" min="1" onchange="updateHoodiePrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addHoodieToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="tribal-set.jpeg" alt="Tribal Graphic Two-Piece Set" id="dynamic-tribal-img">
+                <div class="card-content">
+                    <div class="product-title">Tribal Graphic Two-Piece Set</div>
+                    <div class="product-desc">Matching compression top and lightweight activewear pants featuring striking tribal graphics.</div>
+                    
+                    <div class="price" id="tribal-price-display">$30.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-tribal-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #fff;" id="swatch-tribal-black"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="tribal-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                            </select>
+                            
+                            <input type="number" id="tribal-qty" class="qty-input" value="1" min="1" onchange="updateTribalPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addTribalToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="essential-shirt.jpeg" alt="Essential Compression Top" id="dynamic-essential-img">
+                <div class="card-content">
+                    <div class="product-title">Essential Compression Top</div>
+                    <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams for ultimate durability.</div>
+                    
+                    <div class="price" id="essential-price-display">$16.00</div>
+                    
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-essential-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #888;" id="swatch-essential-black"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-options">
+                            <select class="size-select" id="essential-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            
+                            <input type="number" id="essential-qty" class="qty-input" value="1" min="1" onchange="updateEssentialPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addEssentialToCart()">Add to Cart</button>
+                </div>
+            </div>
 
             <div class="card">
                 <img src="winged-set.jpeg" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img">
@@ -358,40 +460,6 @@
                 </div>
             </div>
 
-            <div class="card">
-                <img src="shorts-black.jpeg" alt="2-in-1 Training Shorts" id="dynamic-shorts-img">
-                <div class="card-content">
-                    <div class="product-title">2-in-1 Training Shorts</div>
-                    <div class="product-desc">Built-in compression liner with hidden pockets and lightweight outer shell.</div>
-                    <div class="price" id="shorts-price-display">$13.00</div>
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-shorts-color-text" style="color: #111;">Black</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111;" id="swatch-shorts-black" onclick="changeShortsColor('Black', 'shorts-black.jpeg')"></div>
-                                <div class="swatch" style="background-color: #808080;" id="swatch-shorts-grey" onclick="changeShortsColor('Grey', 'shorts-grey.jpeg')"></div>
-                                <div class="swatch" style="background-color: #219ebc;" id="swatch-shorts-blue" onclick="changeShortsColor('Blue', 'shorts-blue.jpeg')"></div>
-                                <div class="swatch" style="background-color: #264653;" id="swatch-shorts-navy" onclick="changeShortsColor('Navy Blue', 'shorts-navy.jpeg')"></div>
-                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shorts-white" onclick="changeShortsColor('White', 'shorts-white.jpeg')"></div>
-                            </div>
-                        </div>
-                        <div class="flex-options">
-                            <select class="size-select" id="shorts-size">
-                                <option value="XXS">Size: XXS</option>
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                                <option value="XXL">Size: XXL</option>
-                            </select>
-                            <input type="number" id="shorts-qty" class="qty-input" value="1" min="1" onchange="updateShortsPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addShortsToCart()">Add to Cart</button>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -405,6 +473,10 @@
 
             <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
                 
+                <div style="background: #fdf0f0; border-left: 4px solid #d90429; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+                    <p style="margin: 0; font-size: 0.9rem; font-weight: bold; color: #d90429;"><i class="fas fa-truck"></i> Note: Delivery takes approximately 20 days.</p>
+                </div>
+
                 <button type="button" class="checkout-btn pdf-btn" onclick="downloadOrderPDF()">
                     <i class="fas fa-file-pdf"></i> Download Order Spec as PDF
                 </button>
@@ -479,7 +551,71 @@
         let total = 0;
         const myWhatsAppNumber = "96181885580";
 
-        // --- NEW WINGED SET LISTING LOGIC ---
+        // --- NEW GOTHIC HOODIE LISTING LOGIC ---
+        let currentHoodieColor = 'Black & Red Tribal'; 
+        const baseHoodiePrice = 26.00;
+
+        function changeHoodieColor(colorName, imagePath, swatchId, textColor) {
+            document.getElementById('dynamic-hoodie-img').src = imagePath;
+            const colorText = document.getElementById('selected-hoodie-color-text');
+            colorText.innerText = colorName;
+            colorText.style.color = textColor === '#fff' ? '#555' : textColor; // Keep white text readable
+            currentHoodieColor = colorName;
+            
+            document.getElementById('swatch-hoodie-black-red').classList.remove('active');
+            document.getElementById('swatch-hoodie-black-pink').classList.remove('active');
+            document.getElementById('swatch-hoodie-black-white').classList.remove('active');
+            document.getElementById('swatch-hoodie-black-purple').classList.remove('active');
+            document.getElementById('swatch-hoodie-red-white').classList.remove('active');
+            
+            document.getElementById(swatchId).classList.add('active');
+        }
+
+        function updateHoodiePrice() {
+            let qty = parseInt(document.getElementById('hoodie-qty').value);
+            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('hoodie-qty').value = 1; }
+            document.getElementById('hoodie-price-display').innerText = "$" + (baseHoodiePrice * qty).toFixed(2);
+        }
+
+        function addHoodieToCart() {
+            let size = document.getElementById('hoodie-size').value;
+            let qty = parseInt(document.getElementById('hoodie-qty').value);
+            addToCartWithDetails(`${qty}x Gothic Zip-Up Hoodie (${currentHoodieColor} - ${size})`, baseHoodiePrice * qty, []);
+        }
+
+        // --- TRIBAL SET LISTING LOGIC ---
+        let currentTribalColor = 'Black'; 
+        const baseTribalPrice = 30.00;
+
+        function updateTribalPrice() {
+            let qty = parseInt(document.getElementById('tribal-qty').value);
+            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('tribal-qty').value = 1; }
+            document.getElementById('tribal-price-display').innerText = "$" + (baseTribalPrice * qty).toFixed(2);
+        }
+
+        function addTribalToCart() {
+            let size = document.getElementById('tribal-size').value;
+            let qty = parseInt(document.getElementById('tribal-qty').value);
+            addToCartWithDetails(`${qty}x Tribal Graphic Two-Piece Set (${currentTribalColor} - ${size})`, baseTribalPrice * qty, []);
+        }
+
+        // --- ESSENTIAL COMPRESSION TOP LISTING LOGIC ---
+        let currentEssentialColor = 'Black'; 
+        const baseEssentialPrice = 16.00;
+
+        function updateEssentialPrice() {
+            let qty = parseInt(document.getElementById('essential-qty').value);
+            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('essential-qty').value = 1; }
+            document.getElementById('essential-price-display').innerText = "$" + (baseEssentialPrice * qty).toFixed(2);
+        }
+
+        function addEssentialToCart() {
+            let size = document.getElementById('essential-size').value;
+            let qty = parseInt(document.getElementById('essential-qty').value);
+            addToCartWithDetails(`${qty}x Essential Compression Top (${currentEssentialColor} - ${size})`, baseEssentialPrice * qty, []);
+        }
+
+        // --- WINGED SET LISTING LOGIC ---
         let currentWingedColor = 'Black & Red'; 
         const baseWingedPrice = 25.00;
 
@@ -520,14 +656,13 @@
                 if (fileInput.files.length === 0) return alert("Please select an image file to upload.");
                 const file = fileInput.files[0];
                 
-                // Read image file so we can display it on the shirt overlay
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     shirtDesignList.push({ 
                         placement: placement, 
                         type: type, 
                         content: file.name, 
-                        dataUrl: e.target.result // Store the actual image data for preview
+                        dataUrl: e.target.result 
                     });
                     finalizeAdd();
                 };
@@ -560,20 +695,16 @@
         }
 
         function updateLivePreview() {
-            // Clear all current visual previews
             const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
             zones.forEach(zone => {
                 const el = document.getElementById(`preview-${zone}`);
                 if(el) el.innerHTML = "";
             });
 
-            // Re-render based on current list array
             shirtDesignList.forEach(item => {
-                // Match the drop-down placement to the HTML ID structure
                 let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
                 let element = document.getElementById(elementId);
                 
-                // If it's a back placement, we just skip drawing it on the front image view
                 if (!element) return; 
 
                 if(item.type === 'text') {
@@ -588,14 +719,12 @@
             document.getElementById('dynamic-custom-shirt-img').src = imagePath;
             document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
             
-            // Re-color swatches logic
             const colors = ['white', 'black', 'navy', 'red', 'grey'];
             colors.forEach(c => document.getElementById(`swatch-custom-${c}`).classList.remove('active'));
             
-            let idSuffix = colorName.toLowerCase().split(' ')[0]; // Gets 'white', 'navy', etc.
+            let idSuffix = colorName.toLowerCase().split(' ')[0]; 
             document.getElementById(`swatch-custom-${idSuffix}`).classList.add('active');
 
-            // Toggle preview text color so it remains visible against dark/light shirts
             let textColor = (colorName === 'White' || colorName === 'Grey') ? '#111' : '#fff';
             document.querySelectorAll('.preview-zone').forEach(el => el.style.color = textColor);
             currentCustomShirtColor = colorName;
@@ -860,6 +989,9 @@
             document.getElementById('checkout-form').reset();
             
             // Reset quantities to baseline
+            if(document.getElementById('hoodie-qty')) { document.getElementById('hoodie-qty').value = 1; updateHoodiePrice(); }
+            if(document.getElementById('tribal-qty')) { document.getElementById('tribal-qty').value = 1; updateTribalPrice(); }
+            if(document.getElementById('essential-qty')) { document.getElementById('essential-qty').value = 1; updateEssentialPrice(); }
             if(document.getElementById('winged-qty')) { document.getElementById('winged-qty').value = 1; updateWingedPrice(); }
             if(document.getElementById('hero-qty')) { document.getElementById('hero-qty').value = 1; updateHeroPrice(); }
             if(document.getElementById('set-qty')) { document.getElementById('set-qty').value = 1; updateSetPrice(); }
