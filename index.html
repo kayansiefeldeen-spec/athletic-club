@@ -61,25 +61,53 @@
         .add-to-cart-btn { margin-top: auto; background: #111; color: #fff; border: none; padding: 15px 20px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; font-family: 'Montserrat'; letter-spacing: 1px;}
         .add-to-cart-btn:hover { background: #d90429; }
 
-        /* Custom Design Studio Styles */
-        .design-studio { background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: left; border: 2px solid #ccc;}
-        .design-studio h4 { font-size: 1rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; text-align: center;}
-        .studio-input-group { margin-bottom: 10px; }
-        .studio-input-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; text-transform: uppercase;}
-        .studio-select, .studio-text { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold;}
-        .studio-add-btn { background: #d90429; color: white; border: none; padding: 10px; width: 100%; font-weight: bold; text-transform: uppercase; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 5px;}
+        /* FEATURED CUSTOM SHIRT STUDIO (Big Layout) */
+        .card.featured-card {
+            grid-column: 1 / -1; 
+            flex-direction: row; 
+            background: #fff;
+        }
+        .featured-card .img-container {
+            flex: 1; 
+            position: relative; 
+            background: #fff; 
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 2px solid #eee;
+        }
+        .featured-card .img-container img {
+            width: 100%; height: 100%; object-fit: contain; background: transparent; padding: 20px;
+        }
+        .featured-card .card-content {
+            flex: 1; text-align: left; padding: 2.5rem; justify-content: flex-start;
+        }
+        @media (max-width: 900px) {
+            .card.featured-card { flex-direction: column; }
+            .featured-card .img-container { min-height: 350px; border-right: none; border-bottom: 2px solid #eee;}
+            .featured-card .card-content { padding: 1.5rem; }
+        }
+
+        /* Custom Design Studio Inputs */
+        .design-studio { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #ccc;}
+        .design-studio h4 { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; color: #111; text-align: center;}
+        .studio-input-group { margin-bottom: 15px; }
+        .studio-input-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; text-transform: uppercase;}
+        .studio-select, .studio-text { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; font-size: 0.95rem;}
+        .studio-add-btn { background: #d90429; color: white; border: none; padding: 12px; width: 100%; font-size: 1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 5px;}
         .studio-add-btn:hover { background: #111; }
-        .customization-list { list-style: none; margin-top: 10px; font-size: 0.85rem; padding: 0; }
-        .customization-list li { background: #fff; padding: 8px; border-radius: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #111; font-weight: bold;}
-        .remove-cust-btn { color: #d90429; cursor: pointer; font-weight: 900; }
+        .customization-list { list-style: none; margin-top: 15px; font-size: 0.9rem; padding: 0; }
+        .customization-list li { background: #fff; padding: 10px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #111; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+        .remove-cust-btn { color: #d90429; cursor: pointer; font-weight: 900; font-size: 1.2rem;}
 
         /* Live Preview Overlays */
-        .preview-zone { position: absolute; pointer-events: none; display: flex; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.3); }
-        .preview-zone img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        #preview-Front-Center-Trunk { top: 35%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; font-size: 1.2rem; }
-        #preview-Left-Breast { top: 25%; right: 28%; width: 50px; height: 50px; font-size: 0.7rem; }
-        #preview-Right-Sleeve { top: 35%; left: 15%; width: 40px; height: 40px; font-size: 0.6rem; transform: rotate(-15deg); }
-        #preview-Left-Sleeve { top: 35%; right: 15%; width: 40px; height: 40px; font-size: 0.6rem; transform: rotate(15deg); }
+        .preview-zone { position: absolute; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); overflow: visible;}
+        .preview-zone img { max-width: 100%; max-height: 100%; object-fit: contain; drop-shadow: 0px 2px 4px rgba(0,0,0,0.5); }
+        #preview-Front-Center-Trunk { top: 40%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; font-size: 1.5rem; }
+        #preview-Left-Breast { top: 32%; right: 30%; width: 60px; height: 60px; font-size: 0.8rem; }
+        #preview-Right-Sleeve { top: 40%; left: 15%; width: 50px; height: 50px; font-size: 0.7rem; transform: rotate(-15deg); }
+        #preview-Left-Sleeve { top: 40%; right: 15%; width: 50px; height: 50px; font-size: 0.7rem; transform: rotate(15deg); }
 
         /* Contact Section */
         #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
@@ -116,13 +144,10 @@
         
         .checkout-btn { width: 100%; background: #25D366; color: white; padding: 15px; border: none; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Montserrat'; display: flex; justify-content: center; align-items: center; gap: 10px;}
         .checkout-btn:hover { background: #1ebe57; }
-        
         .checkout-btn.email-btn { background: #d90429; }
         .checkout-btn.email-btn:hover { background: #bf0424; }
-        
         .checkout-btn.pdf-btn { background: #111; margin-bottom: 15px;}
         .checkout-btn.pdf-btn:hover { background: #333; }
-        
         .checkout-btn:disabled { background: #888; cursor: not-allowed; }
 
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
@@ -157,160 +182,28 @@
         <h3 class="section-title">Latest Drops</h3>
         <div class="products">
 
-            <div class="card">
-                <img src="hoodie-black-red.jpeg" alt="Gothic Graphic Zip-Up Hoodie" id="dynamic-hoodie-img">
-                <div class="card-content">
-                    <div class="product-title">Gothic Graphic Zip-Up Hoodie</div>
-                    <div class="product-desc">Heavyweight thermal zip-up featuring intricate tribal and gothic graphic prints along the chest and sleeves.</div>
+            <div class="card featured-card">
+                <div class="img-container">
+                    <img src="blank-black.jpg" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
                     
-                    <div class="price" id="hoodie-price-display">$26.00</div>
-                    
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Style: <span id="selected-hoodie-color-text" style="color: #d90429;">Black & Red Tribal</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-hoodie-black-red" onclick="changeHoodieColor('Black & Red Tribal', 'hoodie-black-red.jpeg', 'swatch-hoodie-black-red', '#d90429')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #ff66b2;" id="swatch-hoodie-black-pink" onclick="changeHoodieColor('Black & Pink Tribal', 'hoodie-black-pink.jpeg', 'swatch-hoodie-black-pink', '#ff66b2')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #ddd;" id="swatch-hoodie-black-white" onclick="changeHoodieColor('Black & White Angel', 'hoodie-black-white.jpeg', 'swatch-hoodie-black-white', '#555')"></div>
-                                <div class="swatch" style="background-color: #111; border-color: #9b5de5;" id="swatch-hoodie-black-purple" onclick="changeHoodieColor('Black & Purple Angel', 'hoodie-black-purple.jpeg', 'swatch-hoodie-black-purple', '#9b5de5')"></div>
-                                <div class="swatch" style="background-color: #900c3f; border-color: #ddd;" id="swatch-hoodie-red-white" onclick="changeHoodieColor('Red & White Tribal', 'hoodie-red-white.jpeg', 'swatch-hoodie-red-white', '#900c3f')"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-options">
-                            <select class="size-select" id="hoodie-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                                <option value="XXL">Size: XXL</option>
-                            </select>
-                            
-                            <input type="number" id="hoodie-qty" class="qty-input" value="1" min="1" onchange="updateHoodiePrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addHoodieToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="tribal-set.jpeg" alt="Tribal Graphic Two-Piece Set" id="dynamic-tribal-img">
-                <div class="card-content">
-                    <div class="product-title">Tribal Graphic Two-Piece Set</div>
-                    <div class="product-desc">Matching compression top and lightweight activewear pants featuring striking tribal graphics.</div>
-                    
-                    <div class="price" id="tribal-price-display">$30.00</div>
-                    
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-tribal-color-text" style="color: #111;">Black</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111; border-color: #fff;" id="swatch-tribal-black"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-options">
-                            <select class="size-select" id="tribal-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                            </select>
-                            
-                            <input type="number" id="tribal-qty" class="qty-input" value="1" min="1" onchange="updateTribalPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addTribalToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="essential-shirt.jpeg" alt="Essential Compression Top" id="dynamic-essential-img">
-                <div class="card-content">
-                    <div class="product-title">Essential Compression Top</div>
-                    <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams for ultimate durability.</div>
-                    
-                    <div class="price" id="essential-price-display">$16.00</div>
-                    
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-essential-color-text" style="color: #111;">Black</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111; border-color: #888;" id="swatch-essential-black"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-options">
-                            <select class="size-select" id="essential-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                                <option value="XXL">Size: XXL</option>
-                            </select>
-                            
-                            <input type="number" id="essential-qty" class="qty-input" value="1" min="1" onchange="updateEssentialPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addEssentialToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="winged-set.jpeg" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img">
-                <div class="card-content">
-                    <div class="product-title">Winged Graphic Two-Piece Set</div>
-                    <div class="product-desc">Performance compression top and activewear pants set with red wing accents.</div>
-                    
-                    <div class="price" id="winged-price-display">$25.00</div>
-                    
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-winged-color-text" style="color: #111;">Black & Red</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-winged-black"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-options">
-                            <select class="size-select" id="winged-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="XL">Size: XL</option>
-                                <option value="XXL">Size: XXL</option>
-                            </select>
-                            
-                            <input type="number" id="winged-qty" class="qty-input" value="1" min="1" onchange="updateWingedPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addWingedToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div style="position: relative; background: #111; overflow: hidden; height: 350px;">
-                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80" alt="Blank T-Shirt" id="dynamic-custom-shirt-img" style="width: 100%; height: 100%; object-fit: contain; padding: 10px; transition: 0.3s;">
-                    
-                    <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #111;"></div>
-                    <div id="preview-Left-Breast" class="preview-zone" style="color: #111;"></div>
-                    <div id="preview-Right-Sleeve" class="preview-zone" style="color: #111;"></div>
-                    <div id="preview-Left-Sleeve" class="preview-zone" style="color: #111;"></div>
+                    <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #fff;"></div>
+                    <div id="preview-Left-Breast" class="preview-zone" style="color: #fff;"></div>
+                    <div id="preview-Right-Sleeve" class="preview-zone" style="color: #fff;"></div>
+                    <div id="preview-Left-Sleeve" class="preview-zone" style="color: #fff;"></div>
                 </div>
 
                 <div class="card-content">
-                    <div class="product-title">Custom Blank Tee</div>
-                    <div class="product-desc">Fully customize your gear. Add text, flags, or logos exactly where you want them.</div>
+                    <div class="product-title" style="font-size: 2rem;">Custom Blank Tee</div>
+                    <div class="product-desc" style="font-size: 1.1rem;">Build your own gear. Upload a logo or add your team name and see it live on the shirt before you buy.</div>
                     
-                    <div class="price" id="custom-shirt-price-display">$15.00</div>
+                    <div class="price" id="custom-shirt-price-display" style="font-size: 2rem;">$20.00</div>
                     
                     <div class="design-studio">
                         <h4><i class="fas fa-paint-roller"></i> Design Studio</h4>
                         
                         <div class="studio-input-group">
                             <label>1. Select Placement</label>
-                            <select id="studio-placement" class="studio-select">
+                            <select id="studio-placement" class="studio-select" onchange="renderPreviews()">
                                 <option value="Front Center (Trunk)">Front Center (Trunk)</option>
                                 <option value="Left Breast">Left Breast</option>
                                 <option value="Right Sleeve">Right Sleeve</option>
@@ -322,35 +215,40 @@
 
                         <div class="studio-input-group">
                             <label>2. Content Type</label>
-                            <select id="studio-type" class="studio-select" onchange="toggleStudioInput()">
+                            <select id="studio-type" class="studio-select" onchange="toggleStudioInput(); renderPreviews();">
                                 <option value="text">Custom Text (e.g., Team Name, Slogan, Initials)</option>
                                 <option value="image">Upload Image/Logo (e.g., Team Crest, Flag)</option>
                             </select>
                         </div>
 
                         <div class="studio-input-group" id="studio-text-wrapper">
-                            <input type="text" id="studio-text-input" class="studio-text" placeholder="Type team name or slogan..." maxlength="30">
+                            <input type="text" id="studio-text-input" class="studio-text" placeholder="Type here to see it live..." maxlength="30" oninput="renderPreviews()">
                         </div>
 
                         <div class="studio-input-group" id="studio-image-wrapper" style="display: none;">
-                            <input type="file" id="studio-image-input" class="studio-text" accept="image/*">
-                            <small style="display:block; margin-top:3px; color:#666;">Choose your logo or flag file.</small>
+                            <input type="file" id="studio-image-input" class="studio-text" accept="image/*" onchange="handleImageUpload(event)">
+                            <small style="display:block; margin-top:5px; color:#666; font-weight:bold;">Select an image to instantly preview it on the shirt.</small>
                         </div>
 
-                        <button class="studio-add-btn" onclick="addCustomizationItem()"><i class="fas fa-plus"></i> Add to Shirt Design</button>
+                        <button class="studio-add-btn" onclick="addCustomizationItem()"><i class="fas fa-plus"></i> Lock in Design</button>
                         
                         <ul id="active-customizations" class="customization-list"></ul>
                     </div>
 
                     <div class="controls-container">
                         <div class="color-selector">
-                            <p>Color: <span id="selected-custom-shirt-color-text" style="color: #111;">White</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-custom-white" onclick="changeCustomShirtColor('White', 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80')"></div>
-                                <div class="swatch" style="background-color: #111;" id="swatch-custom-black" onclick="changeCustomShirtColor('Black', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80')"></div>
-                                <div class="swatch" style="background-color: #0f4c81;" id="swatch-custom-navy" onclick="changeCustomShirtColor('Navy Blue', 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&q=80')"></div>
-                                <div class="swatch" style="background-color: #c1121f;" id="swatch-custom-red" onclick="changeCustomShirtColor('Red', 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80')"></div>
-                                <div class="swatch" style="background-color: #6c757d;" id="swatch-custom-grey" onclick="changeCustomShirtColor('Grey', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&q=80')"></div>
+                            <p>Base Color: <span id="selected-custom-shirt-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches" style="justify-content: flex-start;">
+                                <div class="swatch active" style="background-color: #111;" onclick="changeCustomShirtColor('Black', 'blank-black.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" onclick="changeCustomShirtColor('White', 'blank-white.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #a3e635;" onclick="changeCustomShirtColor('Lime Green', 'blank-lime.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #f97316;" onclick="changeCustomShirtColor('Orange', 'blank-orange.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #f472b6;" onclick="changeCustomShirtColor('Pink', 'blank-pink.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #facc15;" onclick="changeCustomShirtColor('Yellow', 'blank-yellow.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #166534;" onclick="changeCustomShirtColor('Dark Green', 'blank-darkgreen.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #1e3a8a;" onclick="changeCustomShirtColor('Navy', 'blank-navy.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #ef4444;" onclick="changeCustomShirtColor('Red', 'blank-red.jpg', this)"></div>
+                                <div class="swatch" style="background-color: #2563eb;" onclick="changeCustomShirtColor('Royal Blue', 'blank-blue.jpg', this)"></div>
                             </div>
                         </div>
                         
@@ -360,17 +258,135 @@
                                 <option value="M">Size: M</option>
                                 <option value="L">Size: L</option>
                                 <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                                <option value="XXXL">Size: XXXL</option>
                             </select>
                             <input type="number" id="custom-shirt-qty" class="qty-input" value="1" min="1" onchange="updateCustomShirtPrice()">
                         </div>
                     </div>
 
-                    <button class="add-to-cart-btn" onclick="addCustomShirtToCart()">Add Custom Shirt to Cart</button>
+                    <button class="add-to-cart-btn" style="font-size:1.2rem; padding: 20px;" onclick="addCustomShirtToCart()">Add Custom Tee to Cart</button>
                 </div>
             </div>
 
             <div class="card">
-                <img src="hero-green.jpeg" alt="Hero Compression Top" id="dynamic-hero-img">
+                <img src="hoodie-black-red.jpg" alt="Gothic Graphic Zip-Up Hoodie" id="dynamic-hoodie-img">
+                <div class="card-content">
+                    <div class="product-title">Gothic Graphic Zip-Up Hoodie</div>
+                    <div class="product-desc">Heavyweight thermal zip-up featuring intricate tribal and gothic graphic prints along the chest and sleeves.</div>
+                    <div class="price" id="hoodie-price-display">$26.00</div>
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Style: <span id="selected-hoodie-color-text" style="color: #d90429;">Black & Red Tribal</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-hoodie-black-red" onclick="changeHoodieColor('Black & Red Tribal', 'hoodie-black-red.jpg', 'swatch-hoodie-black-red', '#d90429')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ff66b2;" id="swatch-hoodie-black-pink" onclick="changeHoodieColor('Black & Pink Tribal', 'hoodie-black-pink.jpg', 'swatch-hoodie-black-pink', '#ff66b2')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #ddd;" id="swatch-hoodie-black-white" onclick="changeHoodieColor('Black & White Angel', 'hoodie-black-white.jpg', 'swatch-hoodie-black-white', '#555')"></div>
+                                <div class="swatch" style="background-color: #111; border-color: #9b5de5;" id="swatch-hoodie-black-purple" onclick="changeHoodieColor('Black & Purple Angel', 'hoodie-black-purple.jpg', 'swatch-hoodie-black-purple', '#9b5de5')"></div>
+                                <div class="swatch" style="background-color: #900c3f; border-color: #ddd;" id="swatch-hoodie-red-white" onclick="changeHoodieColor('Red & White Tribal', 'hoodie-red-white.jpg', 'swatch-hoodie-red-white', '#900c3f')"></div>
+                            </div>
+                        </div>
+                        <div class="flex-options">
+                            <select class="size-select" id="hoodie-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            <input type="number" id="hoodie-qty" class="qty-input" value="1" min="1" onchange="updateHoodiePrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addHoodieToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="tribal-set-new.jpg" alt="Tribal Graphic Two-Piece Set" id="dynamic-tribal-img">
+                <div class="card-content">
+                    <div class="product-title">Tribal Graphic Two-Piece Set</div>
+                    <div class="product-desc">Matching compression top and lightweight activewear pants featuring striking tribal graphics.</div>
+                    <div class="price" id="tribal-price-display">$30.00</div>
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-tribal-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #fff;" id="swatch-tribal-black"></div>
+                            </div>
+                        </div>
+                        <div class="flex-options">
+                            <select class="size-select" id="tribal-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                            </select>
+                            <input type="number" id="tribal-qty" class="qty-input" value="1" min="1" onchange="updateTribalPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addTribalToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="essential-shirt.jpg" alt="Essential Compression Top" id="dynamic-essential-img">
+                <div class="card-content">
+                    <div class="product-title">Essential Compression Top</div>
+                    <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams for ultimate durability.</div>
+                    <div class="price" id="essential-price-display">$16.00</div>
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-essential-color-text" style="color: #111;">Black</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #888;" id="swatch-essential-black"></div>
+                            </div>
+                        </div>
+                        <div class="flex-options">
+                            <select class="size-select" id="essential-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="S">Size: S</option>
+                                <option value="M">Size: M</option>
+                                <option value="L">Size: L</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            <input type="number" id="essential-qty" class="qty-input" value="1" min="1" onchange="updateEssentialPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addEssentialToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="winged-set.jpg" alt="Winged Graphic Two-Piece Set" id="dynamic-winged-img">
+                <div class="card-content">
+                    <div class="product-title">Winged Graphic Two-Piece Set</div>
+                    <div class="product-desc">Performance compression top and activewear pants set with red wing accents.</div>
+                    <div class="price" id="winged-price-display">$25.00</div>
+                    <div class="controls-container">
+                        <div class="color-selector">
+                            <p>Color: <span id="selected-winged-color-text" style="color: #111;">Black & Red</span></p>
+                            <div class="swatches">
+                                <div class="swatch active" style="background-color: #111; border-color: #d90429;" id="swatch-winged-black"></div>
+                            </div>
+                        </div>
+                        <div class="flex-options">
+                            <select class="size-select" id="winged-size">
+                                <option value="XS">Size: XS</option>
+                                <option value="XL">Size: XL</option>
+                                <option value="XXL">Size: XXL</option>
+                            </select>
+                            <input type="number" id="winged-qty" class="qty-input" value="1" min="1" onchange="updateWingedPrice()">
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addWingedToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="hero-green.jpg" alt="Hero Compression Top" id="dynamic-hero-img">
                 <div class="card-content">
                     <div class="product-title">Hero Compression Top</div>
                     <div class="product-desc">Ultra-stretch performance compression armor featuring high-definition hero concepts.</div>
@@ -379,10 +395,10 @@
                         <div class="color-selector">
                             <p>Style: <span id="selected-hero-color-text" style="color: #2a9d8f;">Green Spider</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.jpeg')"></div>
-                                <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.jpeg')"></div>
-                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.jpeg')"></div>
-                                <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.jpeg')"></div>
+                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.jpg')"></div>
+                                <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.jpg')"></div>
+                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.jpg')"></div>
+                                <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.jpg')"></div>
                             </div>
                         </div>
                         <div class="flex-options">
@@ -397,66 +413,6 @@
                         </div>
                     </div>
                     <button class="add-to-cart-btn" onclick="addHeroToCart()">Add to Cart</button>
-                </div>
-            </div>
-            
-            <div class="card">
-                <img src="spider-black.jpeg" alt="Two Piece Set" id="dynamic-set-img">
-                <div class="card-content">
-                    <div class="product-title">Spider Graphic Two-Piece Set</div>
-                    <div class="product-desc">Compression performance tee paired with lightweight training joggers.</div>
-                    <div class="price" id="set-price-display">$25.00</div>
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-color-text" style="color: #111;">Black</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #111;" id="swatch-black" onclick="changeColor('Black', 'spider-black.jpeg')"></div>
-                                <div class="swatch" style="background-color: #5c1822;" id="swatch-maroon" onclick="changeColor('Maroon', 'spider-maroon.jpeg')"></div>
-                            </div>
-                        </div>
-                        <div class="flex-options">
-                            <select class="size-select" id="set-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                                <option value="XXL">Size: XXL</option>
-                            </select>
-                            <input type="number" id="set-qty" class="qty-input" value="1" min="1" onchange="updateSetPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addSetToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="spider-blue.jpeg" alt="Spider Compression Shirt" id="dynamic-shirt-img">
-                <div class="card-content">
-                    <div class="product-title">Spider Compression Top</div>
-                    <div class="product-desc">Lightweight, quick-drying stretch fabric for maximum performance.</div>
-                    <div class="price" id="shirt-price-display">$15.00</div>
-                    <div class="controls-container">
-                        <div class="color-selector">
-                            <p>Color: <span id="selected-shirt-color-text" style="color: #0f4c81;">Royal Blue</span></p>
-                            <div class="swatches">
-                                <div class="swatch active" style="background-color: #0f4c81;" id="swatch-shirt-blue" onclick="changeShirtColor('Royal Blue', 'spider-blue.jpeg')"></div>
-                                <div class="swatch" style="background-color: #111;" id="swatch-shirt-black" onclick="changeShirtColor('Black', 'spider-black-shirt.jpeg')"></div>
-                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-shirt-white" onclick="changeShirtColor('White', 'spider-black-shirt.jpeg')"></div>
-                            </div>
-                        </div>
-                        <div class="flex-options">
-                            <select class="size-select" id="shirt-size">
-                                <option value="XS">Size: XS</option>
-                                <option value="S">Size: S</option>
-                                <option value="M">Size: M</option>
-                                <option value="L">Size: L</option>
-                                <option value="XL">Size: XL</option>
-                            </select>
-                            <input type="number" id="shirt-qty" class="qty-input" value="1" min="1" onchange="updateShirtPrice()">
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addShirtToCart()">Add to Cart</button>
                 </div>
             </div>
 
@@ -551,7 +507,155 @@
         let total = 0;
         const myWhatsAppNumber = "96181885580";
 
-        // --- NEW GOTHIC HOODIE LISTING LOGIC ---
+        // --- CUSTOM SHIRT DESIGN STUDIO LOGIC (With real-time live preview) ---
+        let currentCustomShirtColor = 'Black'; 
+        const baseCustomShirtPrice = 20.00;
+        let shirtDesignList = []; 
+        let draftDataUrl = null; 
+
+        function toggleStudioInput() {
+            const type = document.getElementById('studio-type').value;
+            document.getElementById('studio-text-wrapper').style.display = type === 'text' ? 'block' : 'none';
+            document.getElementById('studio-image-wrapper').style.display = type === 'image' ? 'block' : 'none';
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if(!file) { 
+                draftDataUrl = null; 
+                renderPreviews(); 
+                return; 
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                draftDataUrl = e.target.result;
+                renderPreviews();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderPreviews() {
+            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
+            zones.forEach(zone => {
+                const el = document.getElementById(`preview-${zone}`);
+                if(el) el.innerHTML = "";
+            });
+
+            // 1. Draw permanently saved design elements
+            shirtDesignList.forEach(item => {
+                let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
+                let element = document.getElementById(elementId);
+                if (!element) return; 
+
+                if(item.type === 'text') {
+                    element.innerHTML += `<div>${item.content}</div>`;
+                } else if (item.type === 'image') {
+                    element.innerHTML += `<img src="${item.dataUrl}">`;
+                }
+            });
+
+            // 2. Draw live temporary preview while user types/selects
+            const placement = document.getElementById('studio-placement').value;
+            const type = document.getElementById('studio-type').value;
+            let targetZoneId = `preview-${placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
+            let targetZone = document.getElementById(targetZoneId);
+
+            if (targetZone) {
+                if(type === 'text') {
+                    const txt = document.getElementById('studio-text-input').value;
+                    if(txt) targetZone.innerHTML += `<div style="opacity: 0.6; border: 2px dashed #d90429; padding: 2px;">${txt}</div>`;
+                } else if (type === 'image' && draftDataUrl) {
+                    targetZone.innerHTML += `<img src="${draftDataUrl}" style="opacity: 0.6; border: 2px dashed #d90429;">`;
+                }
+            }
+        }
+
+        function addCustomizationItem() {
+            const placement = document.getElementById('studio-placement').value;
+            const type = document.getElementById('studio-type').value;
+
+            if (type === 'text') {
+                const contentValue = document.getElementById('studio-text-input').value.trim();
+                if (!contentValue) return alert("Please type some text for the design.");
+                shirtDesignList.push({ placement: placement, type: type, content: contentValue });
+                finalizeAdd();
+            } else {
+                const fileInput = document.getElementById('studio-image-input');
+                if (fileInput.files.length === 0 || !draftDataUrl) return alert("Please select an image file to upload.");
+                const file = fileInput.files[0];
+                shirtDesignList.push({ 
+                    placement: placement, 
+                    type: type, 
+                    content: file.name, 
+                    dataUrl: draftDataUrl 
+                });
+                finalizeAdd();
+            }
+        }
+
+        function finalizeAdd() {
+            document.getElementById('studio-text-input').value = "";
+            document.getElementById('studio-image-input').value = "";
+            draftDataUrl = null; 
+            
+            // Render text list
+            const listEl = document.getElementById('active-customizations');
+            listEl.innerHTML = "";
+            shirtDesignList.forEach((item, index) => {
+                const li = document.createElement('li');
+                const icon = item.type === 'text' ? '<i class="fas fa-font"></i>' : '<i class="fas fa-image"></i>';
+                li.innerHTML = `<span>${icon} <strong>${item.placement}:</strong> ${item.content}</span> <span class="remove-cust-btn" onclick="removeDesignItem(${index})">&times;</span>`;
+                listEl.appendChild(li);
+            });
+
+            renderPreviews();
+        }
+
+        function removeDesignItem(index) {
+            shirtDesignList.splice(index, 1);
+            finalizeAdd(); 
+        }
+
+        function changeCustomShirtColor(colorName, imagePath, swatchEl) {
+            document.getElementById('dynamic-custom-shirt-img').src = imagePath;
+            document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
+            
+            // Re-color swatches logic dynamically based on clicked element
+            const swatches = swatchEl.parentElement.children;
+            for(let i=0; i<swatches.length; i++) {
+                swatches[i].classList.remove('active');
+            }
+            swatchEl.classList.add('active');
+
+            // Set overlay text color based on light/dark shirt
+            const lightColors = ['White', 'Yellow', 'Lime Green', 'Pink'];
+            let textColor = lightColors.includes(colorName) ? '#111' : '#fff';
+            document.querySelectorAll('.preview-zone').forEach(el => el.style.color = textColor);
+            currentCustomShirtColor = colorName;
+        }
+
+        function updateCustomShirtPrice() {
+            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
+            document.getElementById('custom-shirt-price-display').innerText = "$" + (baseCustomShirtPrice * qty).toFixed(2);
+        }
+
+        function addCustomShirtToCart() {
+            let size = document.getElementById('custom-shirt-size').value;
+            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
+            let totalPrice = baseCustomShirtPrice * qty;
+            
+            let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
+            let customDetails = [];
+            if (shirtDesignList.length > 0) {
+                shirtDesignList.forEach(design => {
+                    customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`);
+                });
+            }
+            addToCartWithDetails(itemName, totalPrice, customDetails);
+        }
+
+
+        // --- GOTHIC HOODIE LISTING LOGIC ---
         let currentHoodieColor = 'Black & Red Tribal'; 
         const baseHoodiePrice = 26.00;
 
@@ -559,7 +663,7 @@
             document.getElementById('dynamic-hoodie-img').src = imagePath;
             const colorText = document.getElementById('selected-hoodie-color-text');
             colorText.innerText = colorName;
-            colorText.style.color = textColor === '#fff' ? '#555' : textColor; // Keep white text readable
+            colorText.style.color = textColor === '#fff' ? '#555' : textColor; 
             currentHoodieColor = colorName;
             
             document.getElementById('swatch-hoodie-black-red').classList.remove('active');
@@ -631,126 +735,6 @@
             addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []);
         }
 
-        // --- CUSTOM SHIRT DESIGN STUDIO LOGIC ---
-        let currentCustomShirtColor = 'White'; 
-        const baseCustomShirtPrice = 15.00;
-        let shirtDesignList = []; 
-
-        function toggleStudioInput() {
-            const type = document.getElementById('studio-type').value;
-            document.getElementById('studio-text-wrapper').style.display = type === 'text' ? 'block' : 'none';
-            document.getElementById('studio-image-wrapper').style.display = type === 'image' ? 'block' : 'none';
-        }
-
-        function addCustomizationItem() {
-            const placement = document.getElementById('studio-placement').value;
-            const type = document.getElementById('studio-type').value;
-
-            if (type === 'text') {
-                const contentValue = document.getElementById('studio-text-input').value.trim();
-                if (!contentValue) return alert("Please type some text for the design.");
-                shirtDesignList.push({ placement: placement, type: type, content: contentValue });
-                finalizeAdd();
-            } else {
-                const fileInput = document.getElementById('studio-image-input');
-                if (fileInput.files.length === 0) return alert("Please select an image file to upload.");
-                const file = fileInput.files[0];
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    shirtDesignList.push({ 
-                        placement: placement, 
-                        type: type, 
-                        content: file.name, 
-                        dataUrl: e.target.result 
-                    });
-                    finalizeAdd();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function finalizeAdd() {
-            document.getElementById('studio-text-input').value = "";
-            document.getElementById('studio-image-input').value = "";
-            renderDesignList();
-            updateLivePreview();
-        }
-
-        function removeDesignItem(index) {
-            shirtDesignList.splice(index, 1);
-            renderDesignList();
-            updateLivePreview();
-        }
-
-        function renderDesignList() {
-            const listEl = document.getElementById('active-customizations');
-            listEl.innerHTML = "";
-            shirtDesignList.forEach((item, index) => {
-                const li = document.createElement('li');
-                const icon = item.type === 'text' ? '<i class="fas fa-font"></i>' : '<i class="fas fa-image"></i>';
-                li.innerHTML = `<span>${icon} <strong>${item.placement}:</strong> ${item.content}</span> <span class="remove-cust-btn" onclick="removeDesignItem(${index})">&times;</span>`;
-                listEl.appendChild(li);
-            });
-        }
-
-        function updateLivePreview() {
-            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
-            zones.forEach(zone => {
-                const el = document.getElementById(`preview-${zone}`);
-                if(el) el.innerHTML = "";
-            });
-
-            shirtDesignList.forEach(item => {
-                let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
-                let element = document.getElementById(elementId);
-                
-                if (!element) return; 
-
-                if(item.type === 'text') {
-                    element.innerHTML = `<span>${item.content}</span>`;
-                } else if (item.type === 'image') {
-                    element.innerHTML = `<img src="${item.dataUrl}">`;
-                }
-            });
-        }
-
-        function changeCustomShirtColor(colorName, imagePath) {
-            document.getElementById('dynamic-custom-shirt-img').src = imagePath;
-            document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
-            
-            const colors = ['white', 'black', 'navy', 'red', 'grey'];
-            colors.forEach(c => document.getElementById(`swatch-custom-${c}`).classList.remove('active'));
-            
-            let idSuffix = colorName.toLowerCase().split(' ')[0]; 
-            document.getElementById(`swatch-custom-${idSuffix}`).classList.add('active');
-
-            let textColor = (colorName === 'White' || colorName === 'Grey') ? '#111' : '#fff';
-            document.querySelectorAll('.preview-zone').forEach(el => el.style.color = textColor);
-            currentCustomShirtColor = colorName;
-        }
-
-        function updateCustomShirtPrice() {
-            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
-            document.getElementById('custom-shirt-price-display').innerText = "$" + (baseCustomShirtPrice * qty).toFixed(2);
-        }
-
-        function addCustomShirtToCart() {
-            let size = document.getElementById('custom-shirt-size').value;
-            let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
-            let totalPrice = baseCustomShirtPrice * qty;
-            
-            let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
-            let customDetails = [];
-            if (shirtDesignList.length > 0) {
-                shirtDesignList.forEach(design => {
-                    customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`);
-                });
-            }
-            addToCartWithDetails(itemName, totalPrice, customDetails);
-        }
-
-
         // --- HERO COMPRESSION COLLECTION LISTING LOGIC ---
         let currentHeroColor = 'Green Spider'; 
         const baseHeroPrice = 15.00;
@@ -789,36 +773,6 @@
             let qty = parseInt(document.getElementById('hero-qty').value);
             addToCartWithDetails(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty, []);
         }
-
-        // --- FIRST LISTING LOGIC ---
-        let currentSetColor = 'Black'; 
-        const baseSetPrice = 25.00;
-        function changeColor(colorName, imagePath) {
-            document.getElementById('dynamic-set-img').src = imagePath;
-            document.getElementById('selected-color-text').innerText = colorName;
-            currentSetColor = colorName;
-        }
-        function updateSetPrice() {
-            let qty = parseInt(document.getElementById('set-qty').value);
-            if(qty < 1 || isNaN(qty)) { qty = 1; document.getElementById('set-qty').value = 1; }
-            document.getElementById('set-price-display').innerText = "$" + (baseSetPrice * qty).toFixed(2);
-        }
-        function addSetToCart() {
-            let size = document.getElementById('set-size').value;
-            let qty = parseInt(document.getElementById('set-qty').value);
-            addToCartWithDetails(`${qty}x Spider Graphic Set (${currentSetColor} - ${size})`, baseSetPrice * qty, []);
-        }
-
-        // --- SECOND & THIRD LISTING LOGIC ---
-        let currentShirtColor = 'Royal Blue'; const baseShirtPrice = 15.00;
-        function changeShirtColor(colorName, imagePath) { document.getElementById('dynamic-shirt-img').src = imagePath; currentShirtColor = colorName; }
-        function updateShirtPrice() { let qty = parseInt(document.getElementById('shirt-qty').value) || 1; document.getElementById('shirt-price-display').innerText = "$" + (baseShirtPrice * qty).toFixed(2); }
-        function addShirtToCart() { let size = document.getElementById('shirt-size').value; let qty = parseInt(document.getElementById('shirt-qty').value) || 1; addToCartWithDetails(`${qty}x Spider Shirt (${currentShirtColor} - ${size})`, baseShirtPrice * qty, []); }
-
-        let currentShortsColor = 'Black'; const baseShortsPrice = 13.00;
-        function changeShortsColor(colorName, imagePath) { document.getElementById('dynamic-shorts-img').src = imagePath; currentShortsColor = colorName; }
-        function updateShortsPrice() { let qty = parseInt(document.getElementById('shorts-qty').value) || 1; document.getElementById('shorts-price-display').innerText = "$" + (baseShortsPrice * qty).toFixed(2); }
-        function addShortsToCart() { let size = document.getElementById('shorts-size').value; let qty = parseInt(document.getElementById('shorts-qty').value) || 1; addToCartWithDetails(`${qty}x 2-in-1 Shorts (${currentShortsColor} - ${size})`, baseShortsPrice * qty, []); }
 
 
         // --- CART LOGIC ---
@@ -984,7 +938,7 @@
         }
 
         function resetCart() {
-            cart = []; total = 0; shirtDesignList = [];
+            cart = []; total = 0; shirtDesignList = []; draftDataUrl = null;
             document.getElementById('cart-count').innerText = "0";
             document.getElementById('checkout-form').reset();
             
@@ -994,9 +948,6 @@
             if(document.getElementById('essential-qty')) { document.getElementById('essential-qty').value = 1; updateEssentialPrice(); }
             if(document.getElementById('winged-qty')) { document.getElementById('winged-qty').value = 1; updateWingedPrice(); }
             if(document.getElementById('hero-qty')) { document.getElementById('hero-qty').value = 1; updateHeroPrice(); }
-            if(document.getElementById('set-qty')) { document.getElementById('set-qty').value = 1; updateSetPrice(); }
-            if(document.getElementById('shirt-qty')) { document.getElementById('shirt-qty').value = 1; updateShirtPrice(); }
-            if(document.getElementById('shorts-qty')) { document.getElementById('shorts-qty').value = 1; updateShortsPrice(); }
             if(document.getElementById('custom-shirt-qty')) { document.getElementById('custom-shirt-qty').value = 1; updateCustomShirtPrice(); }
             
             renderDesignList(); updateLivePreview();
