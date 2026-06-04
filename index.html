@@ -74,6 +74,12 @@
 
         .preview-zone { position: absolute; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); overflow: visible;}
         
+        /* REVIEWS SECTION */
+        #reviews { background: #e9ecef; padding: 5rem 5%; text-align: center; }
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .review-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stars { color: #facc15; margin-bottom: 10px; font-size: 1.2rem; }   
+
         #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
         #contact h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: #111;}
         #contact p { color: #666; margin-bottom: 2rem; font-size: 1.1rem;}
@@ -93,7 +99,8 @@
         #cart-items li { display: flex; flex-direction: column; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .cart-item-header { display: flex; justify-content: space-between; font-weight: bold; }
         .cart-item-details { color: #666; font-size: 0.85rem; margin-top: 5px; }
-        .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 2rem; color: #d90429; }
+        .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 0.5rem; color: #d90429; }
+        #lbp-estimate { text-align: right; margin-bottom: 2rem; color: #666; font-size: 0.9rem; font-weight: bold; }
         
         .checkout-form { display: none; text-align: left; }
         .form-row { display: flex; gap: 15px; margin-bottom: 1rem; }
@@ -112,6 +119,16 @@
         .checkout-btn.pdf-btn { background: #111; margin-bottom: 15px;}
         .checkout-btn.pdf-btn:hover { background: #333; }
         .checkout-btn:disabled { background: #888; cursor: not-allowed; }
+
+        /* TOAST NOTIFICATION */
+        .toast { visibility: hidden; min-width: 250px; background-color: #111; color: #fff; text-align: center; border-radius: 4px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px; font-size: 1rem; font-weight: bold; transform: translateX(-50%); box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: visibility 0s, opacity 0.3s linear; opacity: 0; }
+        .toast.show { visibility: visible; opacity: 1; }
+
+        /* STICKY CART (Mobile) */
+        .sticky-cart { display: none; position: fixed; bottom: 20px; right: 20px; background: #d90429; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; line-height: 60px; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 99; transition: transform 0.3s; }
+        .sticky-cart:hover { transform: scale(1.1); }
+        .sticky-cart span { position: absolute; top: 0; right: 0; background: #111; font-size: 0.8rem; width: 24px; height: 24px; line-height: 24px; border-radius: 50%; font-weight: bold; border: 2px solid #fff; }
+        @media (max-width: 768px) { .sticky-cart { display: block; } }
 
         footer { background: #111; color: #fff; text-align: center; padding: 3rem 2rem; }
 
@@ -241,7 +258,8 @@
                             <div class="swatches">
                                 <div class="swatch active" style="background-color: #111;" id="swatch-perf-black" onclick="changePerformanceSetColor('Black (Dumbbell)', 'performance-set-black.png')"></div>
                                 <div class="swatch" style="background: linear-gradient(135deg, #ffffff 50%, #111111 50%); border: 2px solid #ccc;" id="swatch-perf-white-black" onclick="changePerformanceSetColor('White Top / Black Shorts', 'performance-set-white-black.png')"></div>
-                               <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-perf-white-white" onclick="changePerformanceSetColor('White Top / White Shorts', 'performance-set-white-white.jpeg')"></div>
+                                <div class="swatch" style="background-color: #fff; border: 3px solid #ccc;" id="swatch-perf-white-white" onclick="changePerformanceSetColor('White Top / White Shorts', 'performance-set-white-white.jpeg')"></div>
+                            </div>
                         </div>
                         <div class="flex-options">
                             <select class="size-select" id="performance-set-size">
@@ -532,6 +550,27 @@
         </div>
     </section>
 
+    <section id="reviews">
+        <h3 class="section-title" style="color:#111;">What Athletes Say</h3>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"The compression sets fit perfectly. Delivery to Beirut was super smooth via Whish."</p>
+                <strong>- Karim M.</strong>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p>"Custom blanks are elite. Added my gym's logo and the print quality is insane for the price."</p>
+                <strong>- Elias T.</strong>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <p>"Best gym gear I've bought locally. Highly recommend the winged set!"</p>
+                <strong>- Jad H.</strong>
+            </div>
+        </div>
+    </section>   
+
     <section id="contact">
         <h3>Contact Us</h3>
         <p>Have a question or need a custom design quote? Reach out to us below.</p>
@@ -548,6 +587,9 @@
             <h2>Your Cart</h2>
             <ul id="cart-items"></ul>
             <div class="cart-total" id="cart-total-display">Total: $0.00</div>
+            
+            <div id="lbp-estimate">Est. LBP: 0 LL</div>
+
             <div id="empty-cart-msg" style="text-align: center; margin-bottom: 20px; display: none;">Your cart is empty!</div>
 
             <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
@@ -620,6 +662,13 @@
         </div>
     </div>
 
+    <div id="toast" class="toast"></div>
+
+    <div class="sticky-cart" onclick="openCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="sticky-cart-count">0</span>
+    </div>
+
     <footer>
         <p>&copy; 2026 Athletic Club. All rights reserved.</p>
     </footer>
@@ -628,6 +677,37 @@
         let cart = [];
         let total = 0;
         const myWhatsAppNumber = "96170168616";
+        const lbpRate = 90000; // You can update this exchange rate if the market changes
+
+        // --- NEW LOCAL STORAGE LOGIC ---
+        function saveCart() {
+            localStorage.setItem('ac_cart', JSON.stringify(cart));
+            localStorage.setItem('ac_total', total.toString());
+            updateCartUI();
+        }
+
+        function loadCart() {
+            let savedCart = localStorage.getItem('ac_cart');
+            let savedTotal = localStorage.getItem('ac_total');
+            if (savedCart && savedTotal) {
+                cart = JSON.parse(savedCart);
+                total = parseFloat(savedTotal);
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            if(document.getElementById('sticky-cart-count')) document.getElementById('sticky-cart-count').innerText = cart.length;
+        }
+
+        // --- NEW TOAST NOTIFICATION LOGIC ---
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "toast show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
 
         // --- CUSTOM SHIRT DESIGN STUDIO LOGIC ---
         let currentCustomShirtColor = 'Black'; 
@@ -650,15 +730,19 @@
         }
 
         function renderPreviews() {
-            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve'];
-            zones.forEach(zone => { const el = document.getElementById(`preview-${zone}`); if(el) el.innerHTML = ""; });
+            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve', 'Upper-Back-Right', 'Upper-Back-Center'];
+            zones.forEach(zone => { 
+                const el = document.getElementById(`preview-${zone.replace(/ /g, '-').replace(/[()]/g, '')}`); 
+                if(el) el.innerHTML = ""; 
+            });
 
             shirtDesignList.forEach(item => {
                 let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
                 let element = document.getElementById(elementId);
-                if (!element) return; 
-                if(item.type === 'text') element.innerHTML += `<div>${item.content}</div>`;
-                else if (item.type === 'image') element.innerHTML += `<img src="${item.dataUrl}">`;
+                if (element) {
+                    if(item.type === 'text') element.innerHTML += `<div>${item.content}</div>`;
+                    else if (item.type === 'image') element.innerHTML += `<img src="${item.dataUrl}" style="max-width:100%">`;
+                }
             });
 
             const placement = document.getElementById('studio-placement').value;
@@ -671,7 +755,7 @@
                     const txt = document.getElementById('studio-text-input').value;
                     if(txt) targetZone.innerHTML += `<div style="opacity: 0.6; border: 2px dashed #d90429; padding: 2px;">${txt}</div>`;
                 } else if (type === 'image' && draftDataUrl) {
-                    targetZone.innerHTML += `<img src="${draftDataUrl}" style="opacity: 0.6; border: 2px dashed #d90429;">`;
+                    targetZone.innerHTML += `<img src="${draftDataUrl}" style="opacity: 0.6; border: 2px dashed #d90429; max-width:100%">`;
                 }
             }
         }
@@ -767,7 +851,6 @@
         function updateStretchShirtPrice() { let qty = parseInt(document.getElementById('stretch-shirt-qty').value) || 1; document.getElementById('stretch-shirt-price-display').innerText = "$" + (baseStretchShirtPrice * qty).toFixed(2); }
         function addStretchShirtToCart() { let size = document.getElementById('stretch-shirt-size').value; let qty = parseInt(document.getElementById('stretch-shirt-qty').value) || 1; addToCartWithDetails(`${qty}x Stretch Fabric Compression Top (${currentStretchShirtColor} - ${size})`, baseStretchShirtPrice * qty, []); }
 
-
         // --- SPIDER SET LOGIC ---
         let currentSetColor = 'Black'; const baseSetPrice = 25.00;
         function changeColor(colorName, imagePath) {
@@ -856,12 +939,12 @@
         function updateHeroPrice() { let qty = parseInt(document.getElementById('hero-qty').value) || 1; document.getElementById('hero-price-display').innerText = "$" + (baseHeroPrice * qty).toFixed(2); }
         function addHeroToCart() { let size = document.getElementById('hero-size').value; let qty = parseInt(document.getElementById('hero-qty').value) || 1; addToCartWithDetails(`${qty}x Hero Compression Top (${currentHeroColor} - ${size})`, baseHeroPrice * qty, []); }
 
-        // --- CART LOGIC ---
+        // --- CART ACTION LOGIC ---
         function addToCartWithDetails(itemName, itemPrice, detailsArray) {
             cart.push({ name: itemName, price: itemPrice, details: detailsArray });
             total += itemPrice;
-            document.getElementById('cart-count').innerText = cart.length;
-            alert("Added to cart!");
+            saveCart();
+            showToast("Added to Cart!"); // Updated to trigger the cool toast popup!
         }
 
         function openCart() {
@@ -872,23 +955,46 @@
                 document.getElementById('empty-cart-msg').style.display = 'block';
                 document.getElementById('checkout-form').style.display = 'none';
                 document.getElementById('cart-total-display').style.display = 'none';
+                if(document.getElementById('lbp-estimate')) document.getElementById('lbp-estimate').style.display = 'none';
             } else {
                 document.getElementById('empty-cart-msg').style.display = 'none';
                 document.getElementById('checkout-form').style.display = 'block';
                 document.getElementById('cart-total-display').style.display = 'block';
+                if(document.getElementById('lbp-estimate')) document.getElementById('lbp-estimate').style.display = 'block';
                 
-                cart.forEach(item => {
+                cart.forEach((item, index) => {
                     const li = document.createElement('li');
                     let detailsHTML = item.details && item.details.length > 0 ? `<div class="cart-item-details">${item.details.join('<br>')}</div>` : '';
-                    li.innerHTML = `<div class="cart-item-header"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>${detailsHTML}`;
+                    li.innerHTML = `
+                        <div class="cart-item-header" style="align-items: center;">
+                            <span>${item.name}</span>
+                            <div>
+                                <span style="margin-right: 15px;">$${item.price.toFixed(2)}</span>
+                                <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #d90429; font-size: 1.5rem; cursor: pointer; font-weight: bold;" title="Remove from cart">&times;</button>
+                            </div>
+                        </div>
+                        ${detailsHTML}
+                    `;
                     cartList.appendChild(li);
                 });
             }
             document.getElementById('cart-total-display').innerText = `Total: $${total.toFixed(2)}`;
+            
+            let lbpTotal = (total * lbpRate).toLocaleString();
+            if(document.getElementById('lbp-estimate')) document.getElementById('lbp-estimate').innerText = `Est. LBP: ${lbpTotal} LL`;
+            
             document.getElementById('cart-modal').style.display = 'flex';
         }
 
         function closeCart() { document.getElementById('cart-modal').style.display = 'none'; }
+        
+        function removeFromCart(index) {
+            total -= cart[index].price;
+            if (total < 0) total = 0; 
+            cart.splice(index, 1);
+            saveCart();
+            openCart();
+        }
 
         function toggleForm() {
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
@@ -899,19 +1005,6 @@
             } else {
                 sf.style.display = 'none'; sb.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp'; sb.classList.remove('email-btn');
             }
-        }
-
-        // --- PDF GENERATOR ---
-        function downloadOrderPDF() {
-            if (cart.length === 0) return alert("Your cart is empty!");
-            let htmlContent = `<div style="font-family: Arial, sans-serif; padding: 40px; color: #111;"><h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1><h2>Design Spec & Order Invoice</h2><p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p><table style="width: 100%; border-collapse: collapse; margin-top: 20px;"><tr style="background-color: #111; color: white; text-align: left;"><th style="padding: 10px;">Item Details</th><th style="padding: 10px; text-align: right;">Price</th></tr>`;
-            cart.forEach(item => {
-                htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
-                if (item.details && item.details.length > 0) { htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; item.details.forEach(detail => htmlContent += `<li>${detail}</li>`); htmlContent += `</ul>`; }
-                htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
-            });
-            htmlContent += `</table><h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2></div>`;
-            html2pdf().set({ margin: 1, filename: 'AthleticClub_Order_Spec.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(document.createElement('div').insertAdjacentHTML('afterbegin', htmlContent) || htmlContent).save();
         }
 
         // --- CHECKOUT LOGIC ---
@@ -940,15 +1033,32 @@
                     Shipping_Address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}`
                 };
                 fetch("https://api.web3forms.com/submit", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(fd) })
-                .then(r => r.json()).then(data => { if(data.success) { alert("Order Confirmed! Thank you."); resetCart(); } else alert("Error. Please try again."); })
+                .then(r => r.json()).then(data => { if(data.success) { showToast("Order Confirmed! Thank you."); resetCart(); } else alert("Error. Please try again."); })
                 .catch(() => alert("Error. Please try again.")).finally(() => { submitBtn.innerHTML = 'Place Order (COD)'; submitBtn.disabled = false; });
             }
         }
 
+        function downloadOrderPDF() {
+            if (cart.length === 0) return alert("Your cart is empty!");
+            let htmlContent = `<div style="font-family: Arial, sans-serif; padding: 40px; color: #111;"><h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1><h2>Design Spec & Order Invoice</h2><p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p><table style="width: 100%; border-collapse: collapse; margin-top: 20px;"><tr style="background-color: #111; color: white; text-align: left;"><th style="padding: 10px;">Item Details</th><th style="padding: 10px; text-align: right;">Price</th></tr>`;
+            cart.forEach(item => {
+                htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
+                if (item.details && item.details.length > 0) { htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; item.details.forEach(detail => htmlContent += `<li>${detail}</li>`); htmlContent += `</ul>`; }
+                htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
+            });
+            htmlContent += `</table><h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2></div>`;
+            html2pdf().set({ margin: 1, filename: 'AthleticClub_Order_Spec.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(document.createElement('div').insertAdjacentHTML('afterbegin', htmlContent) || htmlContent).save();
+        }
+
         function resetCart() {
+            localStorage.removeItem('ac_cart');
+            localStorage.removeItem('ac_total');
             cart = []; total = 0; shirtDesignList = []; draftDataUrl = null;
             document.getElementById('cart-count').innerText = "0"; document.getElementById('checkout-form').reset();
+            
+            // Includes the new performance-set-qty and stretch-shirt-qty
             ['hoodie-qty','tribal-qty','essential-qty','winged-qty','hero-qty','custom-shirt-qty', 'set-qty', 'shirt-qty', 'shorts-qty', 'performance-set-qty', 'stretch-shirt-qty'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = 1; });
+            
             updateHoodiePrice(); updateTribalPrice(); updateEssentialPrice(); updateWingedPrice(); updateHeroPrice(); updateCustomShirtPrice();
             if(typeof updatePerformanceSetPrice === 'function') updatePerformanceSetPrice();
             if(typeof updateStretchShirtPrice === 'function') updateStretchShirtPrice();
@@ -958,8 +1068,12 @@
             
             renderPreviews();
             document.getElementById('active-customizations').innerHTML = "";
+            updateCartUI();
             toggleForm(); closeCart();
         }
+        
+        // Initialize cart on load
+        window.onload = loadCart;   
     </script>
 </body>
 </html>
