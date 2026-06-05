@@ -74,6 +74,11 @@
 
         .preview-zone { position: absolute; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); overflow: visible;}
         
+        /* Specific positioning for custom tee previews */
+        #preview-Front-Center-Trunk { top: 42%; left: 35%; width: 30%; height: 25%; }
+        #preview-Left-Breast { top: 35%; left: 50%; width: 15%; height: 12%; }
+        #preview-Right-Breast { top: 35%; left: 35%; width: 15%; height: 12%; }
+
         /* REVIEWS SECTION */
         #reviews { background: #e9ecef; padding: 5rem 5%; text-align: center; }
         .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
@@ -146,9 +151,14 @@
             .form-row { flex-direction: column; gap: 1rem; }
         }
     </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("xGWGR74JPcBp7UCEm");
+        })();
+    </script>
 </head>
 <body>
-
     <header>
         <div class="logo-container">
             <img src="logo.png" alt="My Athletic Club Logo">
@@ -169,15 +179,12 @@
     <section id="shop">
         <h3 class="section-title">Drops</h3>
         <div class="products">
-
             <div class="card featured-card">
                 <div class="img-container">
                     <img src="blank-black.png" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
-                    
                     <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #fff;"></div>
                     <div id="preview-Left-Breast" class="preview-zone" style="color: #fff;"></div>
-                    <div id="preview-Right-Sleeve" class="preview-zone" style="color: #fff;"></div>
-                    <div id="preview-Left-Sleeve" class="preview-zone" style="color: #fff;"></div>
+                    <div id="preview-Right-Breast" class="preview-zone" style="color: #fff;"></div>
                 </div>
                 <div class="card-content">
                     <div class="product-title" style="font-size: 2rem;">Custom Blank Tee</div>
@@ -191,10 +198,11 @@
                             <select id="studio-placement" class="studio-select" onchange="renderPreviews()">
                                 <option value="Front Center (Trunk)">Front Center (Trunk)</option>
                                 <option value="Left Breast">Left Breast</option>
-                                <option value="Right Sleeve">Right Sleeve</option>
-                                <option value="Left Sleeve">Left Sleeve</option>
-                                <option value="Upper Back (Right)">Upper Back (Right) *No front preview</option>
-                                <option value="Upper Back (Center)">Upper Back (Center) *No front preview</option>
+                                <option value="Right Breast">Right Breast</option>
+                                <option value="Right Sleeve">Right Sleeve *No preview</option>
+                                <option value="Left Sleeve">Left Sleeve *No preview</option>
+                                <option value="Upper Back (Right)">Upper Back (Right) *No preview</option>
+                                <option value="Upper Back (Center)">Upper Back (Center) *No preview</option>
                             </select>
                         </div>
                         <div class="studio-input-group">
@@ -209,6 +217,8 @@
                         </div>
                         <div class="studio-input-group" id="studio-image-wrapper" style="display: none;">
                             <input type="file" id="studio-image-input" class="studio-text" accept="image/*" onchange="handleImageUpload(event)">
+                            <label style="display:block; margin-top:10px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase;">Adjust Image Size:</label>
+                            <input type="range" id="studio-image-size" min="10" max="100" value="50" oninput="renderPreviews()" style="width: 100%;">
                         </div>
                         <button class="studio-add-btn" onclick="addCustomizationItem()"><i class="fas fa-plus"></i> Lock in Design</button>
                         <ul id="active-customizations" class="customization-list"></ul>
@@ -546,11 +556,10 @@
                     <button class="add-to-cart-btn" onclick="addHeroToCart()">Add to Cart</button>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <section id="reviews">
+<section id="reviews">
         <h3 class="section-title" style="color:#111;">What Athletes Say</h3>
         <div class="review-grid">
             <div class="review-card">
@@ -677,7 +686,7 @@
         let cart = [];
         let total = 0;
         const myWhatsAppNumber = "96170168616";
-        const lbpRate = 90000; // You can update this exchange rate if the market changes
+        const lbpRate = 90000;
 
         // --- NEW LOCAL STORAGE LOGIC ---
         function saveCart() {
@@ -701,7 +710,6 @@
             if(document.getElementById('sticky-cart-count')) document.getElementById('sticky-cart-count').innerText = cart.length;
         }
 
-        // --- NEW TOAST NOTIFICATION LOGIC ---
         function showToast(message) {
             const toast = document.getElementById("toast");
             toast.innerText = message;
@@ -730,21 +738,25 @@
         }
 
         function renderPreviews() {
-            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Sleeve', 'Left-Sleeve', 'Upper-Back-Right', 'Upper-Back-Center'];
+            // 1. Clear ALL front visual zones
+            const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Breast'];
             zones.forEach(zone => { 
-                const el = document.getElementById(`preview-${zone.replace(/ /g, '-').replace(/[()]/g, '')}`); 
+                const el = document.getElementById(`preview-${zone}`); 
                 if(el) el.innerHTML = ""; 
             });
 
+            // 2. Render all locked customizations to their specific zones
             shirtDesignList.forEach(item => {
+                // E.g. "Left Breast" becomes "preview-Left-Breast"
                 let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
                 let element = document.getElementById(elementId);
                 if (element) {
                     if(item.type === 'text') element.innerHTML += `<div>${item.content}</div>`;
-                    else if (item.type === 'image') element.innerHTML += `<img src="${item.dataUrl}" style="max-width:100%">`;
+                    else if (item.type === 'image') element.innerHTML += `<img src="${item.dataUrl}" style="width:${item.size}%; max-width:100%">`;
                 }
             });
 
+            // 3. Render current live typing/upload draft in the currently selected dropdown zone
             const placement = document.getElementById('studio-placement').value;
             const type = document.getElementById('studio-type').value;
             let targetZoneId = `preview-${placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
@@ -755,7 +767,8 @@
                     const txt = document.getElementById('studio-text-input').value;
                     if(txt) targetZone.innerHTML += `<div style="opacity: 0.6; border: 2px dashed #d90429; padding: 2px;">${txt}</div>`;
                 } else if (type === 'image' && draftDataUrl) {
-                    targetZone.innerHTML += `<img src="${draftDataUrl}" style="opacity: 0.6; border: 2px dashed #d90429; max-width:100%">`;
+                    const size = document.getElementById('studio-image-size') ? document.getElementById('studio-image-size').value : '50';
+                    targetZone.innerHTML += `<img src="${draftDataUrl}" style="opacity: 0.6; border: 2px dashed #d90429; width:${size}%; max-width:100%">`;
                 }
             }
         }
@@ -763,6 +776,7 @@
         function addCustomizationItem() {
             const placement = document.getElementById('studio-placement').value;
             const type = document.getElementById('studio-type').value;
+            const size = document.getElementById('studio-image-size') ? document.getElementById('studio-image-size').value : '50';
 
             if (type === 'text') {
                 const contentValue = document.getElementById('studio-text-input').value.trim();
@@ -772,7 +786,7 @@
             } else {
                 const fileInput = document.getElementById('studio-image-input');
                 if (fileInput.files.length === 0 || !draftDataUrl) return alert("Please select an image file to upload.");
-                shirtDesignList.push({ placement: placement, type: type, content: fileInput.files[0].name, dataUrl: draftDataUrl });
+                shirtDesignList.push({ placement: placement, type: type, content: fileInput.files[0].name, dataUrl: draftDataUrl, size: size });
                 finalizeAdd();
             }
         }
@@ -780,6 +794,7 @@
         function finalizeAdd() {
             document.getElementById('studio-text-input').value = "";
             document.getElementById('studio-image-input').value = "";
+            if (document.getElementById('studio-image-size')) document.getElementById('studio-image-size').value = "50";
             draftDataUrl = null; 
             
             const listEl = document.getElementById('active-customizations');
@@ -822,9 +837,21 @@
             let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
             let customDetails = [];
             if (shirtDesignList.length > 0) {
-                shirtDesignList.forEach(design => customDetails.push(`[${design.placement}] ${design.type === 'text' ? 'Text' : 'Img'}: ${design.content}`));
+                shirtDesignList.forEach(design => {
+                    if (design.type === 'text') {
+                        customDetails.push(`[${design.placement}] Text: ${design.content}`);
+                    } else {
+                        // Pass image name, sizing, and base64 string to the cart
+                        customDetails.push(`[${design.placement}] Img (${design.size}% size): ${design.content} | DATA:${design.dataUrl}`);
+                    }
+                });
             }
             addToCartWithDetails(itemName, totalPrice, customDetails);
+            
+            shirtDesignList = [];
+            draftDataUrl = null;
+            renderPreviews();
+            document.getElementById('active-customizations').innerHTML = "";
         }
 
         // --- NEW LISTING: PERFORMANCE TWO-PIECE SET LOGIC ---
@@ -944,7 +971,7 @@
             cart.push({ name: itemName, price: itemPrice, details: detailsArray });
             total += itemPrice;
             saveCart();
-            showToast("Added to Cart!"); // Updated to trigger the cool toast popup!
+            showToast("Added to Cart!");
         }
 
         function openCart() {
@@ -964,7 +991,20 @@
                 
                 cart.forEach((item, index) => {
                     const li = document.createElement('li');
-                    let detailsHTML = item.details && item.details.length > 0 ? `<div class="cart-item-details">${item.details.join('<br>')}</div>` : '';
+                    
+                    // Format the display to hide the massive base64 string from the user's cart modal
+                    let cleanDetails = [];
+                    if(item.details) {
+                        item.details.forEach(d => {
+                            if(d.includes('| DATA:')) {
+                                cleanDetails.push(d.split('| DATA:')[0]);
+                            } else {
+                                cleanDetails.push(d);
+                            }
+                        });
+                    }
+                    let detailsHTML = cleanDetails.length > 0 ? `<div class="cart-item-details">${cleanDetails.join('<br>')}</div>` : '';
+                    
                     li.innerHTML = `
                         <div class="cart-item-header" style="align-items: center;">
                             <span>${item.name}</span>
@@ -1014,9 +1054,23 @@
             const submitBtn = document.getElementById('submit-btn');
             
             let orderSummary = "";
+            let imageHtml = "No custom image uploaded.";
+            
             cart.forEach(item => {
                 orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`;
-                if (item.details && item.details.length > 0) item.details.forEach(detail => orderSummary += `  > ${detail}\n`);
+                if (item.details && item.details.length > 0) {
+                    item.details.forEach(detail => {
+                        // Extract base64 for EmailJS, but hide it from text summary
+                        if (detail.includes("Img ") && detail.includes("| DATA:data:image")) {
+                            const parts = detail.split("| DATA:");
+                            const cleanDataUrl = parts[1];
+                            imageHtml = `<img src="${cleanDataUrl}" alt="Custom Design" style="max-width: 300px; display: block; border: 1px solid #ccc;">`;
+                            orderSummary += `  > ${parts[0]}\n`; 
+                        } else {
+                            orderSummary += `  > ${detail}\n`;
+                        }
+                    });
+                }
             });
             orderSummary += `\nTOTAL: $${total.toFixed(2)}`;
             
@@ -1025,28 +1079,50 @@
                 resetCart();
             } else {
                 submitBtn.innerHTML = "Processing Order..."; submitBtn.disabled = true;
-                const fd = {
-                    access_key: "4c51ca66-face-4bcc-a197-c9d5cafc10ce", subject: "New COD Order - Athletic Club", from_name: "Athletic Club Store",
-                    Order_Details: orderSummary, Payment_Method: "Cash on Delivery",
-                    Customer_Name: document.getElementById('f-name').value + " " + document.getElementById('l-name').value,
-                    Customer_Email: document.getElementById('email').value, Customer_Phone: document.getElementById('phone').value,
-                    Shipping_Address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}`
+
+                // Send complete text details (including size parameters) and image HTML via EmailJS
+                const templateParams = {
+                    customer_name: document.getElementById('f-name').value + " " + document.getElementById('l-name').value,
+                    phone: document.getElementById('phone').value,
+                    address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}`,
+                    payment_method: "Cash on Delivery",
+                    order_details: orderSummary,
+                    image: imageHtml
                 };
-                fetch("https://api.web3forms.com/submit", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(fd) })
-                .then(r => r.json()).then(data => { if(data.success) { showToast("Order Confirmed! Thank you."); resetCart(); } else alert("Error. Please try again."); })
-                .catch(() => alert("Error. Please try again.")).finally(() => { submitBtn.innerHTML = 'Place Order (COD)'; submitBtn.disabled = false; });
+
+                emailjs.send("service_h0brmvk", "template_uqx43zf", templateParams)
+                    .then(function(response) {
+                        showToast("Order Confirmed! Thank you."); 
+                        resetCart();
+                    }, function(error) {
+                        alert("Error submitting order: " + error.text);
+                        console.error("EmailJS Error: ", error);
+                    })
+                    .finally(() => { 
+                        submitBtn.innerHTML = 'Place Order (COD)'; 
+                        submitBtn.disabled = false; 
+                    });
             }
         }
 
         function downloadOrderPDF() {
             if (cart.length === 0) return alert("Your cart is empty!");
             let htmlContent = `<div style="font-family: Arial, sans-serif; padding: 40px; color: #111;"><h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1><h2>Design Spec & Order Invoice</h2><p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p><table style="width: 100%; border-collapse: collapse; margin-top: 20px;"><tr style="background-color: #111; color: white; text-align: left;"><th style="padding: 10px;">Item Details</th><th style="padding: 10px; text-align: right;">Price</th></tr>`;
+            
             cart.forEach(item => {
                 htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
-                if (item.details && item.details.length > 0) { htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; item.details.forEach(detail => htmlContent += `<li>${detail}</li>`); htmlContent += `</ul>`; }
+                if (item.details && item.details.length > 0) { 
+                    htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; 
+                    item.details.forEach(detail => {
+                        let cleanDetail = detail.includes('| DATA:') ? detail.split('| DATA:')[0] : detail;
+                        htmlContent += `<li>${cleanDetail}</li>`;
+                    }); 
+                    htmlContent += `</ul>`; 
+                }
                 htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
             });
             htmlContent += `</table><h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2></div>`;
+            
             html2pdf().set({ margin: 1, filename: 'AthleticClub_Order_Spec.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(document.createElement('div').insertAdjacentHTML('afterbegin', htmlContent) || htmlContent).save();
         }
 
@@ -1056,7 +1132,6 @@
             cart = []; total = 0; shirtDesignList = []; draftDataUrl = null;
             document.getElementById('cart-count').innerText = "0"; document.getElementById('checkout-form').reset();
             
-            // Includes the new performance-set-qty and stretch-shirt-qty
             ['hoodie-qty','tribal-qty','essential-qty','winged-qty','hero-qty','custom-shirt-qty', 'set-qty', 'shirt-qty', 'shorts-qty', 'performance-set-qty', 'stretch-shirt-qty'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = 1; });
             
             updateHoodiePrice(); updateTribalPrice(); updateEssentialPrice(); updateWingedPrice(); updateHeroPrice(); updateCustomShirtPrice();
@@ -1072,7 +1147,6 @@
             toggleForm(); closeCart();
         }
         
-        // Initialize cart on load
         window.onload = loadCart;   
     </script>
 </body>
