@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athletic Club | Premium Gear</title>
-    
+   
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; }
-        
+       
         header { background-color: #111; color: #fff; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.5);}
         header .logo-container { display: flex; align-items: center; gap: 15px; }
         header .logo-container img { height: 45px; width: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #d90429; }
         header h1 { text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; font-weight: 900;}
-        
+       
         .nav-links { display: flex; align-items: center; gap: 20px; }
         .nav-links a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; transition: color 0.3s; }
         .nav-links a:hover { color: #d90429; }
-        
+       
         .cart-btn { background: #d90429; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1rem; text-transform: uppercase; transition: background 0.3s; font-family: 'Montserrat', sans-serif;}
         .cart-btn:hover { background: #bf0424; }
 
@@ -33,7 +32,7 @@
         #shop { background-color: #1a1a1a; padding: 5rem 5%; }
         .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #fff; font-weight: 900; letter-spacing: 2px;}
         .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
-        
+       
         .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
         .card:hover { transform: translateY(-8px); }
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
@@ -43,7 +42,7 @@
         .product-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; color: #111; text-transform: uppercase;}
         .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
         .price { font-size: 1.6rem; font-weight: 900; color: #d90429; margin-bottom: 15px; }
-        
+       
         .controls-container { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;}
         .color-selector p { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; color: #555;}
         .swatches { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;}
@@ -60,7 +59,7 @@
         .featured-card .img-container { flex: 1; position: relative; background: #fff; min-height: 500px; display: flex; align-items: center; justify-content: center; border-right: 2px solid #eee; }
         .featured-card .img-container img { width: 100%; height: 100%; object-fit: contain; background: transparent; padding: 20px; }
         .featured-card .card-content { flex: 1; text-align: left; padding: 2.5rem; justify-content: flex-start; }
-        
+       
         .design-studio { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #ccc;}
         .design-studio h4 { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; color: #111; text-align: center;}
         .studio-input-group { margin-bottom: 15px; }
@@ -72,18 +71,45 @@
         .customization-list li { background: #fff; padding: 10px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #111; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
         .remove-cust-btn { color: #d90429; cursor: pointer; font-weight: 900; font-size: 1.2rem;}
 
-        .preview-zone { position: absolute; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-transform: uppercase; font-weight: 900; text-align: center; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); overflow: visible;}
-        
-        /* Specific positioning for custom tee previews */
-        #preview-Front-Center-Trunk { top: 42%; left: 35%; width: 30%; height: 25%; }
-        #preview-Left-Breast { top: 35%; left: 50%; width: 15%; height: 12%; }
-        #preview-Right-Breast { top: 35%; left: 35%; width: 15%; height: 12%; }
+        /* SHIRT ANCHOR & PREVIEW CSS */
+        .shirt-anchor {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+       
+        .featured-card .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: transparent;
+        }
+
+        .preview-zone {
+            position: absolute;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            font-weight: 900;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            overflow: visible;
+        }
+       
+        #preview-Front-Center-Trunk { top: 48%; left: 50%; transform: translate(-50%, -50%); width: 35%; }
+        #preview-Left-Breast { top: 40%; left: 58%; transform: translate(-50%, -50%); width: 20%; }
+        #preview-Right-Breast { top: 40%; left: 42%; transform: translate(-50%, -50%); width: 20%; }
 
         /* REVIEWS SECTION */
         #reviews { background: #e9ecef; padding: 5rem 5%; text-align: center; }
         .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
         .review-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .stars { color: #facc15; margin-bottom: 10px; font-size: 1.2rem; }   
+        .stars { color: #facc15; margin-bottom: 10px; font-size: 1.2rem; }  
 
         #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
         #contact h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: #111;}
@@ -99,30 +125,28 @@
         .modal { background: #fff; width: 95%; max-width: 600px; border-radius: 8px; padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #666; }
         .modal h2 { margin-bottom: 1.5rem; text-transform: uppercase; text-align: center; font-weight: 900;}
-        
+       
         #cart-items { list-style: none; margin-bottom: 1.5rem; }
         #cart-items li { display: flex; flex-direction: column; margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .cart-item-header { display: flex; justify-content: space-between; font-weight: bold; }
         .cart-item-details { color: #666; font-size: 0.85rem; margin-top: 5px; }
         .cart-total { font-size: 1.5rem; font-weight: 900; text-align: right; margin-bottom: 0.5rem; color: #d90429; }
         #lbp-estimate { text-align: right; margin-bottom: 2rem; color: #666; font-size: 0.9rem; font-weight: bold; }
-        
+       
         .checkout-form { display: none; text-align: left; }
         .form-row { display: flex; gap: 15px; margin-bottom: 1rem; }
         .form-row .form-group { flex: 1; margin-bottom: 0; }
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.85rem; color: #555;}
         .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat'; font-size: 0.9rem;}
-        
+       
         .payment-options { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid #ddd;}
         .payment-options label { display: block; margin-bottom: 10px; cursor: pointer; font-weight: bold;}
-        
-        .checkout-btn { width: 100%; background: #25D366; color: white; padding: 15px; border: none; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Montserrat'; display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .checkout-btn:hover { background: #1ebe57; }
-        .checkout-btn.email-btn { background: #d90429; }
-        .checkout-btn.email-btn:hover { background: #bf0424; }
-        .checkout-btn.pdf-btn { background: #111; margin-bottom: 15px;}
-        .checkout-btn.pdf-btn:hover { background: #333; }
+       
+        .checkout-btn { width: 100%; background: #111; color: white; padding: 15px; border: none; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Montserrat'; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.3s;}
+        .checkout-btn:hover { background: #333; }
+        .checkout-btn.whish-btn { background: #d90429; }
+        .checkout-btn.whish-btn:hover { background: #bf0424; }
         .checkout-btn:disabled { background: #888; cursor: not-allowed; }
 
         /* TOAST NOTIFICATION */
@@ -151,12 +175,6 @@
             .form-row { flex-direction: column; gap: 1rem; }
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("xGWGR74JPcBp7UCEm");
-        })();
-    </script>
 </head>
 <body>
     <header>
@@ -181,16 +199,19 @@
         <div class="products">
             <div class="card featured-card">
                 <div class="img-container">
-                    <img src="blank-black.png" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
-                    <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #fff;"></div>
-                    <div id="preview-Left-Breast" class="preview-zone" style="color: #fff;"></div>
-                    <div id="preview-Right-Breast" class="preview-zone" style="color: #fff;"></div>
+                    <div class="shirt-anchor">
+                        <img src="blank-black.png" alt="Custom Blank Tee" id="dynamic-custom-shirt-img">
+                        <div id="preview-Front-Center-Trunk" class="preview-zone" style="color: #fff;"></div>
+                        <div id="preview-Left-Breast" class="preview-zone" style="color: #fff;"></div>
+                        <div id="preview-Right-Breast" class="preview-zone" style="color: #fff;"></div>
+                    </div>
                 </div>
+               
                 <div class="card-content">
                     <div class="product-title" style="font-size: 2rem;">Custom Blank Tee</div>
                     <div class="product-desc" style="font-size: 1.1rem;">Build your own gear. Upload a logo or add your team name and see it live on the shirt before you buy.</div>
-                    <div class="price" id="custom-shirt-price-display" style="font-size: 2rem;">$20.00</div>
-                    
+                    <div class="price" id="custom-shirt-price-display" style="font-size: 2rem;">$25.00</div>
+                   
                     <div class="design-studio">
                         <h4><i class="fas fa-paint-roller"></i> Design Studio</h4>
                         <div class="studio-input-group">
@@ -261,7 +282,7 @@
                 <div class="card-content">
                     <div class="product-title">Performance Two-Piece Set</div>
                     <div class="product-desc">Premium compression tee and training shorts built for high-intensity movement.</div>
-                    <div class="price" id="performance-set-price-display">$27.00</div>
+                    <div class="price" id="performance-set-price-display">$30.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-performance-set-color-text" style="color: #111;">Black (Dumbbell)</span></p>
@@ -292,7 +313,7 @@
                 <div class="card-content">
                     <div class="product-title">Stretch Fabric Compression Top</div>
                     <div class="product-desc">High elasticity on all sides. Soft, comfortable, and built for unrestricted movement.</div>
-                    <div class="price" id="stretch-shirt-price-display">$17.00</div>
+                    <div class="price" id="stretch-shirt-price-display">$15.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-stretch-shirt-color-text" style="color: #111;">Black</span></p>
@@ -351,7 +372,7 @@
                 <div class="card-content">
                     <div class="product-title">Spider Compression Top</div>
                     <div class="product-desc">Lightweight, quick-drying stretch fabric for maximum performance.</div>
-                    <div class="price" id="shirt-price-display">$15.00</div>
+                    <div class="price" id="shirt-price-display">$19.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-shirt-color-text" style="color: #0f4c81;">Royal Blue</span></p>
@@ -381,7 +402,7 @@
                 <div class="card-content">
                     <div class="product-title">2-in-1 Training Shorts</div>
                     <div class="product-desc">Built-in compression liner with hidden pockets and lightweight outer shell.</div>
-                    <div class="price" id="shorts-price-display">$13.00</div>
+                    <div class="price" id="shorts-price-display">$20.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-shorts-color-text" style="color: #111;">Black</span></p>
@@ -476,7 +497,7 @@
                 <div class="card-content">
                     <div class="product-title">Essential Compression Top</div>
                     <div class="product-desc">Sleek, core-fitting performance shirt with reinforced contrast grey seams.</div>
-                    <div class="price" id="essential-price-display">$16.00</div>
+                    <div class="price" id="essential-price-display">$17.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-essential-color-text" style="color: #111;">Black</span></p>
@@ -505,7 +526,7 @@
                 <div class="card-content">
                     <div class="product-title">Winged Graphic Two-Piece Set</div>
                     <div class="product-desc">Performance compression top and activewear pants set with red wing accents.</div>
-                    <div class="price" id="winged-price-display">$25.00</div>
+                    <div class="price" id="winged-price-display">$24.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
                             <p>Color: <span id="selected-winged-color-text" style="color: #111;">Black & Red</span></p>
@@ -559,7 +580,7 @@
         </div>
     </section>
 
-<section id="reviews">
+    <section id="reviews">
         <h3 class="section-title" style="color:#111;">What Athletes Say</h3>
         <div class="review-grid">
             <div class="review-card">
@@ -578,7 +599,7 @@
                 <strong>- Jad H.</strong>
             </div>
         </div>
-    </section>   
+    </section>  
 
     <section id="contact">
         <h3>Contact Us</h3>
@@ -596,19 +617,20 @@
             <h2>Your Cart</h2>
             <ul id="cart-items"></ul>
             <div class="cart-total" id="cart-total-display">Total: $0.00</div>
-            
+           
             <div id="lbp-estimate">Est. LBP: 0 LL</div>
 
             <div id="empty-cart-msg" style="text-align: center; margin-bottom: 20px; display: none;">Your cart is empty!</div>
 
             <form id="checkout-form" class="checkout-form" onsubmit="processPayment(event)">
+               
+                <input type="hidden" name="access_key" value="4c51ca66-face-4bcc-a197-c9d5cafc10ce">
+                <input type="hidden" name="subject" value="New Order Received - Athletic Club">
+                <textarea style="display:none;" name="Order_Details" id="w3f-order-details"></textarea>
+
                 <div style="background: #fdf0f0; border-left: 4px solid #d90429; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
                     <p style="margin: 0; font-size: 0.9rem; font-weight: bold; color: #d90429;"><i class="fas fa-truck"></i> Note: Delivery takes approximately 20 days.</p>
                 </div>
-
-                <button type="button" class="checkout-btn pdf-btn" onclick="downloadOrderPDF()">
-                    <i class="fas fa-file-pdf"></i> Download Order Spec as PDF
-                </button>
 
                 <label style="font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1rem;">Payment Method</label>
                 <div class="payment-options">
@@ -616,40 +638,40 @@
                     <label><input type="radio" name="Payment_Method" value="Cash on Delivery (COD)" onchange="toggleForm()"> Cash on Delivery (COD)</label>
                 </div>
 
-                <div id="cod-shipping-details" style="display: none; border-top: 1px solid #eee; padding-top: 1rem; margin-top: 1rem;">
+                <div id="shipping-details" style="border-top: 1px solid #eee; padding-top: 1rem; margin-top: 1rem;">
                     <h3 style="margin-bottom: 15px; font-size: 1.1rem;">Shipping Details</h3>
                     <div class="form-row">
                         <div class="form-group">
                             <label>First Name *</label>
-                            <input type="text" id="f-name" class="req-field">
+                            <input type="text" id="f-name" name="First_Name" class="req-field" required>
                         </div>
                         <div class="form-group">
                             <label>Last Name *</label>
-                            <input type="text" id="l-name" class="req-field">
+                            <input type="text" id="l-name" name="Last_Name" class="req-field" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" id="email" class="req-field">
+                            <input type="email" id="email" name="Email" class="req-field" required>
                         </div>
                         <div class="form-group">
                             <label>Phone Number *</label>
-                            <input type="text" id="phone" class="req-field">
+                            <input type="text" id="phone" name="Phone_Number" class="req-field" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Address *</label>
-                        <input type="text" id="address" class="req-field">
+                        <input type="text" id="address" name="Address" class="req-field" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>City *</label>
-                            <input type="text" id="city" class="req-field">
+                            <input type="text" id="city" name="City" class="req-field" required>
                         </div>
                         <div class="form-group">
                             <label>State/Province (Optional)</label>
-                            <select id="state">
+                            <select id="state" name="State_Province">
                                 <option value="">Select a state</option>
                                 <option value="Beirut">Beirut</option>
                                 <option value="Mount Lebanon">Mount Lebanon</option>
@@ -664,8 +686,8 @@
                     </div>
                 </div>
 
-                <button type="submit" id="submit-btn" class="checkout-btn">
-                    <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp
+                <button type="submit" id="submit-btn" class="checkout-btn whish-btn">
+                    Place Order (Whish)
                 </button>
             </form>
         </div>
@@ -685,10 +707,9 @@
     <script>
         let cart = [];
         let total = 0;
-        const myWhatsAppNumber = "96170168616";
         const lbpRate = 90000;
 
-        // --- NEW LOCAL STORAGE LOGIC ---
+        // --- LOCAL STORAGE LOGIC ---
         function saveCart() {
             localStorage.setItem('ac_cart', JSON.stringify(cart));
             localStorage.setItem('ac_total', total.toString());
@@ -718,10 +739,10 @@
         }
 
         // --- CUSTOM SHIRT DESIGN STUDIO LOGIC ---
-        let currentCustomShirtColor = 'Black'; 
-        const baseCustomShirtPrice = 20.00;
-        let shirtDesignList = []; 
-        let draftDataUrl = null; 
+        let currentCustomShirtColor = 'Black';
+        const baseCustomShirtPrice = 25.00;
+        let shirtDesignList = [];
+        let draftDataUrl = null;
 
         function toggleStudioInput() {
             const type = document.getElementById('studio-type').value;
@@ -738,16 +759,13 @@
         }
 
         function renderPreviews() {
-            // 1. Clear ALL front visual zones
             const zones = ['Front-Center-Trunk', 'Left-Breast', 'Right-Breast'];
-            zones.forEach(zone => { 
-                const el = document.getElementById(`preview-${zone}`); 
-                if(el) el.innerHTML = ""; 
+            zones.forEach(zone => {
+                const el = document.getElementById(`preview-${zone}`);
+                if(el) el.innerHTML = "";
             });
 
-            // 2. Render all locked customizations to their specific zones
             shirtDesignList.forEach(item => {
-                // E.g. "Left Breast" becomes "preview-Left-Breast"
                 let elementId = `preview-${item.placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
                 let element = document.getElementById(elementId);
                 if (element) {
@@ -756,7 +774,6 @@
                 }
             });
 
-            // 3. Render current live typing/upload draft in the currently selected dropdown zone
             const placement = document.getElementById('studio-placement').value;
             const type = document.getElementById('studio-type').value;
             let targetZoneId = `preview-${placement.replace(/ /g, '-').replace(/[()]/g, '')}`;
@@ -795,8 +812,8 @@
             document.getElementById('studio-text-input').value = "";
             document.getElementById('studio-image-input').value = "";
             if (document.getElementById('studio-image-size')) document.getElementById('studio-image-size').value = "50";
-            draftDataUrl = null; 
-            
+            draftDataUrl = null;
+           
             const listEl = document.getElementById('active-customizations');
             listEl.innerHTML = "";
             shirtDesignList.forEach((item, index) => {
@@ -813,7 +830,7 @@
         function changeCustomShirtColor(colorName, imagePath, swatchEl) {
             document.getElementById('dynamic-custom-shirt-img').src = imagePath;
             document.getElementById('selected-custom-shirt-color-text').innerText = colorName;
-            
+           
             const swatches = swatchEl.parentElement.children;
             for(let i=0; i<swatches.length; i++) swatches[i].classList.remove('active');
             swatchEl.classList.add('active');
@@ -833,7 +850,7 @@
             let size = document.getElementById('custom-shirt-size').value;
             let qty = parseInt(document.getElementById('custom-shirt-qty').value) || 1;
             let totalPrice = baseCustomShirtPrice * qty;
-            
+           
             let itemName = `${qty}x Custom Tee (${currentCustomShirtColor} - ${size})`;
             let customDetails = [];
             if (shirtDesignList.length > 0) {
@@ -841,100 +858,65 @@
                     if (design.type === 'text') {
                         customDetails.push(`[${design.placement}] Text: ${design.content}`);
                     } else {
-                        // Pass image name, sizing, and base64 string to the cart
                         customDetails.push(`[${design.placement}] Img (${design.size}% size): ${design.content} | DATA:${design.dataUrl}`);
                     }
                 });
             }
             addToCartWithDetails(itemName, totalPrice, customDetails);
-            
+           
             shirtDesignList = [];
             draftDataUrl = null;
             renderPreviews();
             document.getElementById('active-customizations').innerHTML = "";
         }
 
-        // --- NEW LISTING: PERFORMANCE TWO-PIECE SET LOGIC ---
-        let currentPerformanceSetColor = 'Black (Dumbbell)'; 
-        const basePerformanceSetPrice = 27.00;
-        function changePerformanceSetColor(colorName, imagePath) { 
-            document.getElementById('dynamic-performance-set-img').src = imagePath; 
-            document.getElementById('selected-performance-set-color-text').innerText = colorName;
-            currentPerformanceSetColor = colorName; 
-            ['swatch-perf-black', 'swatch-perf-white-black', 'swatch-perf-white-white'].forEach(id => {
-                let el = document.getElementById(id);
-                if(el) el.classList.remove('active');
-            });
+        // --- PRODUCT LISTINGS LOGIC ---
+        let currentPerformanceSetColor = 'Black (Dumbbell)'; const basePerformanceSetPrice = 30.00;
+        function changePerformanceSetColor(colorName, imagePath) {
+            document.getElementById('dynamic-performance-set-img').src = imagePath;
+            document.getElementById('selected-performance-set-color-text').innerText = colorName; currentPerformanceSetColor = colorName;
+            ['swatch-perf-black', 'swatch-perf-white-black', 'swatch-perf-white-white'].forEach(id => { let el = document.getElementById(id); if(el) el.classList.remove('active'); });
             if(colorName === 'Black (Dumbbell)') document.getElementById('swatch-perf-black').classList.add('active');
-            else if(colorName === 'White Top / Black Shorts') document.getElementById('swatch-perf-white-black').classList.add('active');
-            else document.getElementById('swatch-perf-white-white').classList.add('active');
+            else if(colorName === 'White Top / Black Shorts') document.getElementById('swatch-perf-white-black').classList.add('active'); else document.getElementById('swatch-perf-white-white').classList.add('active');
         }
         function updatePerformanceSetPrice() { let qty = parseInt(document.getElementById('performance-set-qty').value) || 1; document.getElementById('performance-set-price-display').innerText = "$" + (basePerformanceSetPrice * qty).toFixed(2); }
         function addPerformanceSetToCart() { let size = document.getElementById('performance-set-size').value; let qty = parseInt(document.getElementById('performance-set-qty').value) || 1; addToCartWithDetails(`${qty}x Performance Two-Piece Set (${currentPerformanceSetColor} - ${size})`, basePerformanceSetPrice * qty, []); }
 
-        // --- NEW LISTING: STRETCH FABRIC SHIRT LOGIC ---
-        let currentStretchShirtColor = 'Black'; 
-        const baseStretchShirtPrice = 17.00;
+        let currentStretchShirtColor = 'Black'; const baseStretchShirtPrice = 15.00;
         function updateStretchShirtPrice() { let qty = parseInt(document.getElementById('stretch-shirt-qty').value) || 1; document.getElementById('stretch-shirt-price-display').innerText = "$" + (baseStretchShirtPrice * qty).toFixed(2); }
         function addStretchShirtToCart() { let size = document.getElementById('stretch-shirt-size').value; let qty = parseInt(document.getElementById('stretch-shirt-qty').value) || 1; addToCartWithDetails(`${qty}x Stretch Fabric Compression Top (${currentStretchShirtColor} - ${size})`, baseStretchShirtPrice * qty, []); }
 
-        // --- SPIDER SET LOGIC ---
         let currentSetColor = 'Black'; const baseSetPrice = 25.00;
         function changeColor(colorName, imagePath) {
-            document.getElementById('dynamic-set-img').src = imagePath;
-            document.getElementById('selected-color-text').innerText = colorName;
-            currentSetColor = colorName;
-            document.getElementById('swatch-black').classList.remove('active');
-            document.getElementById('swatch-maroon').classList.remove('active');
-            if(colorName === 'Black') document.getElementById('swatch-black').classList.add('active');
-            else document.getElementById('swatch-maroon').classList.add('active');
+            document.getElementById('dynamic-set-img').src = imagePath; document.getElementById('selected-color-text').innerText = colorName; currentSetColor = colorName;
+            document.getElementById('swatch-black').classList.remove('active'); document.getElementById('swatch-maroon').classList.remove('active');
+            if(colorName === 'Black') document.getElementById('swatch-black').classList.add('active'); else document.getElementById('swatch-maroon').classList.add('active');
         }
         function updateSetPrice() { let qty = parseInt(document.getElementById('set-qty').value) || 1; document.getElementById('set-price-display').innerText = "$" + (baseSetPrice * qty).toFixed(2); }
         function addSetToCart() { let size = document.getElementById('set-size').value; let qty = parseInt(document.getElementById('set-qty').value) || 1; addToCartWithDetails(`${qty}x Spider Two-Piece Set (${currentSetColor} - ${size})`, baseSetPrice * qty, []); }
 
-        // --- SPIDER SHIRT LOGIC ---
-        let currentShirtColor = 'Royal Blue'; const baseShirtPrice = 15.00;
-        function changeShirtColor(colorName, imagePath) { 
-            document.getElementById('dynamic-shirt-img').src = imagePath; 
-            document.getElementById('selected-shirt-color-text').innerText = colorName;
-            currentShirtColor = colorName; 
-            ['swatch-shirt-blue', 'swatch-shirt-black', 'swatch-shirt-white'].forEach(id => {
-                let el = document.getElementById(id);
-                if(el) el.classList.remove('active');
-            });
-            if(colorName === 'Royal Blue') document.getElementById('swatch-shirt-blue').classList.add('active');
-            else if(colorName === 'Black') document.getElementById('swatch-shirt-black').classList.add('active');
-            else document.getElementById('swatch-shirt-white').classList.add('active');
+        let currentShirtColor = 'Royal Blue'; const baseShirtPrice = 19.00;
+        function changeShirtColor(colorName, imagePath) {
+            document.getElementById('dynamic-shirt-img').src = imagePath; document.getElementById('selected-shirt-color-text').innerText = colorName; currentShirtColor = colorName;
+            ['swatch-shirt-blue', 'swatch-shirt-black', 'swatch-shirt-white'].forEach(id => { let el = document.getElementById(id); if(el) el.classList.remove('active'); });
+            if(colorName === 'Royal Blue') document.getElementById('swatch-shirt-blue').classList.add('active'); else if(colorName === 'Black') document.getElementById('swatch-shirt-black').classList.add('active'); else document.getElementById('swatch-shirt-white').classList.add('active');
         }
         function updateShirtPrice() { let qty = parseInt(document.getElementById('shirt-qty').value) || 1; document.getElementById('shirt-price-display').innerText = "$" + (baseShirtPrice * qty).toFixed(2); }
         function addShirtToCart() { let size = document.getElementById('shirt-size').value; let qty = parseInt(document.getElementById('shirt-qty').value) || 1; addToCartWithDetails(`${qty}x Spider Compression Shirt (${currentShirtColor} - ${size})`, baseShirtPrice * qty, []); }
 
-        // --- 2-IN-1 SHORTS LOGIC ---
-        let currentShortsColor = 'Black'; const baseShortsPrice = 13.00;
-        function changeShortsColor(colorName, imagePath) { 
-            document.getElementById('dynamic-shorts-img').src = imagePath; 
-            document.getElementById('selected-shorts-color-text').innerText = colorName;
-            currentShortsColor = colorName; 
-            ['swatch-shorts-black', 'swatch-shorts-grey', 'swatch-shorts-blue', 'swatch-shorts-navy', 'swatch-shorts-white'].forEach(id => {
-                let el = document.getElementById(id);
-                if(el) el.classList.remove('active');
-            });
-            if(colorName === 'Black') document.getElementById('swatch-shorts-black').classList.add('active');
-            else if(colorName === 'Grey') document.getElementById('swatch-shorts-grey').classList.add('active');
-            else if(colorName === 'Blue') document.getElementById('swatch-shorts-blue').classList.add('active');
-            else if(colorName === 'Navy Blue') document.getElementById('swatch-shorts-navy').classList.add('active');
-            else document.getElementById('swatch-shorts-white').classList.add('active');
+        let currentShortsColor = 'Black'; const baseShortsPrice = 20.00;
+        function changeShortsColor(colorName, imagePath) {
+            document.getElementById('dynamic-shorts-img').src = imagePath; document.getElementById('selected-shorts-color-text').innerText = colorName; currentShortsColor = colorName;
+            ['swatch-shorts-black', 'swatch-shorts-grey', 'swatch-shorts-blue', 'swatch-shorts-navy', 'swatch-shorts-white'].forEach(id => { let el = document.getElementById(id); if(el) el.classList.remove('active'); });
+            if(colorName === 'Black') document.getElementById('swatch-shorts-black').classList.add('active'); else if(colorName === 'Grey') document.getElementById('swatch-shorts-grey').classList.add('active');
+            else if(colorName === 'Blue') document.getElementById('swatch-shorts-blue').classList.add('active'); else if(colorName === 'Navy Blue') document.getElementById('swatch-shorts-navy').classList.add('active'); else document.getElementById('swatch-shorts-white').classList.add('active');
         }
         function updateShortsPrice() { let qty = parseInt(document.getElementById('shorts-qty').value) || 1; document.getElementById('shorts-price-display').innerText = "$" + (baseShortsPrice * qty).toFixed(2); }
         function addShortsToCart() { let size = document.getElementById('shorts-size').value; let qty = parseInt(document.getElementById('shorts-qty').value) || 1; addToCartWithDetails(`${qty}x 2-in-1 Training Shorts (${currentShortsColor} - ${size})`, baseShortsPrice * qty, []); }
 
-        // --- LISTINGS LOGIC ---
         let currentHoodieColor = 'Black & Red Tribal'; const baseHoodiePrice = 26.00;
         function changeHoodieColor(colorName, imagePath, swatchId, textColor) {
-            document.getElementById('dynamic-hoodie-img').src = imagePath;
-            document.getElementById('selected-hoodie-color-text').innerText = colorName;
-            document.getElementById('selected-hoodie-color-text').style.color = textColor === '#fff' ? '#555' : textColor; 
-            currentHoodieColor = colorName;
+            document.getElementById('dynamic-hoodie-img').src = imagePath; document.getElementById('selected-hoodie-color-text').innerText = colorName; document.getElementById('selected-hoodie-color-text').style.color = textColor === '#fff' ? '#555' : textColor; currentHoodieColor = colorName;
             ['swatch-hoodie-black-red','swatch-hoodie-black-pink','swatch-hoodie-black-white','swatch-hoodie-black-purple','swatch-hoodie-red-white'].forEach(id => document.getElementById(id).classList.remove('active'));
             document.getElementById(swatchId).classList.add('active');
         }
@@ -945,18 +927,17 @@
         function updateTribalPrice() { let qty = parseInt(document.getElementById('tribal-qty').value) || 1; document.getElementById('tribal-price-display').innerText = "$" + (baseTribalPrice * qty).toFixed(2); }
         function addTribalToCart() { let size = document.getElementById('tribal-size').value; let qty = parseInt(document.getElementById('tribal-qty').value) || 1; addToCartWithDetails(`${qty}x Tribal Two-Piece Set (${currentTribalColor} - ${size})`, baseTribalPrice * qty, []); }
 
-        let currentEssentialColor = 'Black'; const baseEssentialPrice = 16.00;
+        let currentEssentialColor = 'Black'; const baseEssentialPrice = 17.00;
         function updateEssentialPrice() { let qty = parseInt(document.getElementById('essential-qty').value) || 1; document.getElementById('essential-price-display').innerText = "$" + (baseEssentialPrice * qty).toFixed(2); }
         function addEssentialToCart() { let size = document.getElementById('essential-size').value; let qty = parseInt(document.getElementById('essential-qty').value) || 1; addToCartWithDetails(`${qty}x Essential Compression Top (${currentEssentialColor} - ${size})`, baseEssentialPrice * qty, []); }
 
-        let currentWingedColor = 'Black & Red'; const baseWingedPrice = 25.00;
+        let currentWingedColor = 'Black & Red'; const baseWingedPrice = 24.00;
         function updateWingedPrice() { let qty = parseInt(document.getElementById('winged-qty').value) || 1; document.getElementById('winged-price-display').innerText = "$" + (baseWingedPrice * qty).toFixed(2); }
         function addWingedToCart() { let size = document.getElementById('winged-size').value; let qty = parseInt(document.getElementById('winged-qty').value) || 1; addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []); }
 
         let currentHeroColor = 'Green Spider'; const baseHeroPrice = 15.00;
         function changeHeroColor(colorName, imagePath) {
-            document.getElementById('dynamic-hero-img').src = imagePath;
-            let ct = document.getElementById('selected-hero-color-text'); ct.innerText = colorName;
+            document.getElementById('dynamic-hero-img').src = imagePath; let ct = document.getElementById('selected-hero-color-text'); ct.innerText = colorName;
             if(colorName === 'Green Spider') ct.style.color = '#2a9d8f'; else if (colorName === 'Black & Blue Symbol') ct.style.color = '#00b4d8'; else if (colorName === 'Dark Knight') ct.style.color = '#555'; else ct.style.color = '#9b2226';
             currentHeroColor = colorName;
             ['swatch-hero-green','swatch-hero-blue','swatch-hero-dark','swatch-hero-red'].forEach(id => document.getElementById(id).classList.remove('active'));
@@ -977,7 +958,7 @@
         function openCart() {
             const cartList = document.getElementById('cart-items');
             cartList.innerHTML = '';
-            
+           
             if (cart.length === 0) {
                 document.getElementById('empty-cart-msg').style.display = 'block';
                 document.getElementById('checkout-form').style.display = 'none';
@@ -988,23 +969,18 @@
                 document.getElementById('checkout-form').style.display = 'block';
                 document.getElementById('cart-total-display').style.display = 'block';
                 if(document.getElementById('lbp-estimate')) document.getElementById('lbp-estimate').style.display = 'block';
-                
+               
                 cart.forEach((item, index) => {
                     const li = document.createElement('li');
-                    
-                    // Format the display to hide the massive base64 string from the user's cart modal
+                   
                     let cleanDetails = [];
                     if(item.details) {
                         item.details.forEach(d => {
-                            if(d.includes('| DATA:')) {
-                                cleanDetails.push(d.split('| DATA:')[0]);
-                            } else {
-                                cleanDetails.push(d);
-                            }
+                            if(d.includes('| DATA:')) { cleanDetails.push(d.split('| DATA:')[0]); } else { cleanDetails.push(d); }
                         });
                     }
                     let detailsHTML = cleanDetails.length > 0 ? `<div class="cart-item-details">${cleanDetails.join('<br>')}</div>` : '';
-                    
+                   
                     li.innerHTML = `
                         <div class="cart-item-header" style="align-items: center;">
                             <span>${item.name}</span>
@@ -1019,18 +995,18 @@
                 });
             }
             document.getElementById('cart-total-display').innerText = `Total: $${total.toFixed(2)}`;
-            
+           
             let lbpTotal = (total * lbpRate).toLocaleString();
             if(document.getElementById('lbp-estimate')) document.getElementById('lbp-estimate').innerText = `Est. LBP: ${lbpTotal} LL`;
-            
+           
             document.getElementById('cart-modal').style.display = 'flex';
         }
 
         function closeCart() { document.getElementById('cart-modal').style.display = 'none'; }
-        
+       
         function removeFromCart(index) {
             total -= cart[index].price;
-            if (total < 0) total = 0; 
+            if (total < 0) total = 0;
             cart.splice(index, 1);
             saveCart();
             openCart();
@@ -1038,92 +1014,97 @@
 
         function toggleForm() {
             const method = document.querySelector('input[name="Payment_Method"]:checked').value;
-            const sf = document.getElementById('cod-shipping-details');
             const sb = document.getElementById('submit-btn');
-            if (method === 'Cash on Delivery (COD)') {
-                sf.style.display = 'block'; sb.innerHTML = 'Place Order (COD)'; sb.classList.add('email-btn');
+           
+            if (method === 'Whish Money Transfer') {
+                sb.innerHTML = 'Place Order (Whish)';
+                sb.className = 'checkout-btn whish-btn';
             } else {
-                sf.style.display = 'none'; sb.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Checkout via WhatsApp'; sb.classList.remove('email-btn');
+                sb.innerHTML = 'Place Order (COD)';
+                sb.className = 'checkout-btn';
             }
         }
 
-        // --- CHECKOUT LOGIC ---
+        // --- WEB3FORMS & WHISH WHATSAPP CHECKOUT LOGIC ---
         function processPayment(event) {
-            event.preventDefault(); 
-            const method = document.querySelector('input[name="Payment_Method"]:checked').value;
+            event.preventDefault();
             const submitBtn = document.getElementById('submit-btn');
-            
+            const method = document.querySelector('input[name="Payment_Method"]:checked').value;
+            const originalBtnText = submitBtn.innerHTML;
+           
+            const currency = "$";
+
             let orderSummary = "";
-            let imageHtml = "No custom image uploaded.";
-            
+            let imageHtmlText = "\n\n*** CUSTOM IMAGE UPLOADS ***\n";
+            let hasImages = false;
+
+            // 1. Build the specific, clean summary just for WhatsApp
+            let waSummary = "Hello! I want to open an order via Whish.\n\n*My Order:*\n";
+           
             cart.forEach(item => {
-                orderSummary += `- ${item.name} ($${item.price.toFixed(2)})\n`;
+                // Add to Web3Forms Email Summary
+                orderSummary += `- ${item.name} (${currency}${item.price.toFixed(2)})\n`;
+               
+                // Add to WhatsApp Summary (Only basic item name and price)
+                waSummary += `- ${item.name} (${currency}${item.price.toFixed(2)})\n`;
+
                 if (item.details && item.details.length > 0) {
                     item.details.forEach(detail => {
-                        // Extract base64 for EmailJS, but hide it from text summary
                         if (detail.includes("Img ") && detail.includes("| DATA:data:image")) {
                             const parts = detail.split("| DATA:");
                             const cleanDataUrl = parts[1];
-                            imageHtml = `<img src="${cleanDataUrl}" alt="Custom Design" style="max-width: 300px; display: block; border: 1px solid #ccc;">`;
-                            orderSummary += `  > ${parts[0]}\n`; 
+                            orderSummary += `  > ${parts[0]}\n`;
+                            imageHtmlText += `Image for ${parts[0]}:\n<img src="${cleanDataUrl}" style="max-width:300px;">\n\n`;
+                            hasImages = true;
                         } else {
                             orderSummary += `  > ${detail}\n`;
                         }
                     });
                 }
             });
-            orderSummary += `\nTOTAL: $${total.toFixed(2)}`;
-            
-            if (method === 'Whish Money Transfer') {
-                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(`Hello Athletic Club! I would like to place an order via Whish Transfer.\n\n*ORDER DETAILS:*\n${orderSummary}`)}`, '_blank');
-                resetCart();
-            } else {
-                submitBtn.innerHTML = "Processing Order..."; submitBtn.disabled = true;
+           
+            orderSummary += `\nTOTAL: ${currency}${total.toFixed(2)}`;
+            waSummary += `\n*Total Price: ${currency}${total.toFixed(2)}*`;
 
-                // Send complete text details (including size parameters) and image HTML via EmailJS
-                const templateParams = {
-                    customer_name: document.getElementById('f-name').value + " " + document.getElementById('l-name').value,
-                    phone: document.getElementById('phone').value,
-                    address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}`,
-                    payment_method: "Cash on Delivery",
-                    order_details: orderSummary,
-                    image: imageHtml
-                };
+            // Populate the hidden text area with the full order breakdown so Web3Forms captures it
+            let fullOrderDetails = orderSummary;
+            if(hasImages) fullOrderDetails += imageHtmlText;
+            document.getElementById('w3f-order-details').value = fullOrderDetails;
+           
+            submitBtn.innerHTML = "Processing Order...";
+            submitBtn.disabled = true;
 
-                emailjs.send("service_h0brmvk", "template_uqx43zf", templateParams)
-                    .then(function(response) {
-                        showToast("Order Confirmed! Thank you."); 
-                        resetCart();
-                    }, function(error) {
-                        alert("Error submitting order: " + error.text);
-                        console.error("EmailJS Error: ", error);
-                    })
-                    .finally(() => { 
-                        submitBtn.innerHTML = 'Place Order (COD)'; 
-                        submitBtn.disabled = false; 
-                    });
-            }
-        }
+            const form = document.getElementById('checkout-form');
+            const formData = new FormData(form);
 
-        function downloadOrderPDF() {
-            if (cart.length === 0) return alert("Your cart is empty!");
-            let htmlContent = `<div style="font-family: Arial, sans-serif; padding: 40px; color: #111;"><h1 style="text-transform: uppercase; border-bottom: 2px solid #d90429; padding-bottom: 10px;">Athletic Club</h1><h2>Design Spec & Order Invoice</h2><p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p><table style="width: 100%; border-collapse: collapse; margin-top: 20px;"><tr style="background-color: #111; color: white; text-align: left;"><th style="padding: 10px;">Item Details</th><th style="padding: 10px; text-align: right;">Price</th></tr>`;
-            
-            cart.forEach(item => {
-                htmlContent += `<tr><td style="padding: 10px; border-bottom: 1px solid #ccc;"><strong>${item.name}</strong>`;
-                if (item.details && item.details.length > 0) { 
-                    htmlContent += `<ul style="margin-top: 5px; font-size: 0.9em; color: #555;">`; 
-                    item.details.forEach(detail => {
-                        let cleanDetail = detail.includes('| DATA:') ? detail.split('| DATA:')[0] : detail;
-                        htmlContent += `<li>${cleanDetail}</li>`;
-                    }); 
-                    htmlContent += `</ul>`; 
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    showToast("Order Confirmed! Thank you.");
+                   
+                    // 2. If Whish was selected, open WhatsApp with the stripped-down summary
+                    if (method === 'Whish Money Transfer') {
+                        window.open(`https://wa.me/96170168616?text=${encodeURIComponent(waSummary)}`, '_blank');
+                    }
+                   
+                    resetCart();
+                } else {
+                    console.log(response);
+                    alert("Something went wrong: " + json.message);
                 }
-                htmlContent += `</td><td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: right;">$${item.price.toFixed(2)}</td></tr>`;
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Something went wrong. Please check your connection and try again.");
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             });
-            htmlContent += `</table><h2 style="text-align: right; color: #d90429; margin-top: 20px;">Total: $${total.toFixed(2)}</h2></div>`;
-            
-            html2pdf().set({ margin: 1, filename: 'AthleticClub_Order_Spec.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(document.createElement('div').insertAdjacentHTML('afterbegin', htmlContent) || htmlContent).save();
         }
 
         function resetCart() {
@@ -1131,23 +1112,23 @@
             localStorage.removeItem('ac_total');
             cart = []; total = 0; shirtDesignList = []; draftDataUrl = null;
             document.getElementById('cart-count').innerText = "0"; document.getElementById('checkout-form').reset();
-            
+           
             ['hoodie-qty','tribal-qty','essential-qty','winged-qty','hero-qty','custom-shirt-qty', 'set-qty', 'shirt-qty', 'shorts-qty', 'performance-set-qty', 'stretch-shirt-qty'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = 1; });
-            
+           
             updateHoodiePrice(); updateTribalPrice(); updateEssentialPrice(); updateWingedPrice(); updateHeroPrice(); updateCustomShirtPrice();
             if(typeof updatePerformanceSetPrice === 'function') updatePerformanceSetPrice();
             if(typeof updateStretchShirtPrice === 'function') updateStretchShirtPrice();
             if(typeof updateSetPrice === 'function') updateSetPrice();
             if(typeof updateShirtPrice === 'function') updateShirtPrice();
             if(typeof updateShortsPrice === 'function') updateShortsPrice();
-            
+           
             renderPreviews();
             document.getElementById('active-customizations').innerHTML = "";
             updateCartUI();
             toggleForm(); closeCart();
         }
-        
-        window.onload = loadCart;   
+       
+        window.onload = loadCart;  
     </script>
 </body>
 </html>
