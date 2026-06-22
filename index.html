@@ -25,16 +25,60 @@
         .cart-btn { background: #d90429; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1rem; text-transform: uppercase; transition: background 0.3s; font-family: 'Montserrat', sans-serif;}
         .cart-btn:hover { background: #bf0424; }
 
-        .hero { background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; padding: 10rem 2rem; border-bottom: 5px solid #d90429; }
-        .hero h2 { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; font-weight: 400;}
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.74)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 7.5rem 2rem 9rem;
+            border-bottom: 5px solid #d90429;
+        }
+        .hero-logo {
+            width: 104px;
+            height: 104px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 1.35rem;
+            padding: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.96);
+            border: 3px solid #d90429;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.45), 0 0 0 8px rgba(255,255,255,0.10);
+        }
+        .hero h2 { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; text-shadow: 0 4px 18px rgba(0,0,0,0.65); }
+        .hero p { font-size: 1.2rem; color: #f1f1f1; max-width: 800px; margin: 0 auto; font-weight: 400; text-shadow: 0 2px 8px rgba(0,0,0,0.7);}
 
-        #shop { background-color: #1a1a1a; padding: 5rem 5%; }
-        .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #fff; font-weight: 900; letter-spacing: 2px;}
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
+        /* LIGHT PRODUCT BACKDROP */
+        #shop {
+            position: relative;
+            isolation: isolate;
+            padding: 5rem 5%;
+            overflow: hidden;
+            background-color: #eef2f5;
+            background-image:
+                radial-gradient(circle at 8% 10%, rgba(217, 4, 41, 0.12), transparent 26%),
+                radial-gradient(circle at 92% 88%, rgba(53, 92, 125, 0.12), transparent 30%),
+                repeating-linear-gradient(135deg, rgba(17,17,17,0.025) 0, rgba(17,17,17,0.025) 2px, transparent 2px, transparent 24px),
+                linear-gradient(180deg, #f8fafc 0%, #e8edf2 100%);
+        }
+        #shop::before, #shop::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+        #shop::before { width: 340px; height: 340px; top: 7%; right: -170px; background: rgba(217,4,41,0.07); }
+        #shop::after { width: 430px; height: 430px; bottom: 10%; left: -250px; background: rgba(31,78,121,0.07); }
+        .section-title { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; color: #111; font-weight: 900; letter-spacing: 2px;}
+        .section-title::after { content: ""; display: block; width: 68px; height: 5px; margin: 13px auto 0; border-radius: 999px; background: #d90429; }
+        .products { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;}
        
-        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: transform 0.3s; }
-        .card:hover { transform: translateY(-8px); }
+        .card { background: #fff; border: 1px solid rgba(17,17,17,0.08); border-radius: 14px; overflow: hidden; box-shadow: 0 16px 38px rgba(23, 35, 48, 0.13); display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 22px 46px rgba(23, 35, 48, 0.19); }
         .card img { width: 100%; height: 350px; object-fit: cover; background: #eee; }
         .card img.dynamic-img { object-fit: contain; padding: 10px; background-color: #111;}
 
@@ -105,15 +149,56 @@
         #preview-Left-Breast { top: 40%; left: 58%; transform: translate(-50%, -50%); width: 20%; }
         #preview-Right-Breast { top: 40%; left: 42%; transform: translate(-50%, -50%); width: 20%; }
 
-        /* REVIEWS SECTION */
-        #reviews { background: #e9ecef; padding: 5rem 5%; text-align: center; }
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .review-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        /* BRIGHT REVIEWS SECTION */
+        #reviews {
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 5%;
+            text-align: center;
+            background-color: #f5f8fb;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(217,4,41,0.10), transparent 25%),
+                radial-gradient(circle at 85% 75%, rgba(46,112,160,0.11), transparent 28%),
+                linear-gradient(135deg, rgba(255,255,255,0.92), rgba(231,239,246,0.96));
+        }
+        #reviews::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.32;
+            background-image: radial-gradient(rgba(17,17,17,0.16) 0.8px, transparent 0.8px);
+            background-size: 22px 22px;
+        }
+        #reviews > * { position: relative; z-index: 1; }
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; max-width: 1200px; margin: 0 auto; }
+        .review-card { background: rgba(255,255,255,0.93); padding: 26px 22px; border: 1px solid rgba(17,17,17,0.07); border-radius: 14px; box-shadow: 0 12px 30px rgba(31,50,68,0.10); transition: transform 0.3s, box-shadow 0.3s; }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 18px 36px rgba(31,50,68,0.15); }
         .stars { color: #facc15; margin-bottom: 10px; font-size: 1.2rem; }  
 
-        #contact { background-color: #fff; padding: 5rem 5%; text-align: center; }
+        /* BRIGHT CONTACT SECTION */
+        #contact {
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 5%;
+            text-align: center;
+            background-color: #fff8f8;
+            background-image:
+                linear-gradient(115deg, rgba(255,255,255,0.97) 0%, rgba(255,241,244,0.97) 55%, rgba(244,249,252,0.97) 100%),
+                repeating-linear-gradient(45deg, rgba(217,4,41,0.035) 0 2px, transparent 2px 20px);
+        }
+        #contact::before, #contact::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        #contact::before { width: 260px; height: 260px; left: -110px; top: -95px; background: rgba(217,4,41,0.08); }
+        #contact::after { width: 330px; height: 330px; right: -170px; bottom: -180px; background: rgba(40,91,126,0.08); }
+        #contact > * { position: relative; z-index: 1; }
         #contact h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: #111;}
-        #contact p { color: #666; margin-bottom: 2rem; font-size: 1.1rem;}
+        #contact h3::after { content: ""; display: block; width: 68px; height: 5px; margin: 13px auto 0; border-radius: 999px; background: #d90429; }
+        #contact p { color: #555; margin-bottom: 2rem; font-size: 1.1rem;}
         .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
         .social-btn { display: flex; align-items: center; gap: 10px; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.1rem; color: white; transition: transform 0.3s, box-shadow 0.3s;}
         .social-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
@@ -170,7 +255,8 @@
             header { flex-direction: column; gap: 15px; padding: 1rem; text-align: center; }
             .nav-links { width: 100%; justify-content: center; gap: 15px; }
             header h1 { font-size: 1.3rem; }
-            .hero { padding: 6rem 1rem; }
+            .hero { padding: 5.5rem 1rem 6.5rem; background-attachment: scroll; }
+            .hero-logo { width: 86px; height: 86px; margin-bottom: 1rem; }
             .hero h2 { font-size: 2.5rem; letter-spacing: 2px; }
             .form-row { flex-direction: column; gap: 1rem; }
         }
@@ -190,6 +276,7 @@
     </header>
 
     <section class="hero">
+        <img src="logo.png" alt="Athletic Club logo" class="hero-logo">
         <h2>Athletic Club</h2>
         <p>Premium compression wear and gym essentials. Built for performance, priced for you.</p>
     </section>
@@ -548,18 +635,18 @@
             </div>
 
             <div class="card">
-                <img src="hero-green.png" alt="Hero Compression Top" id="dynamic-hero-img" class="dynamic-img">
+                <img src="hero-dark.png" alt="Hero Compression Top – Dark Knight" id="dynamic-hero-img" class="dynamic-img">
                 <div class="card-content">
                     <div class="product-title">Hero Compression Top</div>
                     <div class="product-desc">Ultra-stretch performance compression armor featuring high-definition hero concepts.</div>
                     <div class="price" id="hero-price-display">$15.00</div>
                     <div class="controls-container">
                         <div class="color-selector">
-                            <p>Style: <span id="selected-hero-color-text" style="color: #2a9d8f;">Green Spider</span></p>
+                            <p>Style: <span id="selected-hero-color-text" style="color: #555;">Dark Knight</span></p>
                             <div class="swatches">
-                                <div class="swatch active" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.png')"></div>
+                                <div class="swatch" style="background-color: #2a9d8f;" id="swatch-hero-green" onclick="changeHeroColor('Green Spider', 'hero-green.png')"></div>
                                 <div class="swatch" style="background-color: #00b4d8;" id="swatch-hero-blue" onclick="changeHeroColor('Black & Blue Symbol', 'hero-blue.png')"></div>
-                                <div class="swatch" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.png')"></div>
+                                <div class="swatch active" style="background-color: #3d3d3d;" id="swatch-hero-dark" onclick="changeHeroColor('Dark Knight', 'hero-dark.png')"></div>
                                 <div class="swatch" style="background-color: #9b2226;" id="swatch-hero-red" onclick="changeHeroColor('Red & Black Spider', 'hero-red.png')"></div>
                             </div>
                         </div>
@@ -935,7 +1022,7 @@
         function updateWingedPrice() { let qty = parseInt(document.getElementById('winged-qty').value) || 1; document.getElementById('winged-price-display').innerText = "$" + (baseWingedPrice * qty).toFixed(2); }
         function addWingedToCart() { let size = document.getElementById('winged-size').value; let qty = parseInt(document.getElementById('winged-qty').value) || 1; addToCartWithDetails(`${qty}x Winged Two-Piece Set (${currentWingedColor} - ${size})`, baseWingedPrice * qty, []); }
 
-        let currentHeroColor = 'Green Spider'; const baseHeroPrice = 15.00;
+        let currentHeroColor = 'Dark Knight'; const baseHeroPrice = 15.00;
         function changeHeroColor(colorName, imagePath) {
             document.getElementById('dynamic-hero-img').src = imagePath; let ct = document.getElementById('selected-hero-color-text'); ct.innerText = colorName;
             if(colorName === 'Green Spider') ct.style.color = '#2a9d8f'; else if (colorName === 'Black & Blue Symbol') ct.style.color = '#00b4d8'; else if (colorName === 'Dark Knight') ct.style.color = '#555'; else ct.style.color = '#9b2226';
